@@ -85,16 +85,15 @@ def moving_average(series, period=20):
     return series.rolling(period).mean()
 
 def detect_trend_change(df):
-    """Trend değişimini tespit et"""
     if len(df) < 3:
         return "NO_DATA"
     
     # Son 3 periyodun trend durumu
     recent_trends = []
     for i in range(-3, 0):
-        if abs(i) <= len(df):
-            ma20 = df['ma20'].iloc[i]
-            ma50 = df['ma50'].iloc[i]
+        ma20 = df['ma20'].iloc[i]
+        ma50 = df['ma50'].iloc[i]
+        if not pd.isna(ma20) and not pd.isna(ma50):
             recent_trends.append(ma20 > ma50)
     
     if len(recent_trends) < 2:
