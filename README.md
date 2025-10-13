@@ -1,1 +1,0 @@
-# Macine learning (Bird Diseases)
