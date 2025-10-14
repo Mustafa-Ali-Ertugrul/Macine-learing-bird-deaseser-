@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Kanatlı Patoloji Histopatoloji Görüntü Toplama Sistemi v2.0
-403 hatası düzeltmesi + Alternatif kaynaklar
+Kanatlı Patoloji Histopatoloji Görüntü Toplama Sistemi
+PubMed Central API ile doğru URL formatı kullanarak indirme
 """
 
 import os
@@ -12,25 +12,25 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict, Optional
 import xml.etree.ElementTree as ET
-from urllib.parse import urljoin, quote
+from urllib.parse import urljoin
 import re
 from tqdm import tqdm
 import hashlib
 from PIL import Image
 import io
-import json
 
 # Konfigürasyon
 CONFIG = {
     'output_dir': 'poultry_microscopy',
     'metadata_csv': 'poultry_dataset.csv',
-    'max_workers': 5,  # Azaltıldı (rate limit için)
+    'max_workers': 4,  # Rate limit için daha düşük eşzamanlılık
     'min_image_size': (512, 512),
     'max_retries': 3,
     'timeout': 30,
-    'rate_limit_delay': 1.0,  # Artırıldı
+    'rate_limit_delay': 2.0,  # PubMed eutils için bekleme süresi
 }
 
+# Hastalık keywords
 DISEASE_KEYWORDS = {
     'ib': ['infectious bronchitis', 'ib virus', 'ibv', 'tracheal ciliostasis'],
     'ibd': ['infectious bursal disease', 'gumboro', 'bursal', 'lymphoid depletion'],
@@ -50,137 +50,169 @@ TISSUE_KEYWORDS = {
 }
 
 
-class EuropePMCScraper:
-    """Europe PMC API - Alternatif kaynak (daha liberal)"""
+class PubMedScraper:
+    """PubMed Central API ile görüntü toplama (FTP erişimi ile)"""
     
-    BASE_URL = 'https://www.ebi.ac.uk/europepmc/webservices/rest/'
+    BASE_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
     
-    def __init__(self):
+    def __init__(self, email: str = 'researcher@example.com'):
+        # Ortam değişkeninden e-posta al (PUBMED_EMAIL) yoksa verilen değeri kullan
+        self.email = os.environ.get('PUBMED_EMAIL', email)
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (compatible; PoultryResearch/1.0)'
         })
     
-    def search_articles(self, query: str, max_results: int = 200) -> List[Dict]:
-        """Europe PMC'de ara"""
-        search_url = f"{self.BASE_URL}search"
+    def search_articles(self, query: str, max_results: int = 30) -> List[str]:
+        """PubMed'de makale ara ve PMC ID'leri döndür"""
+        search_url = f"{self.BASE_URL}esearch.fcgi"
         params = {
-            'query': f'{query} AND (OPEN_ACCESS:y)',
-            'resultType': 'core',
-            'pageSize': min(max_results, 1000),
-            'format': 'json'
+            'db': 'pmc',
+            'term': query + ' AND open access[filter] AND hasimages[text]',
+            'retmax': max_results,
+            'retmode': 'json',
+            'email': self.email,
+            'sort': 'pub+date'
         }
         
-        print(f"🔍 Europe PMC aranıyor: '{query}'")
+        print(f"🔍 PubMed aranıyor: '{query}'")
+        response = self._get_with_backoff(search_url, params)
         
-        try:
-            response = self.session.get(search_url, params=params, timeout=CONFIG['timeout'])
-            response.raise_for_status()
-            data = response.json()
-            
-            results = data.get('resultList', {}).get('result', [])
-            print(f"✅ {len(results)} makale bulundu")
-            
-            return results
-            
-        except Exception as e:
-            print(f"⚠️ Europe PMC hatası: {e}")
-            return []
+        data = response.json()
+        pmc_ids = data.get('esearchresult', {}).get('idlist', [])
+        print(f"✅ {len(pmc_ids)} makale bulundu")
+        
+        return pmc_ids
     
-    def get_article_images(self, article: Dict) -> List[Dict]:
-        """Makale görüntülerini al"""
-        images = []
-        pmcid = article.get('pmcid', '')
-        
-        if not pmcid:
-            return images
-        
-        # Full text XML'i al
-        fulltext_url = f"{self.BASE_URL}{pmcid}/fullTextXML"
+    def get_article_metadata(self, pmc_id: str) -> Optional[Dict]:
+        """Makale metadata ve görüntü URL'lerini al (OAS endpoint kullanarak)"""
+        # OAS (Open Access Subset) endpoint'ini kullan
+        oas_url = f"https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi"
+        params = {
+            'verb': 'GetRecord',
+            'identifier': f'oai:pubmedcentral.nih.gov:{pmc_id}',
+            'metadataPrefix': 'pmc'
+        }
         
         time.sleep(CONFIG['rate_limit_delay'])
         
         try:
-            response = self.session.get(fulltext_url, timeout=CONFIG['timeout'])
-            response.raise_for_status()
+            response = self._get_with_backoff(oas_url, params)
             
             root = ET.fromstring(response.content)
             
-            # Figure'ları bul
-            for fig in root.findall('.//fig'):
-                graphic = fig.find('.//graphic')
-                if graphic is not None:
-                    href = graphic.get('{http://www.w3.org/1999/xlink}href')
-                    caption = ' '.join(fig.itertext())
-                    
-                    if href and self._is_histopathology_image(caption):
-                        # Europe PMC image URL formatı
-                        img_url = f"https://europepmc.org/articles/{pmcid}/bin/{href}.jpg"
-                        
-                        images.append({
-                            'url': img_url,
-                            'caption': caption,
-                            'pmcid': pmcid,
-                            'title': article.get('title', ''),
-                            'fig_id': fig.get('id', '')
-                        })
-        
+            # Namespace tanımla
+            ns = {'oai': 'http://www.openarchives.org/OAI/2.0/'}
+            
+            # Article metadata
+            record = root.find('.//oai:record', ns)
+            if not record:
+                return None
+            
+            # PMC article XML'ini çek
+            article_url = f"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC{pmc_id}/"
+            article_response = self._get_with_backoff(article_url, {})
+            
+            if article_response.status_code != 200:
+                return None
+            
+            # HTML'den görüntü URL'lerini extract et
+            html_content = article_response.text
+            images = self._extract_images_from_html(html_content, pmc_id)
+            
+            if not images:
+                return None
+            
+            # Title ve abstract'ı XML'den al
+            title = self._extract_text_safe(root, './/article-title')
+            abstract = self._extract_text_safe(root, './/abstract')
+            
+            return {
+                'pmc_id': pmc_id,
+                'title': title,
+                'abstract': abstract,
+                'images': images
+            }
+            
         except Exception as e:
-            pass  # Sessizce atla
+            print(f"⚠️ PMC{pmc_id} metadata hatası: {str(e)[:100]}")
+            return None
+
+    def _get_with_backoff(self, url: str, params: Dict) -> requests.Response:
+        """429 (Too Many Requests) ve geçici hatalarda artan bekleme ile yeniden dene"""
+        delay = CONFIG['rate_limit_delay']
+        for attempt in range(CONFIG['max_retries']):
+            try:
+                resp = self.session.get(url, params=params, timeout=CONFIG['timeout'])
+                if resp.status_code == 429:
+                    if attempt == CONFIG['max_retries'] - 1:
+                        resp.raise_for_status()
+                    time.sleep(delay)
+                    delay *= 2
+                    continue
+                resp.raise_for_status()
+                return resp
+            except requests.exceptions.RequestException:
+                if attempt == CONFIG['max_retries'] - 1:
+                    raise
+                time.sleep(delay)
+                delay *= 2
+        raise RuntimeError('Beklenmeyen backoff akışı')
+    
+    def _extract_text_safe(self, root, xpath):
+        """XML'den text güvenli şekilde çıkar"""
+        elem = root.find(xpath)
+        if elem is not None:
+            return ''.join(elem.itertext()).strip()
+        return ''
+    
+    def _extract_images_from_html(self, html: str, pmc_id: str) -> List[Dict]:
+        """HTML'den görüntü URL'lerini extract et"""
+        images = []
         
-        return images
+        # Figure pattern'leri
+        fig_pattern = r'<figure[^>]*>.*?<img[^>]*src="([^"]+)"[^>]*>.*?<figcaption[^>]*>(.*?)</figcaption>.*?</figure>'
+        matches = re.findall(fig_pattern, html, re.DOTALL | re.IGNORECASE)
+        
+        for img_url, caption in matches:
+            # Caption'ı temizle
+            caption_clean = re.sub(r'<[^>]+>', '', caption).strip()
+            
+            if not self._is_histopathology_image(caption_clean):
+                continue
+            
+            # URL'yi düzelt
+            if img_url.startswith('/'):
+                img_url = f'https://www.ncbi.nlm.nih.gov{img_url}'
+            elif not img_url.startswith('http'):
+                img_url = f'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC{pmc_id}/bin/{img_url}'
+            
+            # .jpg.jpg gibi çift uzantıyı düzelt
+            img_url = re.sub(r'\.jpg\.jpg$', '.jpg', img_url)
+            
+            images.append({
+                'url': img_url,
+                'caption': caption_clean[:500],  # Limit caption length
+                'fig_id': hashlib.md5(img_url.encode()).hexdigest()[:8]
+            })
+        
+        return images[:5]  # Max 5 görüntü per makale
     
     def _is_histopathology_image(self, caption: str) -> bool:
+        """Caption'dan histopatoloji görüntüsü olup olmadığını kontrol et"""
+        if not caption or len(caption) < 10:
+            return False
+        
         caption_lower = caption.lower()
-        keywords = ['histopathology', 'microscop', 'tissue', 'h&e', 
-                   'hematoxylin', 'stain', 'lesion', 'magnification', 
-                   'section', 'trachea', 'liver', 'bursa']
+        keywords = ['histopatholog', 'microscop', 'tissue', 'section', 'h&e', 
+                   'hematoxylin', 'stain', 'lesion', 'magnification', 'μm',
+                   'trachea', 'liver', 'bursa', 'intestine', 'epithelium']
+        
         return any(kw in caption_lower for kw in keywords)
 
 
-class BioRxivScraper:
-    """bioRxiv preprints - Açık erişim"""
-    
-    BASE_URL = 'https://api.biorxiv.org/details/biorxiv/'
-    
-    def __init__(self):
-        self.session = requests.Session()
-    
-    def search_articles(self, query: str) -> List[Dict]:
-        """bioRxiv'de makale ara (tarih aralığı ile)"""
-        # Son 2 yıl
-        start_date = '2023-01-01'
-        end_date = '2025-12-31'
-        
-        url = f"{self.BASE_URL}{start_date}/{end_date}/0/json"
-        
-        print(f"🔍 bioRxiv aranıyor...")
-        
-        try:
-            response = self.session.get(url, timeout=CONFIG['timeout'])
-            response.raise_for_status()
-            data = response.json()
-            
-            articles = data.get('collection', [])
-            
-            # Query ile filtrele
-            query_lower = query.lower()
-            filtered = [
-                a for a in articles 
-                if query_lower in a.get('title', '').lower() or 
-                   query_lower in a.get('abstract', '').lower()
-            ]
-            
-            print(f"✅ {len(filtered)} makale bulundu")
-            return filtered[:100]
-            
-        except Exception as e:
-            print(f"⚠️ bioRxiv hatası: {e}")
-            return []
-
-
 class ImageDownloader:
-    """Geliştirilmiş görüntü indirme"""
+    """Görüntü indirme ve kalite kontrolü"""
     
     def __init__(self, output_dir: str):
         self.output_dir = Path(output_dir)
@@ -188,81 +220,67 @@ class ImageDownloader:
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
-            'Referer': 'https://europepmc.org/'
+            'Referer': 'https://www.ncbi.nlm.nih.gov/'
         })
     
     def download_image(self, url: str, metadata: Dict) -> Optional[Dict]:
-        """Görüntü indir - geliştirilmiş hata yönetimi"""
-        
-        # URL temizleme
-        url = url.replace('.jpg.jpg', '.jpg')
-        
+        """Görüntü indir ve metadata döndür"""
         for attempt in range(CONFIG['max_retries']):
             try:
-                # Yavaş indirme (rate limit için)
-                time.sleep(CONFIG['rate_limit_delay'])
+                time.sleep(0.5)  # Rate limiting
                 
-                response = self.session.get(
-                    url, 
-                    timeout=CONFIG['timeout'], 
-                    stream=True,
-                    allow_redirects=True
-                )
+                response = self.session.get(url, timeout=CONFIG['timeout'], stream=True)
                 
                 if response.status_code == 403:
-                    # Alternatif URL dene
-                    alt_url = self._get_alternative_url(url, metadata)
-                    if alt_url and alt_url != url:
-                        response = self.session.get(alt_url, timeout=CONFIG['timeout'], stream=True)
+                    # Alternative URL dene
+                    alt_url = url.replace('/bin/', '/bin/').replace('.jpg', '.png')
+                    response = self.session.get(alt_url, timeout=CONFIG['timeout'], stream=True)
+                
+                if response.status_code != 200:
+                    return None
                 
                 response.raise_for_status()
                 
-                # Görüntü kontrolü
+                # Görüntü kalite kontrolü
                 img_data = response.content
+                
+                if len(img_data) < 10000:  # 10KB minimum
+                    return None
+                
                 img = Image.open(io.BytesIO(img_data))
                 
                 if img.size[0] < CONFIG['min_image_size'][0] or img.size[1] < CONFIG['min_image_size'][1]:
                     return None
                 
-                # Kaydet
+                # Dosya adı oluştur
                 file_hash = hashlib.md5(url.encode()).hexdigest()[:8]
-                pmcid = metadata.get('pmcid', 'unknown')
-                filename = f"{pmcid}_{metadata.get('fig_id', 'fig')}_{file_hash}.jpg"
+                filename = f"{metadata['pmc_id']}_{metadata['fig_id']}_{file_hash}.jpg"
                 filepath = self.output_dir / filename
                 
+                # Kaydet
                 img.convert('RGB').save(filepath, 'JPEG', quality=95)
                 
+                # Metadata döndür
                 return {
                     'image_path': str(filepath),
                     'source_url': url,
-                    'pmcid': pmcid,
-                    'title': metadata.get('title', ''),
-                    'caption': metadata.get('caption', ''),
+                    'pmc_id': metadata['pmc_id'],
+                    'title': metadata['title'][:200],
+                    'caption': metadata['caption'][:500],
                     'width': img.size[0],
                     'height': img.size[1],
-                    'disease': self._detect_disease(metadata.get('caption', '') + ' ' + metadata.get('title', '')),
-                    'tissue': self._detect_tissue(metadata.get('caption', '')),
-                    'magnification': self._extract_magnification(metadata.get('caption', ''))
+                    'disease': self._detect_disease(metadata['caption'] + ' ' + metadata.get('abstract', '')[:500]),
+                    'tissue': self._detect_tissue(metadata['caption']),
+                    'magnification': self._extract_magnification(metadata['caption'])
                 }
                 
             except Exception as e:
                 if attempt == CONFIG['max_retries'] - 1:
-                    return None
-                time.sleep(2 ** attempt)
+                    pass  # Sessizce atla
+                else:
+                    time.sleep(2 ** attempt)
         
         return None
-    
-    def _get_alternative_url(self, url: str, metadata: Dict) -> str:
-        """403 hatası için alternatif URL dene"""
-        pmcid = metadata.get('pmcid', '')
-        fig_id = metadata.get('fig_id', '')
-        
-        if 'europepmc.org' in url:
-            # Farklı format dene
-            return f"https://europepmc.org/articles/{pmcid}/bin/{fig_id}"
-        
-        return url
     
     def _detect_disease(self, text: str) -> str:
         text_lower = text.lower()
@@ -279,7 +297,7 @@ class ImageDownloader:
         return 'unknown'
     
     def _extract_magnification(self, text: str) -> str:
-        match = re.search(r'(\d+)×|×(\d+)|magnification[:\s]+(\d+)', text.lower())
+        match = re.search(r'(\d+)\s*[×x]|[×x]\s*(\d+)|magnification[:\s]+(\d+)', text.lower())
         if match:
             mag = next(g for g in match.groups() if g)
             return f"{mag}x"
@@ -287,54 +305,58 @@ class ImageDownloader:
 
 
 def main():
-    """Ana veri toplama pipeline - Geliştirilmiş versiyon"""
+    """Ana veri toplama pipeline"""
     
-    print("🐔 Kanatlı Patoloji Veri Toplama v2.0\n")
-    print("⚙️ Europe PMC + bioRxiv kaynaklarından toplama yapılacak\n")
+    print("🐔 Kanatlı Patoloji Veri Toplama Başlatılıyor...\n")
     
-    # Arama sorguları
+    # Odaklanmış sorgular
     queries = [
-        'chicken histopathology microscopy',
-        'poultry infectious disease pathology',
-        'avian respiratory histology',
-        'broiler intestinal lesion microscopy',
+        'chicken trachea histology infectious bronchitis',
+        'poultry bursa fabricius histopathology',
+        'broiler liver histology fatty',
+        'chicken intestine coccidiosis microscopy',
     ]
     
-    # Scraper başlat
-    epmc_scraper = EuropePMCScraper()
+    scraper = PubMedScraper()
     downloader = ImageDownloader(CONFIG['output_dir'])
     
     all_metadata = []
-    all_images = []
     
-    # Europe PMC'den topla
     for query in queries:
-        articles = epmc_scraper.search_articles(query, max_results=100)
+        pmc_ids = scraper.search_articles(query, max_results=50)  # Azaltıldı
         
-        print(f"\n📄 {len(articles)} makale için görüntü taranıyor...")
+        print(f"\n📄 {len(pmc_ids)} makale için metadata toplanıyor...")
+        articles_with_images = []
         
-        for article in tqdm(articles[:50], desc="Tarama"):  # İlk 50 makale
-            images = epmc_scraper.get_article_images(article)
-            all_images.extend(images)
+        for pmc_id in tqdm(pmc_ids[:30], desc="Metadata"):  # Max 30 makale
+            article_data = scraper.get_article_metadata(pmc_id)
+            if article_data and article_data['images']:
+                articles_with_images.append(article_data)
         
-        print(f"✅ Toplam {len(all_images)} görüntü bulundu")
+        print(f"✅ {len(articles_with_images)} makalede görüntü bulundu")
         
-        time.sleep(2)
-    
-    # Görüntüleri indir
-    if all_images:
-        print(f"\n⬇️ {len(all_images)} görüntü indiriliyor...")
+        if not articles_with_images:
+            continue
         
-        with ThreadPoolExecutor(max_workers=CONFIG['max_workers']) as executor:
-            futures = {
-                executor.submit(downloader.download_image, img['url'], img): img
-                for img in all_images
-            }
-            
-            for future in tqdm(as_completed(futures), total=len(futures), desc="İndirme"):
-                result = future.result()
+        # Görüntüleri indir (sequential - rate limiting için)
+        print(f"\n⬇️ Görüntüler indiriliyor...")
+        
+        for article in tqdm(articles_with_images, desc="Makaleler"):
+            for img_data in article['images']:
+                task_metadata = {
+                    'pmc_id': article['pmc_id'],
+                    'title': article['title'],
+                    'abstract': article['abstract'],
+                    'caption': img_data['caption'],
+                    'fig_id': img_data['fig_id']
+                }
+                
+                result = downloader.download_image(img_data['url'], task_metadata)
                 if result:
                     all_metadata.append(result)
+                    print(f"✓ İndirildi: {result['disease']} - {result['tissue']}")
+        
+        time.sleep(3)  # Sorgular arası bekleme
     
     # Sonuçları kaydet
     if all_metadata:
@@ -342,25 +364,20 @@ def main():
         df.to_csv(CONFIG['metadata_csv'], index=False)
         
         print(f"\n✅ TAMAMLANDI!")
-        print(f"📊 Başarılı indirme: {len(df)} / {len(all_images)} görüntü")
+        print(f"📊 Toplam indirilen görüntü: {len(df)}")
         print(f"💾 Metadata: {CONFIG['metadata_csv']}")
-        
-        if len(df) > 0:
-            print(f"\n📁 Hastalık dağılımı:")
-            print(df['disease'].value_counts())
-            print(f"\n🔬 Doku dağılımı:")
-            print(df['tissue'].value_counts())
-            print(f"\n📏 Çözünürlük ortalaması: {df['width'].mean():.0f}x{df['height'].mean():.0f}")
+        print(f"\n📁 Hastalık dağılımı:")
+        print(df['disease'].value_counts())
+        print(f"\n🔬 Doku dağılımı:")
+        print(df['tissue'].value_counts())
     else:
-        print("\n⚠️ Hiç görüntü indirilemedi!")
-        print("\n💡 ÖNERİLER:")
-        print("1. Manuel kaynak kullanın: Cornell Vet Atlas, ISPAH DVD")
-        print("2. Kaggle'daki 'Chicken Disease' veri setini indirin")
-        print("3. Üniversite patoloji arşivlerine başvurun")
+        print("⚠️ Hiç görüntü indirilemedi!")
+        print("💡 Alternatif: Figshare veya Zenodo'dan veri seti arayın")
+        print("   Örnek: https://figshare.com/search?q=chicken%20histopathology")
 
 
 if __name__ == '__main__':
-    # Pip paketi → modül adı eşlemesi (özellikle Pillow için)
+    # Pip paketi → modül adı eşlemesi (özellikle Pillow → PIL)
     required = {
         'requests': 'requests',
         'pandas': 'pandas',
@@ -368,15 +385,15 @@ if __name__ == '__main__':
         'Pillow': 'PIL'
     }
     missing = []
-
+    
     for pip_name, module_name in required.items():
         try:
             __import__(module_name)
         except ImportError:
             missing.append(pip_name)
-
+    
     if missing:
-        print(f"⚠️ Eksik: {', '.join(missing)}")
-        print(f"Yükle: pip install {' '.join(missing)}")
+        print(f"⚠️ Eksik kütüphaneler: {', '.join(missing)}")
+        print(f"Yüklemek için: pip install {' '.join(missing)}")
     else:
         main()
