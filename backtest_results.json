@@ -1,0 +1,96 @@
+{
+  "metrics": {
+    "initial_balance": 10000,
+    "final_balance": 9984.246778341263,
+    "total_return_pct": -0.1575322165873695,
+    "total_trades": 1,
+    "profitable_trades": 1,
+    "win_rate_pct": 100.0,
+    "avg_return_per_trade_pct": 0.04245264625247277,
+    "max_drawdown_pct": 0.1575322165873695,
+    "sharpe_ratio": 0
+  },
+  "trades": [
+    {
+      "timestamp": "2025-07-10 09:00:00",
+      "action": "BUY",
+      "price": 111041.37,
+      "btc_amount": 0.08996646925375651,
+      "usdt_amount": 9990.0,
+      "reason": "RSI Buy Signal",
+      "portfolio_value": 9990.0
+    },
+    {
+      "timestamp": "2025-07-10 10:00:00",
+      "action": "SELL",
+      "price": 111088.51,
+      "btc_amount": 0.08996646925375651,
+      "usdt_amount": 9984.246778341263,
+      "reason": "RSI Sell Signal",
+      "portfolio_value": 19978.487797701884
+    }
+  ],
+  "portfolio_history": [
+    {
+      "timestamp": "2025-07-27 23:00:00",
+      "price": 119398.15,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 75.82205777354116
+    },
+    {
+      "timestamp": "2025-07-28 00:00:00",
+      "price": 119298.42,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 70.63333358205038
+    },
+    {
+      "timestamp": "2025-07-28 01:00:00",
+      "price": 119029.06,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 67.33685678109555
+    },
+    {
+      "timestamp": "2025-07-28 02:00:00",
+      "price": 119402.44,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 70.74220504700702
+    },
+    {
+      "timestamp": "2025-07-28 03:00:00",
+      "price": 119268.08,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 66.80708171083525
+    },
+    {
+      "timestamp": "2025-07-28 04:00:00",
+      "price": 119218.4,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 63.286042561694195
+    },
+    {
+      "timestamp": "2025-07-28 05:00:00",
+      "price": 119553.4,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 65.35263058646026
+    },
+    {
+      "timestamp": "2025-07-28 06:00:00",
+      "price": 119448.02,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 57.6212548114204
+    },
+    {
+      "timestamp": "2025-07-28 07:00:00",
+      "price": 118905.6,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 45.466470577238276
+    },
+    {
+      "timestamp": "2025-07-28 08:00:00",
+      "price": 118793.27,
+      "portfolio_value": 9984.246778341263,
+      "rsi": 46.104144352502196
+    }
+  ],
+  "timestamp": "2025-07-28T11:11:09.645280"
+}
