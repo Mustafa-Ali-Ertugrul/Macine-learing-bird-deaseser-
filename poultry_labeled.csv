@@ -1,0 +1,447 @@
+image_path,filename,width,height,source,disease,tissue,magnification
+poultry_microscopy\all_images\Figure 1-A-1.jpg,Figure 1-A-1.jpg,2048,1277,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-A-2.jpg,Figure 1-A-2.jpg,2048,1272,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-B.jpg,Figure 1-B.jpg,696,629,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-C.jpg,Figure 1-C.jpg,1233,911,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-D-1.jpg,Figure 1-D-1.jpg,2048,1593,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-D-2.jpg,Figure 1-D-2.jpg,2048,2048,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-D-3.jpg,Figure 1-D-3.jpg,2048,2048,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Infection-DAPI.jpg,Figure 1-E-Infection-DAPI.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Infection-FITC.jpg,Figure 1-E-Infection-FITC.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Infection-Merge.jpg,Figure 1-E-Infection-Merge.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Negative-DAPI.jpg,Figure 1-E-Negative-DAPI.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Negative-FITC.jpg,Figure 1-E-Negative-FITC.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-E-Negative-Merge.jpg,Figure 1-E-Negative-Merge.jpg,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 1-F.jpg,Figure 1-F.jpg,2048,1525,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-1.JPG,Figure 2-Infection-1.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-2.JPG,Figure 2-Infection-2.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-3.JPG,Figure 2-Infection-3.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-4.JPG,Figure 2-Infection-4.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-5.JPG,Figure 2-Infection-5.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-6.JPG,Figure 2-Infection-6.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-Infection-7.JPG,Figure 2-Infection-7.JPG,2048,1536,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-1.JPG,Figure 2-NC-1.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-2.JPG,Figure 2-NC-2.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-3.JPG,Figure 2-NC-3.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-4.JPG,Figure 2-NC-4.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-5.JPG,Figure 2-NC-5.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-6.JPG,Figure 2-NC-6.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2-NC-7.JPG,Figure 2-NC-7.JPG,2048,1536,unknown,healthy,unknown,unknown
+poultry_microscopy\all_images\Figure 2A.jpg,Figure 2A.jpg,2048,1593,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2B.jpg,Figure 2B.jpg,1798,1485,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 2C.jpg,Figure 2C.jpg,2048,1851,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 3-Back-1.JPG,Figure 3-Back-1.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-2.JPG,Figure 3-Back-2.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-3.JPG,Figure 3-Back-3.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-4.JPG,Figure 3-Back-4.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-5.JPG,Figure 3-Back-5.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-6.JPG,Figure 3-Back-6.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Back-7.JPG,Figure 3-Back-7.JPG,2048,1536,unknown,unknown,back,unknown
+poultry_microscopy\all_images\Figure 3-Head-1.JPG,Figure 3-Head-1.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-2.JPG,Figure 3-Head-2.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-3.JPG,Figure 3-Head-3.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-4.JPG,Figure 3-Head-4.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-5.JPG,Figure 3-Head-5.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-6.JPG,Figure 3-Head-6.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Head-7.JPG,Figure 3-Head-7.JPG,2048,1536,unknown,unknown,head,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-1.JPG,Figure 3-Stomach-1.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-2.JPG,Figure 3-Stomach-2.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-3.JPG,Figure 3-Stomach-3.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-4.JPG,Figure 3-Stomach-4.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-5.JPG,Figure 3-Stomach-5.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-6.JPG,Figure 3-Stomach-6.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 3-Stomach-7.JPG,Figure 3-Stomach-7.JPG,2048,1536,unknown,unknown,stomach,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-1.JPG,Figure 4-Bursa of Fabricius-1.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-2.JPG,Figure 4-Bursa of Fabricius-2.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-3.JPG,Figure 4-Bursa of Fabricius-3.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-4.JPG,Figure 4-Bursa of Fabricius-4.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-5.JPG,Figure 4-Bursa of Fabricius-5.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-6.JPG,Figure 4-Bursa of Fabricius-6.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Bursa of Fabricius-7.JPG,Figure 4-Bursa of Fabricius-7.JPG,2048,1024,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-1.JPG,Figure 4-Kidney-1.JPG,2048,1024,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-2.JPG,Figure 4-Kidney-2.JPG,2048,1024,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-3.JPG,Figure 4-Kidney-3.JPG,2048,1024,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-4.JPG,Figure 4-Kidney-4.JPG,2048,1152,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-5.JPG,Figure 4-Kidney-5.JPG,2048,1024,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-6.JPG,Figure 4-Kidney-6.JPG,2048,1024,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Kidney-7.JPG,Figure 4-Kidney-7.JPG,2048,1152,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 4-Liver-1.JPG,Figure 4-Liver-1.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-2.JPG,Figure 4-Liver-2.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-3.JPG,Figure 4-Liver-3.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-4.JPG,Figure 4-Liver-4.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-5.JPG,Figure 4-Liver-5.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-6.JPG,Figure 4-Liver-6.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Liver-7.JPG,Figure 4-Liver-7.JPG,2048,1024,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-1.JPG,Figure 4-Spleen-1.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-2.JPG,Figure 4-Spleen-2.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-3.JPG,Figure 4-Spleen-3.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-4.JPG,Figure 4-Spleen-4.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-5.JPG,Figure 4-Spleen-5.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-6.JPG,Figure 4-Spleen-6.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Spleen-7.JPG,Figure 4-Spleen-7.JPG,2048,1024,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-1.JPG,Figure 4-Thymus-1.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-2.JPG,Figure 4-Thymus-2.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-3.JPG,Figure 4-Thymus-3.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-4.JPG,Figure 4-Thymus-4.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-5.JPG,Figure 4-Thymus-5.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-6.JPG,Figure 4-Thymus-6.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 4-Thymus-7.JPG,Figure 4-Thymus-7.JPG,2048,1024,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-Infection-1.jpg,Figure 5-Bursa of Fabricius-Infection-1.jpg,1716,916,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-Infection-2.jpg,Figure 5-Bursa of Fabricius-Infection-2.jpg,1716,916,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-Infection-3.jpg,Figure 5-Bursa of Fabricius-Infection-3.jpg,1716,916,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-Infection-4.jpg,Figure 5-Bursa of Fabricius-Infection-4.jpg,1716,916,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-Infection-5.jpg,Figure 5-Bursa of Fabricius-Infection-5.jpg,1716,916,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Bursa of Fabricius-NC.jpg,Figure 5-Bursa of Fabricius-NC.jpg,1716,916,unknown,healthy,bursa,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-Infection-1.jpg,Figure 5-Hair Follicle-Infection-1.jpg,1716,943,unknown,unknown,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-Infection-2.jpg,Figure 5-Hair Follicle-Infection-2.jpg,1716,942,unknown,unknown,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-Infection-3.jpg,Figure 5-Hair Follicle-Infection-3.jpg,1716,916,unknown,unknown,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-Infection-4.jpg,Figure 5-Hair Follicle-Infection-4.jpg,1716,942,unknown,unknown,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-Infection-5.jpg,Figure 5-Hair Follicle-Infection-5.jpg,1716,916,unknown,unknown,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Hair Follicle-NC.jpg,Figure 5-Hair Follicle-NC.jpg,1716,924,unknown,healthy,hair_follicle,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-Infection-1.jpg,Figure 5-Kidney-Infection-1.jpg,1716,942,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-Infection-2.jpg,Figure 5-Kidney-Infection-2.jpg,1716,942,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-Infection-3.jpg,Figure 5-Kidney-Infection-3.jpg,1716,942,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-Infection-4.jpg,Figure 5-Kidney-Infection-4.jpg,1716,916,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-Infection-5.jpg,Figure 5-Kidney-Infection-5.jpg,1716,916,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Kidney-NC.jpg,Figure 5-Kidney-NC.jpg,1716,916,unknown,healthy,kidney,unknown
+poultry_microscopy\all_images\Figure 5-Lung-Infection-1.jpg,Figure 5-Lung-Infection-1.jpg,1716,942,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 5-Lung-Infection-2.jpg,Figure 5-Lung-Infection-2.jpg,1716,942,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 5-Lung-Infection-3.jpg,Figure 5-Lung-Infection-3.jpg,1716,942,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 5-Lung-Infection-4.jpg,Figure 5-Lung-Infection-4.jpg,1716,942,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 5-Lung-Infection-5.jpg,Figure 5-Lung-Infection-5.jpg,1728,924,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 5-Lung-NC.jpg,Figure 5-Lung-NC.jpg,1716,932,unknown,healthy,lung,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-Infection-1.jpg,Figure 5-Pancreas-Infection-1.jpg,1720,927,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-Infection-2.jpg,Figure 5-Pancreas-Infection-2.jpg,1716,916,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-Infection-3.jpg,Figure 5-Pancreas-Infection-3.jpg,1716,942,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-Infection-4.jpg,Figure 5-Pancreas-Infection-4.jpg,1716,942,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-Infection-5.jpg,Figure 5-Pancreas-Infection-5.jpg,1720,925,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Pancreas-NC.jpg,Figure 5-Pancreas-NC.jpg,1716,924,unknown,healthy,pancreas,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-Infection-1.jpg,Figure 5-Spleen-Infection-1.jpg,1716,942,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-Infection-2.jpg,Figure 5-Spleen-Infection-2.jpg,1716,916,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-Infection-3.jpg,Figure 5-Spleen-Infection-3.jpg,1716,916,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-Infection-4.jpg,Figure 5-Spleen-Infection-4.jpg,1716,942,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-Infection-5.jpg,Figure 5-Spleen-Infection-5.jpg,1716,916,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Spleen-NC.jpg,Figure 5-Spleen-NC.jpg,1716,916,unknown,healthy,spleen,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-Infection-1.jpg,Figure 5-Thymus-Infection-1.jpg,1716,942,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-Infection-2.jpg,Figure 5-Thymus-Infection-2.jpg,1716,942,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-Infection-3.jpg,Figure 5-Thymus-Infection-3.jpg,1716,942,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-Infection-4.jpg,Figure 5-Thymus-Infection-4.jpg,1716,942,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-Infection-5.jpg,Figure 5-Thymus-Infection-5.jpg,1716,930,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 5-Thymus-NC.jpg,Figure 5-Thymus-NC.jpg,1668,922,unknown,healthy,thymus,unknown
+poultry_microscopy\all_images\Figure 6-Bursa of Fabricius-Infection-1.jpg,Figure 6-Bursa of Fabricius-Infection-1.jpg,2048,1058,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 6-Bursa of Fabricius-Infection-2.jpg,Figure 6-Bursa of Fabricius-Infection-2.jpg,2048,1058,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 6-Bursa of Fabricius-Infection-3.jpg,Figure 6-Bursa of Fabricius-Infection-3.jpg,2048,1058,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 6-Bursa of Fabricius-NC.jpg,Figure 6-Bursa of Fabricius-NC.jpg,2048,1058,unknown,healthy,bursa,unknown
+poultry_microscopy\all_images\Figure 6-Spleen-Infection-1.jpg,Figure 6-Spleen-Infection-1.jpg,2048,1058,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 6-Spleen-Infection-2.jpg,Figure 6-Spleen-Infection-2.jpg,2048,1058,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 6-Spleen-Infection-3.jpg,Figure 6-Spleen-Infection-3.jpg,2048,1058,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 6-Spleen-NC.jpg,Figure 6-Spleen-NC.jpg,1200,600,unknown,healthy,spleen,unknown
+poultry_microscopy\all_images\Figure 6-Thymus-Infection-1.jpg,Figure 6-Thymus-Infection-1.jpg,2048,1058,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 6-Thymus-Infection-2.jpg,Figure 6-Thymus-Infection-2.jpg,2048,1058,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 6-Thymus-Infection-3.jpg,Figure 6-Thymus-Infection-3.jpg,2048,1058,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 6-Thymus-NC.jpg,Figure 6-Thymus-NC.jpg,2048,1058,unknown,healthy,thymus,unknown
+poultry_microscopy\all_images\Figure 6A.jpg,Figure 6A.jpg,2828,1921,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 6B.jpg,Figure 6B.jpg,4160,3120,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 6C.jpg,Figure 6C.jpg,4096,3072,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 6D.jpg,Figure 6D.jpg,3072,4096,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 6E.jpg,Figure 6E.jpg,2200,1908,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 6F.jpeg,Figure 6F.jpeg,2148,1918,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7-Brain.jpg,Figure 7-Brain.jpg,1721,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7-Bursa of Fabricius.jpg,Figure 7-Bursa of Fabricius.jpg,1721,979,unknown,unknown,bursa,unknown
+poultry_microscopy\all_images\Figure 7-Duodenum.jpg,Figure 7-Duodenum.jpg,1721,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7-Heart.jpg,Figure 7-Heart.jpg,1721,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7-Kidney.jpg,Figure 7-Kidney.jpg,1721,979,unknown,unknown,kidney,unknown
+poultry_microscopy\all_images\Figure 7-Liver.jpg,Figure 7-Liver.jpg,1721,979,unknown,unknown,liver,unknown
+poultry_microscopy\all_images\Figure 7-Lung.jpg,Figure 7-Lung.jpg,1721,979,unknown,unknown,lung,unknown
+poultry_microscopy\all_images\Figure 7-Pancreas.jpg,Figure 7-Pancreas.jpg,1721,979,unknown,unknown,pancreas,unknown
+poultry_microscopy\all_images\Figure 7-Skin.jpg,Figure 7-Skin.jpg,1721,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7-Spleen.jpg,Figure 7-Spleen.jpg,1721,979,unknown,unknown,spleen,unknown
+poultry_microscopy\all_images\Figure 7-Thymus.jpg,Figure 7-Thymus.jpg,1721,979,unknown,unknown,thymus,unknown
+poultry_microscopy\all_images\Figure 7A.jpg,Figure 7A.jpg,2880,2048,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7B.jpg,Figure 7B.jpg,2880,2048,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7C.jpg,Figure 7C.jpg,1440,1024,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7D.jpg,Figure 7D.jpg,1440,1024,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7E.jpg,Figure 7E.jpg,1280,960,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 7F.jpg,Figure 7F.jpg,1440,1024,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 8-A.jpg,Figure 8-A.jpg,1224,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 8-B.jpg,Figure 8-B.jpg,1721,979,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 8-C.jpg,Figure 8-C.jpg,1462,949,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 8-D.jpg,Figure 8-D.jpg,2048,834,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\Figure 8-E.jpg,Figure 8-E.jpg,2048,796,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10031541_fig0002_07e1c073.jpg,PMC10031541_fig0002_07e1c073.jpg,729,851,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10031541_fig0003_cfef4d05.jpg,PMC10031541_fig0003_cfef4d05.jpg,714,953,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10295512_animals-13-02037-f004_73209a15.jpg,PMC10295512_animals-13-02037-f004_73209a15.jpg,747,559,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10405095_fig0006_08f4ee04.jpg,PMC10405095_fig0006_08f4ee04.jpg,750,950,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10405095_fig0007_b8c38f78.jpg,PMC10405095_fig0007_b8c38f78.jpg,791,1496,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10483844_Fig1_5f83ed6b.jpg,PMC10483844_Fig1_5f83ed6b.jpg,770,1653,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10650477_animals-13-03421-f001_e4a54b5b.jpg,PMC10650477_animals-13-03421-f001_e4a54b5b.jpg,724,522,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10711517_fig0001_b8c77161.jpg,PMC10711517_fig0001_b8c77161.jpg,727,1081,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10711517_fig0006_6276e48d.jpg,PMC10711517_fig0006_6276e48d.jpg,727,1144,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10768351_Fig3_3dc94067.jpg,PMC10768351_Fig3_3dc94067.jpg,595,708,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10787586_f2_2fcdd437.jpg,PMC10787586_f2_2fcdd437.jpg,765,753,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10787586_f3_c13ff539.jpg,PMC10787586_f3_c13ff539.jpg,774,778,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10787586_f4_34805ace.jpg,PMC10787586_f4_34805ace.jpg,776,691,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10787586_f5_f628fc83.jpg,PMC10787586_f5_f628fc83.jpg,724,868,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10787586_sch1_2087487e.jpg,PMC10787586_sch1_2087487e.jpg,3806,1377,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10792630_fig0001_fadbc66d.jpg,PMC10792630_fig0001_fadbc66d.jpg,714,534,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10792630_fig0003_6efc7c9a.jpg,PMC10792630_fig0003_6efc7c9a.jpg,714,532,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10792630_fig0004_de763b6d.jpg,PMC10792630_fig0004_de763b6d.jpg,714,537,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10820081_toxins-16-00046-f003_1567380e.jpg,PMC10820081_toxins-16-00046-f003_1567380e.jpg,714,954,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10881339_fig3_e55af878.jpg,PMC10881339_fig3_e55af878.jpg,724,742,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10893078_vetsci-11-00098-f006_6bdedc3f.jpg,PMC10893078_vetsci-11-00098-f006_6bdedc3f.jpg,766,754,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC10893078_vetsci-11-00098-f007_4d2b97c2.jpg,PMC10893078_vetsci-11-00098-f007_4d2b97c2.jpg,742,731,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig10_c01498ee.jpg,PMC11001757_Fig10_c01498ee.jpg,708,672,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig11_1e808529.jpg,PMC11001757_Fig11_1e808529.jpg,708,675,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig12_0fb8e62b.jpg,PMC11001757_Fig12_0fb8e62b.jpg,670,984,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig13_de4faf2e.jpg,PMC11001757_Fig13_de4faf2e.jpg,684,990,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig14_12898e70.jpg,PMC11001757_Fig14_12898e70.jpg,684,989,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig15_c9494e09.jpg,PMC11001757_Fig15_c9494e09.jpg,684,987,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig16_11f24264.jpg,PMC11001757_Fig16_11f24264.jpg,684,909,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig17_618b5ed5.jpg,PMC11001757_Fig17_618b5ed5.jpg,684,910,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig18_bbf075ba.jpg,PMC11001757_Fig18_bbf075ba.jpg,684,905,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig19_34362a35.jpg,PMC11001757_Fig19_34362a35.jpg,684,896,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig20_ee6644f2.jpg,PMC11001757_Fig20_ee6644f2.jpg,678,912,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig21_a03a52f3.jpg,PMC11001757_Fig21_a03a52f3.jpg,684,947,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig22_4f95a7e5.jpg,PMC11001757_Fig22_4f95a7e5.jpg,684,919,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig23_fe66095b.jpg,PMC11001757_Fig23_fe66095b.jpg,684,954,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig6_29434ac8.jpg,PMC11001757_Fig6_29434ac8.jpg,708,680,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig7_765d247f.jpg,PMC11001757_Fig7_765d247f.jpg,708,680,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig8_ddabf81f.jpg,PMC11001757_Fig8_ddabf81f.jpg,708,676,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11001757_Fig9_2fd1768b.jpg,PMC11001757_Fig9_2fd1768b.jpg,708,673,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11017358_fig0001_77c91f39.jpg,PMC11017358_fig0001_77c91f39.jpg,694,552,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11017358_fig0005_aacc6719.jpg,PMC11017358_fig0005_aacc6719.jpg,770,685,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11240451_animals-14-01959-f001_38bface1.jpg,PMC11240451_animals-14-01959-f001_38bface1.jpg,746,556,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11240451_animals-14-01959-f002_4e531273.jpg,PMC11240451_animals-14-01959-f002_4e531273.jpg,774,586,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11342782_fig0004_8b18700e.jpg,PMC11342782_fig0004_8b18700e.jpg,666,1037,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11357213_pathogens-13-00619-f002_d8e5e9c8.jpg,PMC11357213_pathogens-13-00619-f002_d8e5e9c8.jpg,696,540,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11357213_pathogens-13-00619-f004_69048037.jpg,PMC11357213_pathogens-13-00619-f004_69048037.jpg,695,525,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11377767_Fig1_cdcf7232.jpg,PMC11377767_Fig1_cdcf7232.jpg,699,556,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11377767_Fig6_1b7ee950.jpg,PMC11377767_Fig6_1b7ee950.jpg,724,921,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11377767_Fig7_46e5265c.jpg,PMC11377767_Fig7_46e5265c.jpg,724,791,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11377767_Fig8_6813c46c.jpg,PMC11377767_Fig8_6813c46c.jpg,726,916,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11446001_Fig2_0dbade6c.jpg,PMC11446001_Fig2_0dbade6c.jpg,1592,2073,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11446001_Fig3_e76241bb.jpg,PMC11446001_Fig3_e76241bb.jpg,1592,1527,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11446001_Fig4_ce2195e4.jpg,PMC11446001_Fig4_ce2195e4.jpg,1592,1249,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11481460_Fig2_67a4986a.jpg,PMC11481460_Fig2_67a4986a.jpg,798,744,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11481460_Fig5_0e2cf4b6.jpg,PMC11481460_Fig5_0e2cf4b6.jpg,798,762,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11481460_Fig6_38d1fbbd.jpg,PMC11481460_Fig6_38d1fbbd.jpg,798,646,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11492589_fig0004_f5803c2b.jpg,PMC11492589_fig0004_f5803c2b.jpg,740,740,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11492589_fig0008_ad6b5674.jpg,PMC11492589_fig0008_ad6b5674.jpg,752,574,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11544849_cells-13-01797-f006_7eff7236.jpg,PMC11544849_cells-13-01797-f006_7eff7236.jpg,744,734,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11578965_fig1_47259a0e.jpg,PMC11578965_fig1_47259a0e.jpg,767,566,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11578965_fig2_9909a18e.jpg,PMC11578965_fig2_9909a18e.jpg,767,596,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11578965_fig3_43e8bce1.jpg,PMC11578965_fig3_43e8bce1.jpg,767,598,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11578965_fig4_88015ce9.jpg,PMC11578965_fig4_88015ce9.jpg,767,561,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11578965_fig7_1fc99482.jpg,PMC11578965_fig7_1fc99482.jpg,767,530,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11582649_Fig1_8b8249a8.jpg,PMC11582649_Fig1_8b8249a8.jpg,718,1155,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11582649_Fig3_8c9f5518.jpg,PMC11582649_Fig3_8c9f5518.jpg,728,1250,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11582649_Fig5_e50e1684.jpg,PMC11582649_Fig5_e50e1684.jpg,725,826,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11598950_viruses-16-01777-f001_cb58f49f.jpg,PMC11598950_viruses-16-01777-f001_cb58f49f.jpg,728,589,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11598950_viruses-16-01777-f002_5cad26df.jpg,PMC11598950_viruses-16-01777-f002_5cad26df.jpg,698,972,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11598950_viruses-16-01777-f003_ca82edec.jpg,PMC11598950_viruses-16-01777-f003_ca82edec.jpg,718,706,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11598950_viruses-16-01777-f004_d03c4bb2.jpg,PMC11598950_viruses-16-01777-f004_d03c4bb2.jpg,675,862,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11610265_Fig2_dccfc240.jpg,PMC11610265_Fig2_dccfc240.jpg,595,834,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11610265_Fig4_099bd16a.jpg,PMC11610265_Fig4_099bd16a.jpg,708,988,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11647614_fig0001_b2afe4c6.jpg,PMC11647614_fig0001_b2afe4c6.jpg,714,1128,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11647614_fig0004_436bae1f.jpg,PMC11647614_fig0004_436bae1f.jpg,708,864,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11653950_Fig3_f2724457.jpg,PMC11653950_Fig3_f2724457.jpg,2008,2070,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11653950_Fig5_5b98b4e7.jpg,PMC11653950_Fig5_5b98b4e7.jpg,2008,791,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11677493_pathogens-13-01115-f001_53da904f.jpg,PMC11677493_pathogens-13-01115-f001_53da904f.jpg,729,727,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11677493_pathogens-13-01115-f002_3df7d4f7.jpg,PMC11677493_pathogens-13-01115-f002_3df7d4f7.jpg,781,595,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11680472_ame212463-fig-0001_cb0c6731.jpg,PMC11680472_ame212463-fig-0001_cb0c6731.jpg,709,1113,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11680472_ame212463-fig-0002_9b06edf9.jpg,PMC11680472_ame212463-fig-0002_9b06edf9.jpg,709,943,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11721806_F0001_499b482d.jpg,PMC11721806_F0001_499b482d.jpg,750,1076,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11721806_F0004_183786bd.jpg,PMC11721806_F0004_183786bd.jpg,750,795,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11721806_F0005_b8d13f8d.jpg,PMC11721806_F0005_b8d13f8d.jpg,750,806,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11721806_F0006_47056793.jpg,PMC11721806_F0006_47056793.jpg,750,890,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11721806_F0007_0b53044d.jpg,PMC11721806_F0007_0b53044d.jpg,750,1069,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11728826_viruses-16-01966-f011_b3a8ad6f.jpg,PMC11728826_viruses-16-01966-f011_b3a8ad6f.jpg,708,702,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11728826_viruses-16-01966-f012_6cbc1534.jpg,PMC11728826_viruses-16-01966-f012_6cbc1534.jpg,792,528,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11740294_F0001_76713ad3.jpg,PMC11740294_F0001_76713ad3.jpg,750,774,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F10_2244e966.jpg,PMC11784312_F10_2244e966.jpg,774,951,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F2_62d4c9cc.jpg,PMC11784312_F2_62d4c9cc.jpg,728,896,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F3_2915201b.jpg,PMC11784312_F3_2915201b.jpg,753,1024,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F4_a6670377.jpg,PMC11784312_F4_a6670377.jpg,756,1305,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F5_11bd5256.jpg,PMC11784312_F5_11bd5256.jpg,749,983,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11784312_F7_d2bebc5a.jpg,PMC11784312_F7_d2bebc5a.jpg,728,910,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11792478_F4_9ad36dcf.jpg,PMC11792478_F4_9ad36dcf.jpg,775,650,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11792478_F5_b537569e.jpg,PMC11792478_F5_b537569e.jpg,718,656,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11803967_Fig1_1b22716c.jpg,PMC11803967_Fig1_1b22716c.jpg,778,651,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11803967_Fig5_1e3febdf.jpg,PMC11803967_Fig5_1e3febdf.jpg,778,810,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11803967_Fig6_6a05f2d5.jpg,PMC11803967_Fig6_6a05f2d5.jpg,777,988,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11803967_Fig7_80f9763c.jpg,PMC11803967_Fig7_80f9763c.jpg,722,920,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11858509_pathogens-14-00149-f002_db224d6c.jpg,PMC11858509_pathogens-14-00149-f002_db224d6c.jpg,713,713,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11858509_pathogens-14-00149-f003_bc4d3be3.jpg,PMC11858509_pathogens-14-00149-f003_bc4d3be3.jpg,728,641,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11858509_pathogens-14-00149-f006_1f95113d.jpg,PMC11858509_pathogens-14-00149-f006_1f95113d.jpg,774,883,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11864831_F1_5b66038c.jpg,PMC11864831_F1_5b66038c.jpg,787,943,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11866900_Fig2_13c4795f.jpg,PMC11866900_Fig2_13c4795f.jpg,1592,941,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11866900_Fig3_1a3b4310.jpg,PMC11866900_Fig3_1a3b4310.jpg,1959,1104,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11906689_F3_bad77003.jpg,PMC11906689_F3_bad77003.jpg,708,549,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11906689_F4_0677720f.jpg,PMC11906689_F4_0677720f.jpg,708,549,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11932683_fig0003_68410bc5.jpg,PMC11932683_fig0003_68410bc5.jpg,768,763,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11945385_vaccines-13-00294-f002_ef8994bb.jpg,PMC11945385_vaccines-13-00294-f002_ef8994bb.jpg,731,998,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11945385_vaccines-13-00294-f005_984b7676.jpg,PMC11945385_vaccines-13-00294-f005_984b7676.jpg,726,704,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11945385_vaccines-13-00294-f006_3524b08f.jpg,PMC11945385_vaccines-13-00294-f006_3524b08f.jpg,721,818,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g001_0b610137.jpg,PMC11960958_pone.0320483.g001_0b610137.jpg,750,525,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g003_7e286b18.jpg,PMC11960958_pone.0320483.g003_7e286b18.jpg,785,785,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g004_ef2c9da9.jpg,PMC11960958_pone.0320483.g004_ef2c9da9.jpg,766,678,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g005_e47995f8.jpg,PMC11960958_pone.0320483.g005_e47995f8.jpg,796,806,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g006_cb3122df.jpg,PMC11960958_pone.0320483.g006_cb3122df.jpg,723,530,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g007_1b6d43c7.jpg,PMC11960958_pone.0320483.g007_1b6d43c7.jpg,782,782,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11960958_pone.0320483.g009_f6d6876e.jpg,PMC11960958_pone.0320483.g009_f6d6876e.jpg,796,605,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11965304_Fig2_6d73b066.jpg,PMC11965304_Fig2_6d73b066.jpg,799,528,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11971486_F1_0f42d2c4.jpg,PMC11971486_F1_0f42d2c4.jpg,757,1000,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11971486_F2_c12be088.jpg,PMC11971486_F2_c12be088.jpg,735,575,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11971486_F4_8ff43deb.jpg,PMC11971486_F4_8ff43deb.jpg,735,961,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11980200_F0001_0f201704.jpg,PMC11980200_F0001_0f201704.jpg,750,641,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11986440_FIG2_3539be77.jpg,PMC11986440_FIG2_3539be77.jpg,733,639,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11986440_FIG4_c2108b15.jpg,PMC11986440_FIG4_c2108b15.jpg,756,518,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11986440_FIG8_a6ce11dd.jpg,PMC11986440_FIG8_a6ce11dd.jpg,711,629,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11987307_Fig1_0767be09.jpg,PMC11987307_Fig1_0767be09.jpg,744,910,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11987307_Fig2_dd251ff6.jpg,PMC11987307_Fig2_dd251ff6.jpg,744,1059,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11987656_fig0004_b280abbe.jpg,PMC11987656_fig0004_b280abbe.jpg,750,748,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11995505_Fig2_96303e6b.jpg,PMC11995505_Fig2_96303e6b.jpg,669,661,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11995505_Fig3_dac68776.jpg,PMC11995505_Fig3_dac68776.jpg,669,672,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC11995505_Fig5_37c1bb42.jpg,PMC11995505_Fig5_37c1bb42.jpg,669,682,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12002762_fig0001_c85e3779.jpg,PMC12002762_fig0001_c85e3779.jpg,777,656,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12016797_fig1_19b15e12.jpg,PMC12016797_fig1_19b15e12.jpg,643,1111,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12017716_fig2_0702d0a6.jpg,PMC12017716_fig2_0702d0a6.jpg,645,524,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12017716_fig4_e7f1b4f9.jpg,PMC12017716_fig4_e7f1b4f9.jpg,645,556,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12017716_fig6_01875c52.jpg,PMC12017716_fig6_01875c52.jpg,636,527,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12017716_fig7_ef2c19d4.jpg,PMC12017716_fig7_ef2c19d4.jpg,636,534,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12031470_viruses-17-00519-f003_4da213f9.jpg,PMC12031470_viruses-17-00519-f003_4da213f9.jpg,640,638,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12031470_viruses-17-00519-f004_5e5b5cc4.jpg,PMC12031470_viruses-17-00519-f004_5e5b5cc4.jpg,795,563,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12031470_viruses-17-00519-f005_1b218c31.jpg,PMC12031470_viruses-17-00519-f005_1b218c31.jpg,613,611,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12070898_animals-15-01281-f003_f06d50a3.jpg,PMC12070898_animals-15-01281-f003_f06d50a3.jpg,755,986,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12088461_idoj.idoj_1039_24-f002_7ba1dc04.jpg,PMC12088461_idoj.idoj_1039_24-f002_7ba1dc04.jpg,539,779,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12088461_idoj.idoj_1039_24-f004_dad4a38a.jpg,PMC12088461_idoj.idoj_1039_24-f004_dad4a38a.jpg,539,650,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12090714_F6_d23764c7.jpg,PMC12090714_F6_d23764c7.jpg,735,783,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12090751_F4_7a9c9aba.jpg,PMC12090751_F4_7a9c9aba.jpg,743,803,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12090751_F5_a809823c.jpg,PMC12090751_F5_a809823c.jpg,796,644,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12102188_Fig1_5879e89c.jpg,PMC12102188_Fig1_5879e89c.jpg,800,1010,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12102188_Fig2_4856a42f.jpg,PMC12102188_Fig2_4856a42f.jpg,800,889,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12102188_Fig4_876c92c9.jpg,PMC12102188_Fig4_876c92c9.jpg,756,999,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12137113_Fig1_58c9b69f.jpg,PMC12137113_Fig1_58c9b69f.jpg,728,541,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12137113_Fig3_24e3116d.jpg,PMC12137113_Fig3_24e3116d.jpg,783,1023,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12137113_Fig4_d6275384.jpg,PMC12137113_Fig4_d6275384.jpg,688,933,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12137113_Fig5_8302c6c6.jpg,PMC12137113_Fig5_8302c6c6.jpg,787,932,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12137113_Fig7_cf19a238.jpg,PMC12137113_Fig7_cf19a238.jpg,704,524,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12138426_fig0003_88c359a0.jpg,PMC12138426_fig0003_88c359a0.jpg,729,592,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12138426_fig0010_d7ee8dfb.jpg,PMC12138426_fig0010_d7ee8dfb.jpg,777,765,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12144252_Fig3_fe7bc636.jpg,PMC12144252_Fig3_fe7bc636.jpg,750,918,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12144252_Fig7_0469396f.jpg,PMC12144252_Fig7_0469396f.jpg,737,1250,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12146021_F1_6c3e53f1.jpg,PMC12146021_F1_6c3e53f1.jpg,774,597,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12146021_F2_ac58d679.jpg,PMC12146021_F2_ac58d679.jpg,774,513,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12146021_F3_beb56b4e.jpg,PMC12146021_F3_beb56b4e.jpg,753,753,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12169742_fig0002_40f64bd0.jpg,PMC12169742_fig0002_40f64bd0.jpg,777,872,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12169742_fig0009_f261d17e.jpg,PMC12169742_fig0009_f261d17e.jpg,777,520,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12172082_F0001_03a7e9b4.jpg,PMC12172082_F0001_03a7e9b4.jpg,750,553,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12172082_F0003_5fa6e83e.jpg,PMC12172082_F0003_5fa6e83e.jpg,750,1026,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12173210_FIG1_247b2ddd.jpg,PMC12173210_FIG1_247b2ddd.jpg,750,596,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12173210_FIG2_f9058345.jpg,PMC12173210_FIG2_f9058345.jpg,750,544,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12188715_F6_a81d0ae2.jpg,PMC12188715_F6_a81d0ae2.jpg,687,527,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12188715_F7_72c49450.jpg,PMC12188715_F7_72c49450.jpg,688,515,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12188715_F8_06bd53b8.jpg,PMC12188715_F8_06bd53b8.jpg,735,540,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12188715_F9_20da75de.jpg,PMC12188715_F9_20da75de.jpg,706,518,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12213281_fig0004_38745df5.jpg,PMC12213281_fig0004_38745df5.jpg,777,628,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12224477_Fig2_27a4ed34.jpg,PMC12224477_Fig2_27a4ed34.jpg,708,591,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12239568_F2_dce148ea.jpg,PMC12239568_F2_dce148ea.jpg,796,1305,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12239568_F3_cca747b2.jpg,PMC12239568_F3_cca747b2.jpg,669,512,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12239568_F4_5bee3c02.jpg,PMC12239568_F4_5bee3c02.jpg,717,716,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig10_c097cf0a.jpg,PMC12255740_Fig10_c097cf0a.jpg,711,989,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig11_90a7219b.jpg,PMC12255740_Fig11_90a7219b.jpg,723,772,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig1_ab9abdb3.jpg,PMC12255740_Fig1_ab9abdb3.jpg,735,996,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig5_4d7510fc.jpg,PMC12255740_Fig5_4d7510fc.jpg,725,1010,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig6_d8dc7c34.jpg,PMC12255740_Fig6_d8dc7c34.jpg,723,838,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12255740_Fig7_7c4a0ddd.jpg,PMC12255740_Fig7_7c4a0ddd.jpg,701,998,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12269577_fig0001_79372cc8.jpg,PMC12269577_fig0001_79372cc8.jpg,740,576,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12282172_F5_2e2db4d7.jpg,PMC12282172_F5_2e2db4d7.jpg,745,679,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12282323_F4_53d61dff.jpg,PMC12282323_F4_53d61dff.jpg,735,909,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12286695_fig1_8fdbcb44.jpg,PMC12286695_fig1_8fdbcb44.jpg,789,646,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12286695_fig2_68466354.jpg,PMC12286695_fig2_68466354.jpg,789,646,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12291917_animals-15-02057-f002_df5dd1e1.jpg,PMC12291917_animals-15-02057-f002_df5dd1e1.jpg,702,1199,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12291917_animals-15-02057-f003_a82f128e.jpg,PMC12291917_animals-15-02057-f003_a82f128e.jpg,725,620,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12326629_Fig11_c9084ae6.jpg,PMC12326629_Fig11_c9084ae6.jpg,787,677,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12326652_Fig6_6e8c32c5.jpg,PMC12326652_Fig6_6e8c32c5.jpg,764,1181,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12327064_vms370504-fig-0009_e0665823.jpg,PMC12327064_vms370504-fig-0009_e0665823.jpg,600,638,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12333254_Fig3_da081970.jpg,PMC12333254_Fig3_da081970.jpg,778,784,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12333254_Fig4_0bd06807.jpg,PMC12333254_Fig4_0bd06807.jpg,778,866,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12333254_Fig5_dd437f2e.jpg,PMC12333254_Fig5_dd437f2e.jpg,778,975,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12345485_animals-15-02187-f002_8f5ce37d.jpg,PMC12345485_animals-15-02187-f002_8f5ce37d.jpg,717,771,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12362686_fig0004_daae7b51.jpg,PMC12362686_fig0004_daae7b51.jpg,750,689,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12362686_fig0005_cb40f6c0.jpg,PMC12362686_fig0005_cb40f6c0.jpg,768,626,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12363208_F1_4b9bcf8e.jpg,PMC12363208_F1_4b9bcf8e.jpg,692,896,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12363208_F4_aca03b26.jpg,PMC12363208_F4_aca03b26.jpg,769,645,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12363208_F5_243ae514.jpg,PMC12363208_F5_243ae514.jpg,713,837,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12372494_F0001_7f9d3140.jpg,PMC12372494_F0001_7f9d3140.jpg,750,665,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12372494_F0003_d2f177d7.jpg,PMC12372494_F0003_d2f177d7.jpg,750,1184,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12372494_F0004_4acc3fed.jpg,PMC12372494_F0004_4acc3fed.jpg,750,1264,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12372494_F0005_3ac147e3.jpg,PMC12372494_F0005_3ac147e3.jpg,750,672,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12372494_F0007_0460fa3d.jpg,PMC12372494_F0007_0460fa3d.jpg,750,772,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12373873_Fig3_0685dee3.jpg,PMC12373873_Fig3_0685dee3.jpg,788,765,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12373873_Fig5_0695a228.jpg,PMC12373873_Fig5_0695a228.jpg,797,815,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12373873_Fig6_e35bd648.jpg,PMC12373873_Fig6_e35bd648.jpg,797,668,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12381878_fig6_222d1b08.jpg,PMC12381878_fig6_222d1b08.jpg,714,966,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12382773_animals-15-02327-f002_a513d532.jpg,PMC12382773_animals-15-02327-f002_a513d532.jpg,798,657,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12383250_F5_7c05290a.jpg,PMC12383250_F5_7c05290a.jpg,730,1015,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12383250_F7_02d3bea6.jpg,PMC12383250_F7_02d3bea6.jpg,764,955,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12385707_foods-14-02781-f008_54035c6b.jpg,PMC12385707_foods-14-02781-f008_54035c6b.jpg,729,640,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12388314_microorganisms-13-01738-f007_233405ae.jpg,PMC12388314_microorganisms-13-01738-f007_233405ae.jpg,779,556,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12388314_microorganisms-13-01738-f008_0471400d.jpg,PMC12388314_microorganisms-13-01738-f008_0471400d.jpg,686,681,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12389831_vetsci-12-00689-f002_f8b87824.jpg,PMC12389831_vetsci-12-00689-f002_f8b87824.jpg,752,566,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12389831_vetsci-12-00689-f003_e9e90134.jpg,PMC12389831_vetsci-12-00689-f003_e9e90134.jpg,749,565,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12389831_vetsci-12-00689-f004_bc343a4d.jpg,PMC12389831_vetsci-12-00689-f004_bc343a4d.jpg,786,592,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12390582_vetsci-12-00726-f001_ec57ea1e.jpg,PMC12390582_vetsci-12-00726-f001_ec57ea1e.jpg,690,1036,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12390582_vetsci-12-00726-f004_fc40a5b9.jpg,PMC12390582_vetsci-12-00726-f004_fc40a5b9.jpg,763,1156,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12390651_viruses-17-01037-f003_14b24f6c.jpg,PMC12390651_viruses-17-01037-f003_14b24f6c.jpg,716,971,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12396427_fig0004_3fa988bd.jpg,PMC12396427_fig0004_3fa988bd.jpg,723,1070,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12396427_fig0005_100ea40e.jpg,PMC12396427_fig0005_100ea40e.jpg,714,1161,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig3_ce3d099d.jpg,PMC12398015_Fig3_ce3d099d.jpg,797,987,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig4_efd45745.jpg,PMC12398015_Fig4_efd45745.jpg,797,983,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig5_4f013fbd.jpg,PMC12398015_Fig5_4f013fbd.jpg,797,1208,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig6_e9e64854.jpg,PMC12398015_Fig6_e9e64854.jpg,797,937,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig7_145d2308.jpg,PMC12398015_Fig7_145d2308.jpg,629,1241,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12398015_Fig8_303e4163.jpg,PMC12398015_Fig8_303e4163.jpg,708,1216,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12400679_fig2_d565d77e.jpg,PMC12400679_fig2_d565d77e.jpg,767,612,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12400679_fig5_85646b1f.jpg,PMC12400679_fig5_85646b1f.jpg,767,574,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12400679_fig6_e85d6962.jpg,PMC12400679_fig6_e85d6962.jpg,767,572,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12400679_fig7_dc6af674.jpg,PMC12400679_fig7_dc6af674.jpg,767,851,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12403985_F1_f3a6aa76.jpg,PMC12403985_F1_f3a6aa76.jpg,729,1204,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12403985_F2_1844dc29.jpg,PMC12403985_F2_1844dc29.jpg,798,591,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12405288_fig1_825a62aa.jpg,PMC12405288_fig1_825a62aa.jpg,767,959,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12410888_ppat.1013458.g001_9a892416.jpg,PMC12410888_ppat.1013458.g001_9a892416.jpg,694,745,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12410888_ppat.1013458.g002_98c1785c.jpg,PMC12410888_ppat.1013458.g002_98c1785c.jpg,759,626,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12410888_ppat.1013458.g004_59f3037d.jpg,PMC12410888_ppat.1013458.g004_59f3037d.jpg,700,782,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12433649_f0001_37c79b0a.jpg,PMC12433649_f0001_37c79b0a.jpg,750,937,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12433649_f0003_16d40fcc.jpg,PMC12433649_f0003_16d40fcc.jpg,798,1352,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12433649_f0005_c883e0fc.jpg,PMC12433649_f0005_c883e0fc.jpg,791,1144,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12433649_f0006_e9cbae6f.jpg,PMC12433649_f0006_e9cbae6f.jpg,795,1144,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12434004_f2_9197a5bc.jpg,PMC12434004_f2_9197a5bc.jpg,706,1418,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12434004_f4_b9a769c7.jpg,PMC12434004_f4_b9a769c7.jpg,690,1042,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12434004_f6_cafcba59.jpg,PMC12434004_f6_cafcba59.jpg,687,651,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12444787_F4_e8fb5bb3.jpg,PMC12444787_F4_e8fb5bb3.jpg,735,872,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12456136_F4_52f46b94.jpg,PMC12456136_F4_52f46b94.jpg,709,906,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12456792_pone.0332213.g001_b38aaaa3.jpg,PMC12456792_pone.0332213.g001_b38aaaa3.jpg,750,582,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12456792_pone.0332213.g003_52ae199c.jpg,PMC12456792_pone.0332213.g003_52ae199c.jpg,792,823,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12472222_pathogens-14-00865-f002_26e3475d.jpg,PMC12472222_pathogens-14-00865-f002_26e3475d.jpg,671,838,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12472222_pathogens-14-00865-f003_c756d249.jpg,PMC12472222_pathogens-14-00865-f003_c756d249.jpg,675,1003,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12474141_vetsci-12-00849-f001_78a49244.jpg,PMC12474141_vetsci-12-00849-f001_78a49244.jpg,766,934,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12474141_vetsci-12-00849-f003_f98cdeae.jpg,PMC12474141_vetsci-12-00849-f003_f98cdeae.jpg,740,557,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12474141_vetsci-12-00849-f005_f60bcb72.jpg,PMC12474141_vetsci-12-00849-f005_f60bcb72.jpg,730,822,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12474430_vaccines-13-00946-f007_a92bcd58.jpg,PMC12474430_vaccines-13-00946-f007_a92bcd58.jpg,734,528,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12474430_vaccines-13-00946-f008_35039df4.jpg,PMC12474430_vaccines-13-00946-f008_35039df4.jpg,720,1688,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12476818_F1_90ae0c84.jpg,PMC12476818_F1_90ae0c84.jpg,676,658,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12495160_fig0002_1c08ad2d.jpg,PMC12495160_fig0002_1c08ad2d.jpg,748,605,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12497699_f3_225640ee.jpg,PMC12497699_f3_225640ee.jpg,759,839,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12501596_F2_08d66881.jpg,PMC12501596_F2_08d66881.jpg,564,660,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12501596_F4_12cdcb5e.jpg,PMC12501596_F4_12cdcb5e.jpg,768,879,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC12501596_F5_8fef5f23.jpg,PMC12501596_F5_8fef5f23.jpg,564,726,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC9321215_vetsci-09-00347-f003_cc21c2f9.jpg,PMC9321215_vetsci-09-00347-f003_cc21c2f9.jpg,749,547,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC9321215_vetsci-09-00347-f004_25f5b3ff.jpg,PMC9321215_vetsci-09-00347-f004_25f5b3ff.jpg,750,549,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\PMC9321215_vetsci-09-00347-f005_760d2ad2.jpg,PMC9321215_vetsci-09-00347-f005_760d2ad2.jpg,756,547,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\case 13(tfnd).jpg,case 13(tfnd).jpg,2048,1466,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\case 19(tfnd).jpg,case 19(tfnd).jpg,2048,1466,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\case 23(tfnd).jpg,case 23(tfnd).jpg,2048,1466,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\case 7(tfnd).jpg,case 7(tfnd).jpg,2048,1466,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\case 9(tfnd).jpg,case 9(tfnd).jpg,2048,1466,unknown,unknown,unknown,unknown
+poultry_microscopy\all_images\cavp_a_2570722_sm4820.jpg,cavp_a_2570722_sm4820.jpg,2048,1377,unknown,unknown,unknown,unknown
