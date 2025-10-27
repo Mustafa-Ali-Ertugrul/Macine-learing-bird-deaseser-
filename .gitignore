@@ -9,3 +9,16 @@ venv/
 # Veri toplama çıktı klasörü ve CSV
 poultry_microscopy/
 poultry_dataset.csv
+
+# Büyük veri ve indirilen dataset klasörlerini izleme dışı bırak
+organized_poultry_dataset/
+chicken_disease_dataset/
+public_poultry_dataset/
+public_downloads/
+dataset_downloads/
+data/
+
+# Node ve frontend
+node_modules/
+poultry-pathology-app/node_modules/
+*.log
