@@ -55,3 +55,6 @@ We have collected and organized **465 histopathology images** of poultry tissues
 For questions or issues with the project, please refer to the documentation files:
 - `project_status.md` - Current project status
 - `complete_workflow.md` - Detailed workflow instructions
+=======
+# Macine-learing-bird-deaseser-
+>>>>>>> 14493a5a74487df461c40005ac51fac4e4106e69
