@@ -10,7 +10,7 @@ We have collected and organized **465 histopathology images** of poultry tissues
 
 1. **Interactive Labeling Tool** (`poultry_labeling_tool.html`)
    - Web-based interface for classifying images
-   - Supports 7 disease categories plus healthy class
+   - Supports 10 disease categories plus healthy class
 
 2. **Dataset Organization Scripts**
    - `dataset_organizer_helper.py` - Move images between classes
@@ -49,6 +49,9 @@ We have collected and organized **465 histopathology images** of poultry tissues
 - 🔵 **Salmonella** - Salmonella infection
 - 🟣 **Fatty Liver** - Fatty Liver Syndrome
 - 🟤 **Histomoniasis** - Histomoniasis (Blackhead disease)
+- 🔶 **Newcastle** - Newcastle Disease (NDV)
+- 🟢 **Marek** - Marek's Disease
+- ⚫ **Avian Influenza** - Avian Influenza (Bird Flu)
 
 ## 📞 Support
 

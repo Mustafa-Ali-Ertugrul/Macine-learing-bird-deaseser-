@@ -19,7 +19,7 @@ def view_images_for_labeling(csv_path, num_images=5):
         sample_df = unknown_df
     
     print(f"Showing {len(sample_df)} images for labeling:")
-    print("Disease categories: healthy, ib, ibd, coccidiosis, salmonella, fatty_liver, histomoniasis")
+    print("Disease categories: healthy, ib, ibd, coccidiosis, salmonella, fatty_liver, histomoniasis, newcastle, marek, avian_influenza")
     print("\nImage details:")
     
     for i, (idx, row) in enumerate(sample_df.iterrows()):

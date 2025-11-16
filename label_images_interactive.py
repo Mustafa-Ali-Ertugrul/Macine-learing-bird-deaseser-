@@ -33,7 +33,10 @@ def label_images_interactively():
     print("  5. salmonella")
     print("  6. fatty_liver")
     print("  7. histomoniasis")
-    print("  8. skip (for now)")
+    print("  8. newcastle (Newcastle Disease)")
+    print("  9. marek (Marek's Disease)")
+    print("  10. avian_influenza (Avian Influenza)")
+    print("  11. skip (for now)")
     print("  0. exit")
     
     # Disease mapping
@@ -44,7 +47,10 @@ def label_images_interactively():
         '4': 'coccidiosis',
         '5': 'salmonella',
         '6': 'fatty_liver',
-        '7': 'histomoniasis'
+        '7': 'histomoniasis',
+        '8': 'newcastle',
+        '9': 'marek',
+        '10': 'avian_influenza'
     }
     
     labeled_count = 0
@@ -74,7 +80,7 @@ def label_images_interactively():
         
         # Get user input
         while True:
-            choice = input("\nSelect disease category (0-8): ").strip()
+            choice = input("\nSelect disease category (0-11): ").strip()
             
             if choice == "0":
                 print("👋 Exiting...")
@@ -82,7 +88,7 @@ def label_images_interactively():
                 df.to_csv(csv_path, index=False)
                 print(f"💾 Saved progress: {labeled_count} images labeled")
                 return
-            elif choice == "8":
+            elif choice == "11":
                 print("⏭️  Skipping this image...")
                 processed_count += 1
                 break
@@ -95,7 +101,7 @@ def label_images_interactively():
                 processed_count += 1
                 break
             else:
-                print("❌ Invalid choice. Please select 0-8.")
+                print("❌ Invalid choice. Please select 0-11.")
     
     # Save final results
     df.to_csv(csv_path, index=False)

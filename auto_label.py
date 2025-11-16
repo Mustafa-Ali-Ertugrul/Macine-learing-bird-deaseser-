@@ -12,8 +12,10 @@ DISEASE_MAP = {
     r'\bsalmonella\b': 'salmonella',
     r'\bfatty liver\b|\bhepatosis\b': 'fatty_liver',
     r'\bhistomoniasis\b': 'histomoniasis',
+    r'\bnewcastle\b|\bndv\b|\bnewcastle disease\b': 'newcastle',
+    r'\bmarek\b|\bmarek\'s\b|\bmd\b': 'marek',
+    r'\bavian influenza\b|\bavian flu\b|\bai\b|\bhpai\b|\blpai\b': 'avian_influenza',
     r'\bnegative control\b|\bnc\b|\bcontrol\b|\bhealthy\b': 'healthy'
-    # newcastle/ndv biliniyorsa eklenebilir; şu an etiket setinde yoksa 'unknown' kalır
 }
 
 TISSUE_MAP = {

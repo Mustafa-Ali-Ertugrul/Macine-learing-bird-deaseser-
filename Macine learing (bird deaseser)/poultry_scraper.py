@@ -36,8 +36,12 @@ DISEASE_KEYWORDS = {
     'ibd': ['infectious bursal disease', 'gumboro', 'bursal', 'lymphoid depletion'],
     'nd': ['newcastle disease', 'ndv', 'paramyxovirus', 'viscerotropic'],
     'coccidiosis': ['coccidi', 'eimeria', 'oocyst', 'intestinal lesion'],
+    'salmonella': ['salmonella', 'salmonellosis', 'typhimurium', 'enteritidis'],
     'fatty_liver': ['hepatic lipidosis', 'fatty liver', 'hepatic steatosis', 'ketoacidosis'],
     'histomoniasis': ['histomona', 'blackhead', 'cecal lesion', 'hepatic necrosis'],
+    'newcastle': ['newcastle', 'ndv', 'paramyxovirus', 'avian paramyxovirus', 'velogenic'],
+    'marek': ['marek', "marek's disease", 'mdv', 'herpesvirus', 'lymphoid tumor', 'neural lesion'],
+    'avian_influenza': ['avian influenza', 'bird flu', 'h5n1', 'h7n9', 'influenza a', 'hpai', 'lpai'],
     'healthy': ['normal', 'healthy', 'control', 'no lesion']
 }
 
@@ -315,6 +319,9 @@ def main():
         'poultry bursa fabricius histopathology',
         'broiler liver histology fatty',
         'chicken intestine coccidiosis microscopy',
+        'newcastle disease chicken histopathology',
+        'marek disease lymphoid tumor histology',
+        'avian influenza poultry tissue microscopy',
     ]
     
     scraper = PubMedScraper()

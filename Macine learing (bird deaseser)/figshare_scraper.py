@@ -276,6 +276,12 @@ class ImageProcessor:
             'ibd': ['ibd', 'bursa', 'gumboro'],
             'nd': ['nd', 'newcastle'],
             'coccidiosis': ['cocci', 'eimeria'],
+            'salmonella': ['salmonella'],
+            'fatty_liver': ['fatty', 'liver', 'hepatic'],
+            'histomoniasis': ['histomon', 'blackhead'],
+            'newcastle': ['newcastle', 'ndv', 'paramyxovirus'],
+            'marek': ['marek', 'mdv', 'herpes'],
+            'avian_influenza': ['influenza', 'flu', 'h5n1', 'h7n9', 'hpai', 'lpai'],
             'healthy': ['healthy', 'normal', 'control']
         }
         
@@ -296,7 +302,10 @@ def main():
         'chicken histopathology',
         'poultry disease microscopy',
         'avian pathology images',
-        'broiler tissue microscopy'
+        'broiler tissue microscopy',
+        'newcastle disease poultry',
+        'marek disease chicken',
+        'avian influenza histology'
     ]
     
     # Downloaders

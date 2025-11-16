@@ -128,14 +128,17 @@ def convert_csv_to_html(csv_path, output_html_path):
                     Doku: {tissue} | Büyütme: {magnification}
                 </div>
                 <select class="label-select" onchange="updateLabel(this)">
-                    <option value="unknown" {'selected' if disease == 'unknown' else ''}>Seçiniz...</option>
-                    <option value="healthy" {'selected' if disease == 'healthy' else ''}>Sağlıklı (Healthy)</option>
-                    <option value="ib" {'selected' if disease == 'ib' else ''}>IB (Infectious Bronchitis)</option>
-                    <option value="ibd" {'selected' if disease == 'ibd' else ''}>IBD (Infectious Bursal Disease)</option>
-                    <option value="coccidiosis" {'selected' if disease == 'coccidiosis' else ''}>Coccidiosis</option>
-                    <option value="salmonella" {'selected' if disease == 'salmonella' else ''}>Salmonella</option>
-                    <option value="fatty_liver" {'selected' if disease == 'fatty_liver' else ''}>Fatty Liver Syndrome</option>
-                    <option value="histomoniasis" {'selected' if disease == 'histomoniasis' else ''}>Histomoniasis</option>
+                    <option value="unknown" {'selected' if disease == 'unknown' else ''}'>Seçiniz...</option>
+                    <option value="healthy" {'selected' if disease == 'healthy' else ''}'>Sağlıklı (Healthy)</option>
+                    <option value="ib" {'selected' if disease == 'ib' else ''}'>IB (Infectious Bronchitis)</option>
+                    <option value="ibd" {'selected' if disease == 'ibd' else ''}'>IBD (Infectious Bursal Disease)</option>
+                    <option value="coccidiosis" {'selected' if disease == 'coccidiosis' else ''}'>Coccidiosis</option>
+                    <option value="salmonella" {'selected' if disease == 'salmonella' else ''}'>Salmonella</option>
+                    <option value="fatty_liver" {'selected' if disease == 'fatty_liver' else ''}'>Fatty Liver Syndrome</option>
+                    <option value="histomoniasis" {'selected' if disease == 'histomoniasis' else ''}'>Histomoniasis</option>
+                    <option value="newcastle" {'selected' if disease == 'newcastle' else ''}'>Newcastle Disease</option>
+                    <option value="marek" {'selected' if disease == 'marek' else ''}'>Marek's Disease</option>
+                    <option value="avian_influenza" {'selected' if disease == 'avian_influenza' else ''}'>Avian Influenza</option>
                 </select>
             </div>
 """

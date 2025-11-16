@@ -56,6 +56,9 @@ def create_labeling_template(csv_path):
     print("  - salmonella")
     print("  - fatty_liver")
     print("  - histomoniasis")
+    print("  - newcastle (Newcastle Disease)")
+    print("  - marek (Marek's Disease)")
+    print("  - avian_influenza (Avian Influenza)")
     print("  - other (for images that don't fit the above categories)")
     
     return unknown_df
