@@ -81,7 +81,7 @@ def train_model():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     
-    num_epochs = 20
+    num_epochs = 1
     for epoch in range(num_epochs):
         # Training
         model.train()
