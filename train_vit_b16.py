@@ -24,11 +24,11 @@ from transformers import EarlyStoppingCallback
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'organized_labeled_dataset',  # CSV-labeled and organized dataset
+    'data_dir': 'Macine learing (bird deaseser)/final_poultry_dataset_10_classes',  # Updated dataset path
     'output_dir': './vit_poultry_results',
     'img_size': 224,  # ViT-B/16 standard input size
     'batch_size': 16,  # Adjust based on GPU memory (8 for 6GB, 16 for 8GB+)
-    'epochs': 15,
+    'epochs': 10,
     'learning_rate': 5e-5,
     'weight_decay': 0.01,
     'warmup_ratio': 0.1,
@@ -120,15 +120,24 @@ class PoultryViTDataset(Dataset):
     
     def __getitem__(self, idx):
         # Load image
+        img_path = self.image_paths[idx]
         try:
-            image = Image.open(self.image_paths[idx]).convert("RGB")
+            image = Image.open(img_path).convert("RGB")
         except Exception as e:
-            print(f"Error loading {self.image_paths[idx]}: {e}")
+            print(f"Error loading {img_path}: {e}")
             # Return a blank image if error
             image = Image.new('RGB', (224, 224), color='black')
         
         # Process with feature extractor
-        encoding = self.feature_extractor(images=image, return_tensors="pt")
+        try:
+            encoding = self.feature_extractor(images=image, return_tensors="pt")
+        except Exception as e:
+            print(f"❌ Error processing image: {img_path}")
+            print(f"   Mode: {image.mode}, Size: {image.size}")
+            print(f"   Error: {e}")
+            # Return a blank image to avoid crashing
+            image = Image.new('RGB', (224, 224), color='black')
+            encoding = self.feature_extractor(images=image, return_tensors="pt")
         
         # Prepare item
         item = {key: val.squeeze() for key, val in encoding.items()}

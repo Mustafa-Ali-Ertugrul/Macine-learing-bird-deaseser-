@@ -91,7 +91,7 @@ def convert_csv_to_html(csv_path, output_html_path):
 <body>
     <div class="container">
         <div class="header">
-            <h1>🐔 Kanatlı Patoloji Etiketleme Aracı</h1>
+            <h1>[Chicken] Kanatlı Patoloji Etiketleme Aracı</h1>
             <p>Histopatolojik Görüntü Sınıflandırma</p>
         </div>
         
@@ -108,14 +108,29 @@ def convert_csv_to_html(csv_path, output_html_path):
     
     # Add image cards for each entry
     for index, row in df.iterrows():
-        image_path = row['image_path'].replace('\\', '/')
-        filename = row['filename']
-        width = row['width']
-        height = row['height']
-        source = row['source']
-        disease = row['disease'] if pd.notna(row['disease']) else 'unknown'
-        tissue = row['tissue'] if pd.notna(row['tissue']) else 'unknown'
-        magnification = row['magnification'] if pd.notna(row['magnification']) else 'unknown'
+        # Convert to string and handle potential NaN values
+        # Using at() accessor to avoid the type checking issues
+        image_path = row.at['image_path'] if pd.notna(row.at['image_path']) else ''
+        image_path = str(image_path).replace('\\', '/')
+        filename = str(row.at['filename']) if pd.notna(row.at['filename']) else 'unknown'
+        width = int(row.at['width']) if pd.notna(row.at['width']) else 0
+        height = int(row.at['height']) if pd.notna(row.at['height']) else 0
+        source = str(row.at['source']) if pd.notna(row.at['source']) else 'unknown'
+        disease = str(row.at['disease']) if pd.notna(row.at['disease']) else 'unknown'
+        tissue = str(row.at['tissue']) if pd.notna(row.at['tissue']) else 'unknown'
+        magnification = str(row.at['magnification']) if pd.notna(row.at['magnification']) else 'unknown'
+        
+        # Determine which option should be selected
+        selected_options = {
+            'unknown': 'selected' if disease == 'unknown' else '',
+            'healthy': 'selected' if disease == 'healthy' else '',
+            'ib': 'selected' if disease == 'ib' else '',
+            'ibd': 'selected' if disease == 'ibd' else '',
+            'coccidiosis': 'selected' if disease == 'coccidiosis' else '',
+            'salmonella': 'selected' if disease == 'salmonella' else '',
+            'fatty_liver': 'selected' if disease == 'fatty_liver' else '',
+            'histomoniasis': 'selected' if disease == 'histomoniasis' else ''
+        }
         
         html_content += f"""
             <div class="image-card" data-index="{index}">
@@ -128,17 +143,14 @@ def convert_csv_to_html(csv_path, output_html_path):
                     Doku: {tissue} | Büyütme: {magnification}
                 </div>
                 <select class="label-select" onchange="updateLabel(this)">
-                    <option value="unknown" {'selected' if disease == 'unknown' else ''}'>Seçiniz...</option>
-                    <option value="healthy" {'selected' if disease == 'healthy' else ''}'>Sağlıklı (Healthy)</option>
-                    <option value="ib" {'selected' if disease == 'ib' else ''}'>IB (Infectious Bronchitis)</option>
-                    <option value="ibd" {'selected' if disease == 'ibd' else ''}'>IBD (Infectious Bursal Disease)</option>
-                    <option value="coccidiosis" {'selected' if disease == 'coccidiosis' else ''}'>Coccidiosis</option>
-                    <option value="salmonella" {'selected' if disease == 'salmonella' else ''}'>Salmonella</option>
-                    <option value="fatty_liver" {'selected' if disease == 'fatty_liver' else ''}'>Fatty Liver Syndrome</option>
-                    <option value="histomoniasis" {'selected' if disease == 'histomoniasis' else ''}'>Histomoniasis</option>
-                    <option value="newcastle" {'selected' if disease == 'newcastle' else ''}'>Newcastle Disease</option>
-                    <option value="marek" {'selected' if disease == 'marek' else ''}'>Marek's Disease</option>
-                    <option value="avian_influenza" {'selected' if disease == 'avian_influenza' else ''}'>Avian Influenza</option>
+                    <option value="unknown" {selected_options['unknown']}>Seçiniz...</option>
+                    <option value="healthy" {selected_options['healthy']}>Sağlıklı (Healthy)</option>
+                    <option value="ib" {selected_options['ib']}>IB (Infectious Bronchitis)</option>
+                    <option value="ibd" {selected_options['ibd']}>IBD (Infectious Bursal Disease)</option>
+                    <option value="coccidiosis" {selected_options['coccidiosis']}>Coccidiosis</option>
+                    <option value="salmonella" {selected_options['salmonella']}>Salmonella</option>
+                    <option value="fatty_liver" {selected_options['fatty_liver']}>Fatty Liver Syndrome</option>
+                    <option value="histomoniasis" {selected_options['histomoniasis']}>Histomoniasis</option>
                 </select>
             </div>
 """

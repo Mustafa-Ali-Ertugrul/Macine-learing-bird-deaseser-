@@ -36,12 +36,8 @@ DISEASE_KEYWORDS = {
     'ibd': ['infectious bursal disease', 'gumboro', 'bursal', 'lymphoid depletion'],
     'nd': ['newcastle disease', 'ndv', 'paramyxovirus', 'viscerotropic'],
     'coccidiosis': ['coccidi', 'eimeria', 'oocyst', 'intestinal lesion'],
-    'salmonella': ['salmonella', 'salmonellosis', 'typhimurium', 'enteritidis'],
     'fatty_liver': ['hepatic lipidosis', 'fatty liver', 'hepatic steatosis', 'ketoacidosis'],
     'histomoniasis': ['histomona', 'blackhead', 'cecal lesion', 'hepatic necrosis'],
-    'newcastle': ['newcastle', 'ndv', 'paramyxovirus', 'avian paramyxovirus', 'velogenic'],
-    'marek': ['marek', "marek's disease", 'mdv', 'herpesvirus', 'lymphoid tumor', 'neural lesion'],
-    'avian_influenza': ['avian influenza', 'bird flu', 'h5n1', 'h7n9', 'influenza a', 'hpai', 'lpai'],
     'healthy': ['normal', 'healthy', 'control', 'no lesion']
 }
 
@@ -79,12 +75,12 @@ class PubMedScraper:
             'sort': 'pub+date'
         }
         
-        print(f"🔍 PubMed aranıyor: '{query}'")
+        print(f"[Search] PubMed aranıyor: '{query}'")
         response = self._get_with_backoff(search_url, params)
         
         data = response.json()
         pmc_ids = data.get('esearchresult', {}).get('idlist', [])
-        print(f"✅ {len(pmc_ids)} makale bulundu")
+        print(f"[Success] {len(pmc_ids)} makale bulundu")
         
         return pmc_ids
     
@@ -139,7 +135,7 @@ class PubMedScraper:
             }
             
         except Exception as e:
-            print(f"⚠️ PMC{pmc_id} metadata hatası: {str(e)[:100]}")
+            print(f"[Warning] PMC{pmc_id} metadata hatası: {str(e)[:100]}")
             return None
 
     def _get_with_backoff(self, url: str, params: Dict) -> requests.Response:
@@ -311,7 +307,7 @@ class ImageDownloader:
 def main():
     """Ana veri toplama pipeline"""
     
-    print("🐔 Kanatlı Patoloji Veri Toplama Başlatılıyor...\n")
+    print("[Chicken] Kanatlı Patoloji Veri Toplama Başlatılıyor...\n")
     
     # Odaklanmış sorgular
     queries = [
@@ -319,9 +315,6 @@ def main():
         'poultry bursa fabricius histopathology',
         'broiler liver histology fatty',
         'chicken intestine coccidiosis microscopy',
-        'newcastle disease chicken histopathology',
-        'marek disease lymphoid tumor histology',
-        'avian influenza poultry tissue microscopy',
     ]
     
     scraper = PubMedScraper()
@@ -332,7 +325,7 @@ def main():
     for query in queries:
         pmc_ids = scraper.search_articles(query, max_results=50)  # Azaltıldı
         
-        print(f"\n📄 {len(pmc_ids)} makale için metadata toplanıyor...")
+        print(f"\n[Article] {len(pmc_ids)} makale için metadata toplanıyor...")
         articles_with_images = []
         
         for pmc_id in tqdm(pmc_ids[:30], desc="Metadata"):  # Max 30 makale
@@ -340,13 +333,13 @@ def main():
             if article_data and article_data['images']:
                 articles_with_images.append(article_data)
         
-        print(f"✅ {len(articles_with_images)} makalede görüntü bulundu")
+        print(f"[Success] {len(articles_with_images)} makalede görüntü bulundu")
         
         if not articles_with_images:
             continue
         
         # Görüntüleri indir (sequential - rate limiting için)
-        print(f"\n⬇️ Görüntüler indiriliyor...")
+        print(f"\n[Download] Görüntüler indiriliyor...")
         
         for article in tqdm(articles_with_images, desc="Makaleler"):
             for img_data in article['images']:
@@ -361,7 +354,7 @@ def main():
                 result = downloader.download_image(img_data['url'], task_metadata)
                 if result:
                     all_metadata.append(result)
-                    print(f"✓ İndirildi: {result['disease']} - {result['tissue']}")
+                    print(f"[Downloaded] {result['disease']} - {result['tissue']}")
         
         time.sleep(3)  # Sorgular arası bekleme
     
@@ -370,16 +363,16 @@ def main():
         df = pd.DataFrame(all_metadata)
         df.to_csv(CONFIG['metadata_csv'], index=False)
         
-        print(f"\n✅ TAMAMLANDI!")
-        print(f"📊 Toplam indirilen görüntü: {len(df)}")
-        print(f"💾 Metadata: {CONFIG['metadata_csv']}")
-        print(f"\n📁 Hastalık dağılımı:")
+        print(f"\n[Complete] TAMAMLANDI!")
+        print(f"[Stats] Toplam indirilen görüntü: {len(df)}")
+        print(f"[Save] Metadata: {CONFIG['metadata_csv']}")
+        print(f"\n[Disease] Hastalık dağılımı:")
         print(df['disease'].value_counts())
-        print(f"\n🔬 Doku dağılımı:")
+        print(f"\n[Tissue] Doku dağılımı:")
         print(df['tissue'].value_counts())
     else:
-        print("⚠️ Hiç görüntü indirilemedi!")
-        print("💡 Alternatif: Figshare veya Zenodo'dan veri seti arayın")
+        print("[Warning] Hiç görüntü indirilemedi!")
+        print("[Tip] Alternatif: Figshare veya Zenodo'dan veri seti arayın")
         print("   Örnek: https://figshare.com/search?q=chicken%20histopathology")
 
 
@@ -400,7 +393,7 @@ if __name__ == '__main__':
             missing.append(pip_name)
     
     if missing:
-        print(f"⚠️ Eksik kütüphaneler: {', '.join(missing)}")
+        print(f"[Missing] Eksik kütüphaneler: {', '.join(missing)}")
         print(f"Yüklemek için: pip install {' '.join(missing)}")
     else:
         main()
