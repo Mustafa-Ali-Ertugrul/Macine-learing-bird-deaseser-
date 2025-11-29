@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+&^qw!+%e'^& !+%AEQWCimport React, { useState } from 'react';
 import { Download, Search, Database, CheckCircle, AlertCircle, FileText, Image } from 'lucide-react';
 
 const PoultryDataCollector = () => {

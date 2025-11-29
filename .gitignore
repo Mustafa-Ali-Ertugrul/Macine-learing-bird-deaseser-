@@ -44,3 +44,7 @@ new_diseases_dataset/
 organized_labeled_dataset/
 poultry_dataset_512x512/
 vit_poultry_results/
+resnest_poultry_results/
+convnext_poultry_results/
+cvt_poultry_results/
+resnext_poultry_results/
