@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Vision Transformer (ViT-B/16) Fine-tuning for Poultry Disease Classification
 Using Hugging Face Transformers with 10 disease categories
 """
 
 import os
+import sys
 import torch
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms

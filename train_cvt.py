@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 CvT-13 (Convolutional Vision Transformer) Training Script for Poultry Disease Classification
 Using Hugging Face Transformers
 """
 
 import os
+import sys
 import torch
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 from torch.utils.data import Dataset
 from PIL import Image
 from sklearn.model_selection import train_test_split

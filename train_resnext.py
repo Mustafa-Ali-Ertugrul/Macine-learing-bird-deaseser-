@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ResNeXt-50 (32x4d) Training Script for Poultry Disease Classification
 """
 
 import os
+import sys
 import torch
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset

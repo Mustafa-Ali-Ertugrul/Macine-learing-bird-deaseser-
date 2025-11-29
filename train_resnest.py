@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ResNeSt-50d Training Script for Poultry Disease Classification
 Using `timm` library
 """
 
 import os
+import sys
 import torch
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
@@ -117,11 +125,11 @@ def main():
 
     # DataLoaders
     train_loader = DataLoader(PoultryDataset(train_paths, train_labels, train_transform), 
-                              batch_size=CONFIG['batch_size'], shuffle=True, num_workers=CONFIG['num_workers'])
+                              batch_size=CONFIG['batch_size'], shuffle=True, num_workers=CONFIG['num_workers'], drop_last=True)
     val_loader = DataLoader(PoultryDataset(val_paths, val_labels, val_transform), 
-                            batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
+                            batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'], drop_last=False)
     test_loader = DataLoader(PoultryDataset(test_paths, test_labels, val_transform), 
-                             batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
+                             batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'], drop_last=False)
 
     # 2. Model Setup
     print("\nLoading ResNeSt-50d from timm...")
