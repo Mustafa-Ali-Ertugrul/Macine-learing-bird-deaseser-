@@ -48,3 +48,5 @@ resnest_poultry_results/
 convnext_poultry_results/
 cvt_poultry_results/
 resnext_poultry_results/
+*.pth
+evaluation_results.txt
