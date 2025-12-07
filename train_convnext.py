@@ -14,18 +14,20 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+from transformers import ConvNextForImageClassification, ConvNextImageProcessor, TrainingArguments, Trainer, EarlyStoppingCallback
+from torchvision import transforms
+import torchvision.transforms as T
 from torch.utils.data import Dataset
 from PIL import Image
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
-import json
-from transformers import ConvNextForImageClassification, ConvNextImageProcessor, TrainingArguments, Trainer, EarlyStoppingCallback
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_poultry_dataset_10_classes',
+    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',
     'output_dir': './convnext_poultry_results',
     'model_name': 'facebook/convnext-tiny-224',
     'batch_size': 16,
@@ -84,11 +86,12 @@ def main():
 
     # Dataset Class
     class PoultryDataset(Dataset):
-        def __init__(self, paths, labels, processor):
+        def __init__(self, paths, labels, processor, transform=None):
             self.paths = paths
             self.labels = labels
             self.processor = processor
             self.label2id = label2id
+            self.transform = transform
 
         def __len__(self):
             return len(self.paths)
@@ -98,6 +101,8 @@ def main():
             label = self.labels[idx]
             try:
                 image = Image.open(path).convert('RGB')
+                if hasattr(self, 'transform') and self.transform:
+                    image = self.transform(image)
                 encoding = self.processor(image, return_tensors="pt")
                 item = {k: v.squeeze() for k, v in encoding.items()}
                 item['labels'] = torch.tensor(self.label2id[label])
@@ -111,7 +116,15 @@ def main():
                 item['labels'] = torch.tensor(self.label2id[label])
                 return item
 
-    train_dataset = PoultryDataset(train_paths, train_labels, processor)
+    # Augmentation for Training
+    train_transforms = transforms.Compose([
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomRotation(degrees=15),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+        transforms.RandomResizedCrop(size=224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
+    ])
+
+    train_dataset = PoultryDataset(train_paths, train_labels, processor, transform=train_transforms)
     val_dataset = PoultryDataset(val_paths, val_labels, processor)
     test_dataset = PoultryDataset(test_paths, test_labels, processor)
 

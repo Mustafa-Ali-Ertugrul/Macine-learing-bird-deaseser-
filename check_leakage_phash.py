@@ -1,0 +1,106 @@
+import os
+import sys
+import torch
+import numpy as np
+import imagehash
+from PIL import Image
+from tqdm import tqdm
+import matplotlib.pyplot as plt
+from collections import defaultdict
+import random
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+DATA_DIR = 'Macine learing (bird deaseser)/final_dataset_10_classes'
+
+def check_leakage_phash():
+    print("="*60)
+    print("🕵️ VISUAL LEAKAGE DETECTION (Perceptual Hash)")
+    print("="*60)
+    
+    classes = [d for d in os.listdir(DATA_DIR) if os.path.isdir(os.path.join(DATA_DIR, d))]
+    
+    total_leakage = 0
+    total_checked = 0
+    
+    for cls in classes:
+        print(f"\nAnalyzing Class: {cls}")
+        cls_path = os.path.join(DATA_DIR, cls)
+        images = [os.path.join(cls_path, f) for f in os.listdir(cls_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+        
+        # Simulate Train/Test split (Simple 80/20 random split for checking)
+        random.seed(42)
+        random.shuffle(images)
+        split_idx = int(len(images) * 0.8)
+        train_imgs = images[:split_idx]
+        test_imgs = images[split_idx:]
+        
+        print(f"   Train: {len(train_imgs)}, Test: {len(test_imgs)}")
+        
+        # Calculate hashes for TRAIN
+        train_hashes = {}
+        for img_path in tqdm(train_imgs, desc="Hashing Train", leave=False):
+            try:
+                img = Image.open(img_path)
+                h = imagehash.phash(img)
+                train_hashes[h] = img_path
+            except Exception as e:
+                continue
+                
+        # Check TEST against TRAIN
+        leakage_found = []
+        for img_path in tqdm(test_imgs, desc="Checking Test", leave=False):
+            try:
+                img = Image.open(img_path)
+                h = imagehash.phash(img)
+                
+                # Check for near-duplicates (Hamming distance < 5)
+                # This is slow O(N*M), so we'll just check exact pHash and very close ones
+                # Optimization: In a real scenario, use a VP-Tree or BK-Tree.
+                # Here we just check exact pHash matches which resists resizing/minor edits
+                
+                if h in train_hashes:
+                    leakage_found.append((img_path, train_hashes[h], 0)) # 0 distance
+                    continue
+                
+                # Quick linear scan for very close matches (distance <= 2 is VERY similar)
+                # Only check a subset if too slow? No, let's try strict first.
+                # Actually, iterating all train hashes for every test image is O(N*M)
+                # Let's just stick to hash collision for now which catches resizing.
+                
+            except:
+                continue
+        
+        if leakage_found:
+            print(f"⚠️  FOUND {len(leakage_found)} POTENTIAL LEAKS in {cls}")
+            total_leakage += len(leakage_found)
+            
+            # Show first 3 leaks
+            for i, (test_p, train_p, dist) in enumerate(leakage_found[:3]):
+                print(f"   Leak {i+1}: Test '{os.path.basename(test_p)}' ~= Train '{os.path.basename(train_p)}'")
+                
+                # Visualize
+                fig, ax = plt.subplots(1, 2, figsize=(10, 5))
+                ax[0].imshow(Image.open(test_p))
+                ax[0].set_title(f"TEST: {os.path.basename(test_p)}")
+                ax[0].axis('off')
+                
+                ax[1].imshow(Image.open(train_p))
+                ax[1].set_title(f"TRAIN: {os.path.basename(train_p)}")
+                ax[1].axis('off')
+                
+                plt.suptitle(f"Potential Leak in {cls} (pHash Match)")
+                plt.show() # This might not show in non-interactive, but we save it
+                plt.savefig(f"leakage_example_{cls}_{i}.png")
+                plt.close()
+
+    print("\n" + "="*60)
+    print(f"🏁 Total Potential Leaks Found: {total_leakage}")
+    print("="*60)
+
+if __name__ == "__main__":
+    check_leakage_phash()

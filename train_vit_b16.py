@@ -32,7 +32,7 @@ from transformers import EarlyStoppingCallback
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_poultry_dataset_10_classes',  # Updated dataset path
+    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',  # Updated dataset path
     'output_dir': './vit_poultry_results',
     'img_size': 224,  # ViT-B/16 standard input size
     'batch_size': 16,  # Adjust based on GPU memory (8 for 6GB, 16 for 8GB+)
@@ -117,11 +117,12 @@ print(f"   Test: {len(test_paths)} images")
 
 # === 3. Custom Dataset for ViT ===
 class PoultryViTDataset(Dataset):
-    def __init__(self, image_paths, labels, feature_extractor, label2id):
+    def __init__(self, image_paths, labels, feature_extractor, label2id, transform=None):
         self.image_paths = image_paths
         self.labels = labels
         self.feature_extractor = feature_extractor
         self.label2id = label2id
+        self.transform = transform
     
     def __len__(self):
         return len(self.image_paths)
@@ -136,6 +137,10 @@ class PoultryViTDataset(Dataset):
             # Return a blank image if error
             image = Image.new('RGB', (224, 224), color='black')
         
+        # Apply transforms (Augmentation) if provided
+        if hasattr(self, 'transform') and self.transform:
+            image = self.transform(image)
+
         # Process with feature extractor
         try:
             encoding = self.feature_extractor(images=image, return_tensors="pt")
@@ -183,12 +188,20 @@ model = ViTForImageClassification.from_pretrained(
 print(f"✅ Model loaded with {len(classes)} output classes")
 
 # === 5. Create Datasets ===
+# Augmentation for Training
+train_transforms = transforms.Compose([
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomRotation(degrees=15),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+    transforms.RandomResizedCrop(size=224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
+])
+
 print("\n📦 Creating datasets...")
-train_dataset = PoultryViTDataset(train_paths, train_labels, feature_extractor, label2id)
+train_dataset = PoultryViTDataset(train_paths, train_labels, feature_extractor, label2id, transform=train_transforms)
 val_dataset = PoultryViTDataset(val_paths, val_labels, feature_extractor, label2id)
 test_dataset = PoultryViTDataset(test_paths, test_labels, feature_extractor, label2id)
 
-print(f"   Train dataset: {len(train_dataset)} samples")
+print(f"   Train dataset: {len(train_dataset)} samples (with on-the-fly augmentation)")
 print(f"   Val dataset: {len(val_dataset)} samples")
 print(f"   Test dataset: {len(test_dataset)} samples")
 

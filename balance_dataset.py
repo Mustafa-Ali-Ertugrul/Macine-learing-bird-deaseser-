@@ -11,17 +11,18 @@ IMAGE_BASE_DIR = 'data/processed/poultry_dataset_512x512'
 TARGET_DIR = 'Macine learing (bird deaseser)/final_dataset_10_classes'
 MIN_IMAGES_PER_CLASS = 500
 
-# Mapping label from CSV to Folder Names
+# Mapping from CSV labels to Standardized Folder Names
 LABEL_TO_FOLDER = {
     'coccidiosis': 'Coccidiosis',
     'healthy': 'Healthy',
-    'ncd': 'Newcastle Disease',
+    'ncd': 'Newcastle_Disease',
     'pcrcocci': 'Coccidiosis',
     'pcrhealthy': 'Healthy', 
-    'pcrncd': 'Newcastle Disease',
+    'pcrncd': 'Newcastle_Disease',
     'pcrsalmo': 'Salmonella',
     'salmonella': 'Salmonella',
-    # Note: Avian Influenza, Fowl Pox etc are NOT in the CSV, assuming they are already in folders
+    # Note: Other classes (Avian Influenza etc.) are not in this CSV, so they are not reset strictly by this,
+    # but we will check strict counts for them during augmentation phase.
 }
 
 def augment_image(image_path, save_path):
@@ -50,54 +51,46 @@ def augment_image(image_path, save_path):
         return False
 
 def main():
-    print("🚀 Starting Dataset Balancing...")
+    print("🚀 Starting Dataset Restoration (From CSV)...")
     
-    # 1. Distribute images from CSV if not already in folders
-    # The folders already have data (from previous steps potentially), but we need to ensure everything usable is there.
-    # However, the user asked to check datasets again. 
-    # If I just augment existing folders, I might miss the data in CSV?
-    # Let's check if the CSV images are ALREADY in the specific folders?
-    # The CSV paths are like `poultry_microscopy/...` while target folders are `final_dataset_10_classes/...`
-    # They are likely different copies. 
-    # I will copy VALID images from CSV to the target folders to maximize raw data before augmentation.
-    
+    # 1. Consolidate from CSV (Restoring images)
     if os.path.exists(SOURCE_CSV):
+        print(f"Scanning {SOURCE_CSV} to restore original images...")
         df = pd.read_csv(SOURCE_CSV)
-        print(f"Scanning {len(df)} rows from CSV to consolidate data...")
         
-        for idx, row in df.iterrows():
+        count_moved = 0
+        for _, row in df.iterrows():
             label = str(row['disease']).lower()
-            if label in LABEL_TO_FOLDER:
-                folder_name = LABEL_TO_FOLDER[label]
-                # Find the destination folder that matches this name partially
-                # (e.g. 'Coccidiosis' matches 'Coccidiosis - Bukoola Vet' ?)
-                # The user folders are specific. Let's find exact or partial match.
+            rel_path = row['image_path']
+            
+            if pd.isna(rel_path) or label not in LABEL_TO_FOLDER:
+                continue
                 
-                target_folder = None
-                for d in os.listdir(TARGET_DIR):
-                    if folder_name.lower() in d.lower():
-                        target_folder = os.path.join(TARGET_DIR, d)
-                        break
+            target_class = LABEL_TO_FOLDER[label]
+            target_folder = os.path.join(TARGET_DIR, target_class)
+            
+            # Ensure target folder exists
+            os.makedirs(target_folder, exist_ok=True)
+            
+            # Source path
+            src_path = os.path.join(IMAGE_BASE_DIR, rel_path.replace('\\', '/'))
+            
+            if os.path.exists(src_path):
+                # Destination filename
+                filename = os.path.basename(src_path)
+                dst_path = os.path.join(target_folder, filename)
                 
-                if target_folder:
-                    # Construct source path
-                    rel_path = row['image_path']
-                    if pd.isna(rel_path): continue
-                    rel_path = rel_path.replace('\\', '/')
-                    src_path = os.path.join(IMAGE_BASE_DIR, rel_path)
-                    
-                    if os.path.exists(src_path):
-                        # Destination filename (avoid overwrite collision)
-                        filename = os.path.basename(src_path)
-                        dst_path = os.path.join(target_folder, f"csv_{idx}_{filename}")
-                        
-                        if not os.path.exists(dst_path):
-                            try:
-                                shutil.copy(src_path, dst_path)
-                            except:
-                                pass
-    
-    # 2. Check counts and Augment
+                # Copy if not exists (Restore!)
+                if not os.path.exists(dst_path):
+                    shutil.copy2(src_path, dst_path)
+                    count_moved += 1
+                    if count_moved % 100 == 0:
+                        print(f"Restored {count_moved} images...", end='\r')
+        print(f"\n✅ Restored {count_moved} images from CSV.")
+    else:
+        print(f"⚠️ Source CSV {SOURCE_CSV} not found. Skipping restoration.")
+
+    # 2. Check counts and Augment (Ensure minimum 500)
     print("\n📊 Checking Class Counts and Augmenting...")
     
     for cls in sorted(os.listdir(TARGET_DIR)):
@@ -123,10 +116,12 @@ def main():
             while generated < needed:
                 # Pick a random source image
                 src_name = random.choice(images)
+                # Avoid augmenting already augmented images if possible for variety, 
+                # but for simplicity just pick from whatever is there.
                 src_full = os.path.join(cls_path, src_name)
                 
                 # New name
-                new_name = f"aug_{generated}_{src_name}"
+                new_name = f"aug_restore_{generated}_{src_name}"
                 dst_full = os.path.join(cls_path, new_name)
                 
                 if augment_image(src_full, dst_full):
@@ -136,9 +131,9 @@ def main():
             
             print(f"   ✅ Augmented {generated} images. New Total: {count + generated}")
         else:
-            print("   ✅ Count OK.")
+            print(f"   ✅ Count OK ({count} >= {MIN_IMAGES_PER_CLASS}).")
 
-    print("\n🎉 Balancing Complete.")
+    print("\n🎉 Restoration & Balancing Complete.")
 
 if __name__ == "__main__":
     main()

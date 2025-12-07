@@ -29,7 +29,7 @@ from tqdm import tqdm
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_poultry_dataset_10_classes',
+    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',
     'output_dir': './resnext_poultry_results',
     'img_size': 224,
     'batch_size': 16,
@@ -112,7 +112,8 @@ def main():
     train_transform = transforms.Compose([
         transforms.Resize((CONFIG['img_size'], CONFIG['img_size'])),
         transforms.RandomHorizontalFlip(),
-        transforms.RandomRotation(10),
+        transforms.RandomRotation(15),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])

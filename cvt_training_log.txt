@@ -1,0 +1,14 @@
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+============================================================
+POULTRY DISEASE CLASSIFICATION - CvT-13
+============================================================
+Found 10 classes: ['Avian_Influenza', 'Coccidiosis', 'Fowl_Pox', 'Healthy', 'Histomoniasis', 'Infectious_Bronchitis', 'Infectious_Bursal_Disease', 'Mareks_Disease', 'Newcastle_Disease', 'Salmonella']
+Train: 6746, Val: 750, Test: 1874
+Traceback (most recent call last):
+  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 203, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 118, in main
+    train_transforms = transforms.Compose([
+                       ^^^^^^^^^^
+NameError: name 'transforms' is not defined
