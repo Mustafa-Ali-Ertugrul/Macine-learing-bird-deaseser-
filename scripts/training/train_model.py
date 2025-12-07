@@ -73,8 +73,8 @@ def train_model():
     
     # Create datasets
     dataset = PoultryDiseaseDataset(
-        csv_file='../../data/metadata/poultry_labeled_12k.csv',
-        root_dir='../../data/processed/poultry_dataset_512x512',
+        csv_file='../../data/metadata/final_dataset_10_classes.csv',
+        root_dir='../../Macine learing (bird deaseser)/final_dataset_10_classes',
         transform=train_transform
     )
     
