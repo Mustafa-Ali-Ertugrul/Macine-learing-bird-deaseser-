@@ -43,6 +43,51 @@ final_poultry_dataset_10_classes/
 new_diseases_dataset/
 organized_labeled_dataset/
 poultry_dataset_512x512/
+# Python derleme ve çıktı dosyaları
+__pycache__/
+*.pyc
+
+# Sanal ortamlar
+.venv/
+venv/
+
+# Veri toplama çıktı klasörü ve CSV
+poultry_microscopy/
+poultry_dataset.csv
+
+# Büyük veri ve indirilen dataset klasörlerini izleme dışı bırak
+organized_poultry_dataset/
+chicken_disease_dataset/
+# Python derleme ve çıktı dosyaları
+__pycache__/
+*.pyc
+
+# Sanal ortamlar
+.venv/
+venv/
+
+# Veri toplama çıktı klasörü ve CSV
+poultry_microscopy/
+poultry_dataset.csv
+
+# Büyük veri ve indirilen dataset klasörlerini izleme dışı bırak
+organized_poultry_dataset/
+chicken_disease_dataset/
+public_poultry_dataset/
+public_downloads/
+dataset_downloads/
+data/
+
+# Node ve frontend
+node_modules/
+poultry-pathology-app/node_modules/
+*.log
+
+# New Datasets
+final_poultry_dataset_10_classes/
+new_diseases_dataset/
+organized_labeled_dataset/
+poultry_dataset_512x512/
 vit_poultry_results/
 resnest_poultry_results/
 convnext_poultry_results/
@@ -50,3 +95,4 @@ cvt_poultry_results/
 resnext_poultry_results/
 *.pth
 evaluation_results.txt
+final_dataset_10_classes/

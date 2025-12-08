@@ -1,11 +1,11 @@
 Disease,Found,Target,Missing
-Coccidiosis,500,500,0
-Healthy,500,500,0
-Salmonella,500,500,0
-Newcastle Disease,500,500,0
-Marek's Disease,500,500,0
-Avian Influenza,500,500,0
-Infectious Bronchitis,500,500,0
-Infectious Bursal Disease,500,500,0
-Histomoniasis,500,500,0
-Fowl Pox,500,500,0
+Coccidiosis,334,500,166
+Healthy,155,500,345
+Salmonella,709,500,0
+Newcastle Disease,33,500,467
+Marek's Disease,98,500,402
+Avian Influenza,11,500,489
+Infectious Bronchitis,31,500,469
+Infectious Bursal Disease,153,500,347
+Histomoniasis,232,500,268
+Fowl Pox,41,500,459
