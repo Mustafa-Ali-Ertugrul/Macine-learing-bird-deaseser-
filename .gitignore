@@ -95,3 +95,10 @@ cvt_poultry_results/
 resnext_poultry_results/
 *.pth
 evaluation_results.txt
+
+# Generated Dataset Splits
+final_dataset_split/
+quarantine_cleaned/
+
+# Temporary Leakage Examples
+leakage_example_*.png

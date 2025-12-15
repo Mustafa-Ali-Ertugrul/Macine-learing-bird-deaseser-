@@ -2,13 +2,35 @@ Using a slow image processor as `use_fast` is unset and a slow processor was sav
 ============================================================
 POULTRY DISEASE CLASSIFICATION - CvT-13
 ============================================================
-Found 10 classes: ['Avian_Influenza', 'Coccidiosis', 'Fowl_Pox', 'Healthy', 'Histomoniasis', 'Infectious_Bronchitis', 'Infectious_Bursal_Disease', 'Mareks_Disease', 'Newcastle_Disease', 'Salmonella']
-Train: 6746, Val: 750, Test: 1874
 Traceback (most recent call last):
-  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 203, in <module>
+  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 185, in <module>
     main()
     ~~~~^^
-  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 118, in main
-    train_transforms = transforms.Compose([
-                       ^^^^^^^^^^
-NameError: name 'transforms' is not defined
+  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 101, in main
+    val_dataset = PoultryHFDataset(val_dir, processor)
+  File "C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\train_cvt.py", line 71, in __init__
+    self.dataset = ImageFolder(root_dir)
+                   ~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Ali\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchvision\datasets\folder.py", line 328, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        root,
+        ^^^^^
+    ...<5 lines>...
+        allow_empty=allow_empty,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Ali\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchvision\datasets\folder.py", line 150, in __init__
+    samples = self.make_dataset(
+        self.root,
+    ...<3 lines>...
+        allow_empty=allow_empty,
+    )
+  File "C:\Users\Ali\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchvision\datasets\folder.py", line 203, in make_dataset
+    return make_dataset(
+        directory, class_to_idx, extensions=extensions, is_valid_file=is_valid_file, allow_empty=allow_empty
+    )
+  File "C:\Users\Ali\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchvision\datasets\folder.py", line 104, in make_dataset
+    raise FileNotFoundError(msg)
+FileNotFoundError: Found no valid file for the classes Histomoniasis, Infectious_Bronchitis, Infectious_Bursal_Disease. Supported extensions are: .jpg, .jpeg, .png, .ppm, .bmp, .pgm, .tif, .tiff, .webp

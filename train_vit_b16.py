@@ -59,61 +59,43 @@ print("POULTRY DISEASE CLASSIFICATION - ViT-B/16")
 print("=" * 60)
 
 # Get class folders
-data_dir = CONFIG['data_dir']
+data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
 if not os.path.exists(data_dir):
     print(f"❌ Data directory not found: {data_dir}")
-    print("Please run resize_images_512.py first!")
+    print("Please run organize_dataset_splits_physically.py first!")
     exit(1)
 
-classes = sorted([d for d in os.listdir(data_dir) 
-                 if os.path.isdir(os.path.join(data_dir, d))])
+print(f"Loading data from: {data_dir}")
 
-print(f"\n📊 Found {len(classes)} disease categories:")
-for i, cls in enumerate(classes, 1):
-    print(f"   {i}. {cls}")
+train_dir = os.path.join(data_dir, 'train')
+val_dir = os.path.join(data_dir, 'val')
+test_dir = os.path.join(data_dir, 'test')
 
-# Collect all images
-image_paths = []
-labels = []
+# Helper to collect paths
+def collect_paths(directory):
+    paths = []
+    labels = []
+    classes = sorted([d for d in os.listdir(directory) if os.path.isdir(os.path.join(directory, d))])
+    for cls in classes:
+        cls_path = os.path.join(directory, cls)
+        files = [os.path.join(cls_path, f) for f in os.listdir(cls_path) 
+                 if f.lower().endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff'))]
+        paths.extend(files)
+        labels.extend([cls] * len(files))
+    return paths, labels, classes
 
-print(f"\n📁 Collecting images from {data_dir}...")
-for cls in classes:
-    cls_path = os.path.join(data_dir, cls)
-    cls_images = [os.path.join(cls_path, f) for f in os.listdir(cls_path)
-                  if f.lower().endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff'))]
-    
-    image_paths.extend(cls_images)
-    labels.extend([cls] * len(cls_images))
-    print(f"   {cls}: {len(cls_images)} images")
-
-print(f"\n✅ Total images: {len(image_paths)}")
-
-if len(image_paths) == 0:
-    print("❌ No images found! Check your data directory.")
-    exit(1)
-
-# === 2. Train/Val/Test Split ===
-print("\n📊 Splitting dataset...")
-
-# First split: train+val vs test
-train_val_paths, test_paths, train_val_labels, test_labels = train_test_split(
-    image_paths, labels, 
-    test_size=CONFIG['test_size'], 
-    stratify=labels, 
-    random_state=CONFIG['random_seed']
-)
-
-# Second split: train vs val
-train_paths, val_paths, train_labels, val_labels = train_test_split(
-    train_val_paths, train_val_labels,
-    test_size=CONFIG['val_size'],
-    stratify=train_val_labels,
-    random_state=CONFIG['random_seed']
-)
+print("\n📊 Loading splits...")
+train_paths, train_labels, classes = collect_paths(train_dir)
+val_paths, val_labels, _ = collect_paths(val_dir)
+test_paths, test_labels, _ = collect_paths(test_dir)
 
 print(f"   Training: {len(train_paths)} images")
 print(f"   Validation: {len(val_paths)} images")
 print(f"   Test: {len(test_paths)} images")
+
+print(f"\n📊 Found {len(classes)} disease categories:")
+for i, cls in enumerate(classes, 1):
+    print(f"   {i}. {cls}")
 
 # === 3. Custom Dataset for ViT ===
 class PoultryViTDataset(Dataset):
@@ -163,7 +145,7 @@ print("\n🔮 Loading ViT-B/16 from Hugging Face...")
 print("   (First run will download ~1GB model)")
 
 # Create label mappings
-label2id = {label: i for i, label in enumerate(sorted(set(labels)))}
+label2id = {label: i for i, label in enumerate(classes)}
 id2label = {i: label for label, i in label2id.items()}
 
 # Save label mappings

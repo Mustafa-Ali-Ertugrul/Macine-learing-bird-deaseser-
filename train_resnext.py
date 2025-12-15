@@ -54,59 +54,13 @@ def main():
     print(f"Device: {CONFIG['device']}")
 
     # 1. Data Preparation
-    data_dir = CONFIG['data_dir']
+    data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
     if not os.path.exists(data_dir):
         print(f"❌ Data directory not found: {data_dir}")
+        print("Please run organize_dataset_splits_physically.py first.")
         return
 
-    classes = sorted([d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))])
-    print(f"Found {len(classes)} classes: {classes}")
-
-    image_paths = []
-    labels = []
-    for cls in classes:
-        cls_path = os.path.join(data_dir, cls)
-        cls_images = [os.path.join(cls_path, f) for f in os.listdir(cls_path)
-                      if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-        image_paths.extend(cls_images)
-        labels.extend([cls] * len(cls_images))
-
-    # Mappings
-    label2id = {label: i for i, label in enumerate(classes)}
-    id2label = {i: label for label, i in label2id.items()}
-
-    # Splits
-    train_val_paths, test_paths, train_val_labels, test_labels = train_test_split(
-        image_paths, labels, test_size=CONFIG['test_size'], stratify=labels, random_state=CONFIG['random_seed']
-    )
-    train_paths, val_paths, train_labels, val_labels = train_test_split(
-        train_val_paths, train_val_labels, test_size=CONFIG['val_size'], stratify=train_val_labels, random_state=CONFIG['random_seed']
-    )
-
-    print(f"Train: {len(train_paths)}, Val: {len(val_paths)}, Test: {len(test_paths)}")
-
-    # Dataset Class
-    class PoultryDataset(Dataset):
-        def __init__(self, paths, labels, transform=None):
-            self.paths = paths
-            self.labels = labels
-            self.transform = transform
-            self.label2id = label2id
-
-        def __len__(self):
-            return len(self.paths)
-
-        def __getitem__(self, idx):
-            path = self.paths[idx]
-            label = self.labels[idx]
-            try:
-                image = Image.open(path).convert('RGB')
-                if self.transform:
-                    image = self.transform(image)
-                return image, self.label2id[label]
-            except Exception as e:
-                print(f"Error loading {path}: {e}")
-                return torch.zeros((3, CONFIG['img_size'], CONFIG['img_size'])), self.label2id[label]
+    print(f"Loading data from split: {data_dir}")
 
     # Transforms
     train_transform = transforms.Compose([
@@ -124,13 +78,69 @@ def main():
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
+    train_dir = os.path.join(data_dir, 'train')
+    val_dir = os.path.join(data_dir, 'val')
+    test_dir = os.path.join(data_dir, 'test')
+    
+    # Helper to collect paths ensuring consistent classes
+    def collect_paths(directory, classes):
+        paths = []
+        labels = []
+        for i, cls in enumerate(classes):
+            cls_path = os.path.join(directory, cls)
+            if not os.path.exists(cls_path):
+                continue
+            
+            # Case insensitive check
+            files = [os.path.join(cls_path, f) for f in os.listdir(cls_path) 
+                     if f.lower().endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff'))]
+            paths.extend(files)
+            labels.extend([i] * len(files))
+        return paths, labels
+
+    # Detect ALL classes from TRAIN (Source of Truth)
+    classes = sorted([d for d in os.listdir(train_dir) if os.path.isdir(os.path.join(train_dir, d))])
+    
+    # Collect paths
+    train_paths, train_labels = collect_paths(train_dir, classes)
+    val_paths, val_labels = collect_paths(val_dir, classes)
+    test_paths, test_labels = collect_paths(test_dir, classes)
+
+    # Custom Dataset
+    class PoultryDataset(Dataset):
+        def __init__(self, image_paths, labels, transform=None):
+            self.image_paths = image_paths
+            self.labels = labels
+            self.transform = transform
+            self.classes = classes
+            
+        def __len__(self):
+            return len(self.image_paths)
+            
+        def __getitem__(self, idx):
+            img_path = self.image_paths[idx]
+            try:
+                image = Image.open(img_path).convert("RGB")
+            except:
+                image = Image.new('RGB', (224, 224), color='black') # Fallback
+
+            if self.transform:
+                image = self.transform(image)
+            
+            return image, self.labels[idx]
+
+    train_dataset = PoultryDataset(train_paths, train_labels, transform=train_transform)
+    val_dataset = PoultryDataset(val_paths, val_labels, transform=val_transform)
+    test_dataset = PoultryDataset(test_paths, test_labels, transform=val_transform)
+    
+    print(f"Found {len(classes)} classes: {classes}")
+    print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}, Test: {len(test_dataset)}")
+
     # DataLoaders
-    train_loader = DataLoader(PoultryDataset(train_paths, train_labels, train_transform), 
-                              batch_size=CONFIG['batch_size'], shuffle=True, num_workers=CONFIG['num_workers'])
-    val_loader = DataLoader(PoultryDataset(val_paths, val_labels, val_transform), 
-                            batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
-    test_loader = DataLoader(PoultryDataset(test_paths, test_labels, val_transform), 
-                             batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
+    train_loader = DataLoader(train_dataset, batch_size=CONFIG['batch_size'], shuffle=True, num_workers=CONFIG['num_workers'])
+    val_loader = DataLoader(val_dataset, batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
+    test_loader = DataLoader(test_dataset, batch_size=CONFIG['batch_size'], shuffle=False, num_workers=CONFIG['num_workers'])
+
 
     # 2. Model Setup
     print("\nLoading ResNeXt-50...")

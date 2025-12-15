@@ -21,12 +21,12 @@ if sys.platform == 'win32':
 
 # Model configurations
 MODELS = [
-    # {
-    #     'name': 'ViT-B/16',
-    #     'script': 'train_vit_b16.py',
-    #     'output_dir': 'vit_poultry_results',
-    #     'log_file': 'vit_training_log.txt'
-    # },
+    {
+        'name': 'ViT-B/16',
+        'script': 'train_vit_b16.py',
+        'output_dir': 'vit_poultry_results',
+        'log_file': 'vit_training_log.txt'
+    },
     {
         'name': 'ResNeXt-50',
         'script': 'train_resnext.py',

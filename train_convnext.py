@@ -50,83 +50,76 @@ def main():
     print("=" * 60)
 
     # 1. Data Preparation
-    data_dir = CONFIG['data_dir']
+    data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
     if not os.path.exists(data_dir):
         print(f"❌ Data directory not found: {data_dir}")
+        print("Please run organize_dataset_splits_physically.py first.")
         return
-
-    classes = sorted([d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))])
-    print(f"Found {len(classes)} classes: {classes}")
-
-    image_paths = []
-    labels = []
-    for cls in classes:
-        cls_path = os.path.join(data_dir, cls)
-        cls_images = [os.path.join(cls_path, f) for f in os.listdir(cls_path)
-                      if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-        image_paths.extend(cls_images)
-        labels.extend([cls] * len(cls_images))
-
-    # Mappings
-    label2id = {label: i for i, label in enumerate(classes)}
-    id2label = {i: label for label, i in label2id.items()}
-
-    # Splits
-    train_val_paths, test_paths, train_val_labels, test_labels = train_test_split(
-        image_paths, labels, test_size=CONFIG['test_size'], stratify=labels, random_state=CONFIG['random_seed']
-    )
-    train_paths, val_paths, train_labels, val_labels = train_test_split(
-        train_val_paths, train_val_labels, test_size=CONFIG['val_size'], stratify=train_val_labels, random_state=CONFIG['random_seed']
-    )
-
-    print(f"Train: {len(train_paths)}, Val: {len(val_paths)}, Test: {len(test_paths)}")
-
-    # Load Processor
+    
+    # Load Processor FIRST
     processor = ConvNextImageProcessor.from_pretrained(CONFIG['model_name'])
 
-    # Dataset Class
-    class PoultryDataset(Dataset):
-        def __init__(self, paths, labels, processor, transform=None):
-            self.paths = paths
+    # Helper to collect paths ensuring consistent classes
+    def collect_paths(directory, classes):
+        paths = []
+        labels = []
+        # Use provided classes list to ensure consistency
+        for i, cls in enumerate(classes):
+            cls_path = os.path.join(directory, cls)
+            if not os.path.exists(cls_path):
+                continue
+            
+            files = [os.path.join(cls_path, f) for f in os.listdir(cls_path) 
+                     if f.lower().endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff', '.webp'))]
+            paths.extend(files)
+            labels.extend([i] * len(files))
+        return paths, labels
+
+    # Detect ALL classes from TRAIN directory (Source of Truth)
+    train_classes = sorted([d for d in os.listdir(train_dir) if os.path.isdir(os.path.join(train_dir, d))])
+    label2id = {label: i for i, label in enumerate(train_classes)}
+    id2label = {i: label for label, i in label2id.items()}
+    
+    # Collect paths
+    train_paths, train_labels = collect_paths(train_dir, train_classes)
+    val_paths, val_labels = collect_paths(val_dir, train_classes)
+    test_paths, test_labels = collect_paths(test_dir, train_classes)
+    
+    # Custom Dataset
+    class PoultryHFDataset(Dataset):
+        def __init__(self, image_paths, labels, processor, transform=None):
+            self.image_paths = image_paths
             self.labels = labels
             self.processor = processor
-            self.label2id = label2id
             self.transform = transform
-
+            self.classes = train_classes # Use global classes
+            
         def __len__(self):
-            return len(self.paths)
-
+            return len(self.image_paths)
+            
         def __getitem__(self, idx):
-            path = self.paths[idx]
-            label = self.labels[idx]
+            img_path = self.image_paths[idx]
             try:
-                image = Image.open(path).convert('RGB')
-                if hasattr(self, 'transform') and self.transform:
-                    image = self.transform(image)
-                encoding = self.processor(image, return_tensors="pt")
-                item = {k: v.squeeze() for k, v in encoding.items()}
-                item['labels'] = torch.tensor(self.label2id[label])
-                return item
-            except Exception as e:
-                print(f"Error loading {path}: {e}")
-                # Return dummy
-                image = Image.new('RGB', (224, 224))
-                encoding = self.processor(image, return_tensors="pt")
-                item = {k: v.squeeze() for k, v in encoding.items()}
-                item['labels'] = torch.tensor(self.label2id[label])
-                return item
-
-    # Augmentation for Training
-    train_transforms = transforms.Compose([
-        transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomRotation(degrees=15),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
-        transforms.RandomResizedCrop(size=224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
-    ])
-
-    train_dataset = PoultryDataset(train_paths, train_labels, processor, transform=train_transforms)
-    val_dataset = PoultryDataset(val_paths, val_labels, processor)
-    test_dataset = PoultryDataset(test_paths, test_labels, processor)
+                image = Image.open(img_path).convert("RGB")
+            except:
+                image = Image.new('RGB', (224, 224), color='black')
+                
+            if hasattr(self, 'transform') and self.transform:
+                image = self.transform(image)
+                
+            encoding = self.processor(image, return_tensors="pt")
+            item = {k: v.squeeze() for k, v in encoding.items()}
+            item['labels'] = torch.tensor(self.labels[idx])
+            return item
+    
+    print(f"Found {len(train_classes)} classes: {train_classes}")
+    
+    train_dataset = PoultryHFDataset(train_paths, train_labels, processor, transform=train_transforms)
+    val_dataset = PoultryHFDataset(val_paths, val_labels, processor)
+    test_dataset = PoultryHFDataset(test_paths, test_labels, processor)
+    
+    print(f"Found {len(classes)} classes: {classes}")
+    print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}, Test: {len(test_dataset)}")
 
     # 2. Model Setup
     print(f"\nLoading {CONFIG['model_name']}...")

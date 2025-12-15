@@ -2,10 +2,13 @@
 __pycache__/
 *.pyc
 
+# Python derleme ve çıktı dosyaları
+__pycache__/
+*.pyc
+
 # Sanal ortamlar
 .venv/
 venv/
 
 # Veri toplama çıktı klasörü ve CSV
 poultry_microscopy/
-poultry_dataset.csv

@@ -145,7 +145,7 @@ def generate_final_report():
     # Run results extraction
     print("\n1️⃣  Extracting results from all models...")
     try:
-        subprocess.run([sys.executable, 'extract_all_results.py'], check=True)
+        subprocess.run([sys.executable, 'extract_checkpoint_metrics.py'], check=True)
         print("   ✅ Results extracted")
     except Exception as e:
         print(f"   ⚠️  Error extracting results: {e}")
@@ -153,7 +153,7 @@ def generate_final_report():
     # Generate HTML report
     print("\n2️⃣  Generating HTML report and visualizations...")
     try:
-        subprocess.run([sys.executable, 'generate_final_report.py'], check=True)
+        subprocess.run([sys.executable, 'create_final_report.py'], check=True)
         print("   ✅ Report generated")
     except Exception as e:
         print(f"   ⚠️  Error generating report: {e}")

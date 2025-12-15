@@ -15,31 +15,43 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-DATA_DIR = 'Macine learing (bird deaseser)/final_dataset_10_classes'
+DATA_DIR = 'final_dataset_clean_split'
 
 def check_leakage_phash():
     print("="*60)
     print("🕵️ VISUAL LEAKAGE DETECTION (Perceptual Hash)")
     print("="*60)
     
-    classes = [d for d in os.listdir(DATA_DIR) if os.path.isdir(os.path.join(DATA_DIR, d))]
+    if not os.path.exists(DATA_DIR):
+        print(f"❌ Error: Data directory '{DATA_DIR}' not found.")
+        return
+
+    # Check structure: train, val, test
+    if not all(os.path.exists(os.path.join(DATA_DIR, s)) for s in ['train', 'val', 'test']):
+        print("❌ Error: Expected 'train', 'val', 'test' subdirectories.")
+        return
+
+    # Get classes from train
+    classes = [d for d in os.listdir(os.path.join(DATA_DIR, 'train')) if os.path.isdir(os.path.join(DATA_DIR, 'train', d))]
     
     total_leakage = 0
-    total_checked = 0
     
     for cls in classes:
         print(f"\nAnalyzing Class: {cls}")
-        cls_path = os.path.join(DATA_DIR, cls)
-        images = [os.path.join(cls_path, f) for f in os.listdir(cls_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
         
-        # Simulate Train/Test split (Simple 80/20 random split for checking)
-        random.seed(42)
-        random.shuffle(images)
-        split_idx = int(len(images) * 0.8)
-        train_imgs = images[:split_idx]
-        test_imgs = images[split_idx:]
+        # Collect Train images
+        train_path = os.path.join(DATA_DIR, 'train', cls)
+        if not os.path.exists(train_path): continue
+        train_imgs = [os.path.join(train_path, f) for f in os.listdir(train_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
         
-        print(f"   Train: {len(train_imgs)}, Test: {len(test_imgs)}")
+        # Collect Test/Val images
+        test_imgs = []
+        for split in ['val', 'test']:
+            split_path = os.path.join(DATA_DIR, split, cls)
+            if os.path.exists(split_path):
+                test_imgs.extend([os.path.join(split_path, f) for f in os.listdir(split_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+        
+        print(f"   Train: {len(train_imgs)}, Test/Val: {len(test_imgs)}")
         
         # Calculate hashes for TRAIN
         train_hashes = {}

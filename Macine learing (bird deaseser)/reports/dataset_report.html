@@ -1,0 +1,2124 @@
+<h1>Poultry Dataset Raporu</h1>
+<p>Kaynak CSV: poultry_labeled_12k.csv</p>
+<p>Oluşturulma: 2025-12-08 09:53 UTC</p>
+<h2>Genel Özellikler</h2>
+<p>Toplam kayıt: 8,513</p>
+<p>Sütun sayısı: 8</p>
+<h3>Veri Tipleri Dağılımı</h3>
+<ul>
+<li>object: 5</li>
+<li>int64: 2</li>
+<li>float64: 1</li>
+</ul>
+<h3>Eksik Veri Analizi</h3>
+<p>Toplam eksik hücre: 16,580</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>missing</th>
+      <th>pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>magnification</th>
+      <td>8513</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>filename</th>
+      <td>8067</td>
+      <td>94.760954</td>
+    </tr>
+    <tr>
+      <th>image_path</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>disease</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>source</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>tissue</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2>İstatistiksel Analizler</h2>
+<h3>Sayısal Sütunlar İçin Tanımlayıcı İstatistikler</h3>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>width</th>
+      <td>8513.0</td>
+      <td>549.775285</td>
+      <td>218.602390</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>4160.0</td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td>8513.0</td>
+      <td>536.500881</td>
+      <td>136.904153</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>512.0</td>
+      <td>4096.0</td>
+    </tr>
+    <tr>
+      <th>magnification</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Kategorik Sütunlar İçin Frekans Dağılımları</h3>
+<h4>disease</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>disease</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>salmonella</th>
+      <td>2276</td>
+    </tr>
+    <tr>
+      <th>coccidiosis</th>
+      <td>2103</td>
+    </tr>
+    <tr>
+      <th>healthy</th>
+      <td>2074</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>429</td>
+    </tr>
+    <tr>
+      <th>ncd</th>
+      <td>376</td>
+    </tr>
+    <tr>
+      <th>pcrcocci</th>
+      <td>373</td>
+    </tr>
+    <tr>
+      <th>pcrsalmo</th>
+      <td>349</td>
+    </tr>
+    <tr>
+      <th>pcrhealthy</th>
+      <td>347</td>
+    </tr>
+    <tr>
+      <th>pcrncd</th>
+      <td>186</td>
+    </tr>
+  </tbody>
+</table>
+<h4>tissue</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>tissue</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>viscera</th>
+      <td>8067</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>329</td>
+    </tr>
+    <tr>
+      <th>thymus</th>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>spleen</th>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>bursa</th>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>kidney</th>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>liver</th>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>back</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>head</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>stomach</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>lung</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>pancreas</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>hair_follicle</th>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<h4>source</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>source</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>kaggle</th>
+      <td>8067</td>
+    </tr>
+    <tr>
+      <th>figshare</th>
+      <td>446</td>
+    </tr>
+  </tbody>
+</table>
+<h4>filename</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>filename</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NaN</th>
+      <td>8067</td>
+    </tr>
+    <tr>
+      <th>Figure 1-A-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-A-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-B.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-C.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-D-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-D-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-D-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Infection-DAPI.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Infection-FITC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Infection-Merge.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Negative-DAPI.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Negative-FITC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-E-Negative-Merge.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 1-F.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-Infection-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2-NC-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2A.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2B.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 2C.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Back-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Head-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 3-Stomach-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Bursa of Fabricius-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Kidney-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Liver-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Spleen-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-1.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-2.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-3.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-4.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-5.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-6.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 4-Thymus-7.JPG</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Bursa of Fabricius-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Hair Follicle-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Kidney-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Lung-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Pancreas-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Spleen-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-Infection-4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-Infection-5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 5-Thymus-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Bursa of Fabricius-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Bursa of Fabricius-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Bursa of Fabricius-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Bursa of Fabricius-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Spleen-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Spleen-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Spleen-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Spleen-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Thymus-Infection-1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Thymus-Infection-2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Thymus-Infection-3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6-Thymus-NC.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6A.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6B.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6C.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6D.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6E.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 6F.jpeg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Brain.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Bursa of Fabricius.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Duodenum.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Heart.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Kidney.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Liver.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Lung.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Pancreas.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Skin.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Spleen.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7-Thymus.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7A.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7B.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7C.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7D.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7E.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 7F.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 8-A.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 8-B.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 8-C.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 8-D.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Figure 8-E.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10031541_fig0002_07e1c073.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10031541_fig0003_cfef4d05.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10295512_animals-13-02037-f004_73209a15.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10405095_fig0006_08f4ee04.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10405095_fig0007_b8c38f78.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10483844_Fig1_5f83ed6b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10650477_animals-13-03421-f001_e4a54b5b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10711517_fig0001_b8c77161.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10711517_fig0006_6276e48d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10768351_Fig3_3dc94067.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10787586_f2_2fcdd437.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10787586_f3_c13ff539.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10787586_f4_34805ace.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10787586_f5_f628fc83.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10787586_sch1_2087487e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10792630_fig0001_fadbc66d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10792630_fig0003_6efc7c9a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10792630_fig0004_de763b6d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10820081_toxins-16-00046-f003_1567380e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10881339_fig3_e55af878.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10893078_vetsci-11-00098-f006_6bdedc3f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC10893078_vetsci-11-00098-f007_4d2b97c2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig10_c01498ee.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig11_1e808529.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig12_0fb8e62b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig13_de4faf2e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig14_12898e70.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig15_c9494e09.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig16_11f24264.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig17_618b5ed5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig18_bbf075ba.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig19_34362a35.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig20_ee6644f2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig21_a03a52f3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig22_4f95a7e5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig23_fe66095b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig6_29434ac8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig7_765d247f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig8_ddabf81f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11001757_Fig9_2fd1768b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11017358_fig0001_77c91f39.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11017358_fig0005_aacc6719.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11240451_animals-14-01959-f001_38bface1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11240451_animals-14-01959-f002_4e531273.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11342782_fig0004_8b18700e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11357213_pathogens-13-00619-f002_d8e5e9c8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11357213_pathogens-13-00619-f004_69048037.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11377767_Fig1_cdcf7232.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11377767_Fig6_1b7ee950.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11377767_Fig7_46e5265c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11377767_Fig8_6813c46c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11446001_Fig2_0dbade6c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11446001_Fig3_e76241bb.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11446001_Fig4_ce2195e4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11481460_Fig2_67a4986a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11481460_Fig5_0e2cf4b6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11481460_Fig6_38d1fbbd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11492589_fig0004_f5803c2b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11492589_fig0008_ad6b5674.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11544849_cells-13-01797-f006_7eff7236.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11578965_fig1_47259a0e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11578965_fig2_9909a18e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11578965_fig3_43e8bce1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11578965_fig4_88015ce9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11578965_fig7_1fc99482.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11582649_Fig1_8b8249a8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11582649_Fig3_8c9f5518.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11582649_Fig5_e50e1684.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11598950_viruses-16-01777-f001_cb58f49f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11598950_viruses-16-01777-f002_5cad26df.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11598950_viruses-16-01777-f003_ca82edec.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11598950_viruses-16-01777-f004_d03c4bb2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11610265_Fig2_dccfc240.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11610265_Fig4_099bd16a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11647614_fig0001_b2afe4c6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11647614_fig0004_436bae1f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11653950_Fig3_f2724457.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11653950_Fig5_5b98b4e7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11677493_pathogens-13-01115-f001_53da904f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11677493_pathogens-13-01115-f002_3df7d4f7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11680472_ame212463-fig-0001_cb0c6731.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11680472_ame212463-fig-0002_9b06edf9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11721806_F0001_499b482d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11721806_F0004_183786bd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11721806_F0005_b8d13f8d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11721806_F0006_47056793.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11721806_F0007_0b53044d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11728826_viruses-16-01966-f011_b3a8ad6f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11728826_viruses-16-01966-f012_6cbc1534.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11740294_F0001_76713ad3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F10_2244e966.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F2_62d4c9cc.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F3_2915201b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F4_a6670377.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F5_11bd5256.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11784312_F7_d2bebc5a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11792478_F4_9ad36dcf.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11792478_F5_b537569e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11803967_Fig1_1b22716c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11803967_Fig5_1e3febdf.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11803967_Fig6_6a05f2d5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11803967_Fig7_80f9763c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11858509_pathogens-14-00149-f002_db224d6c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11858509_pathogens-14-00149-f003_bc4d3be3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11858509_pathogens-14-00149-f006_1f95113d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11864831_F1_5b66038c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11866900_Fig2_13c4795f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11866900_Fig3_1a3b4310.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11906689_F3_bad77003.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11906689_F4_0677720f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11932683_fig0003_68410bc5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11945385_vaccines-13-00294-f002_ef8994bb.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11945385_vaccines-13-00294-f005_984b7676.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11945385_vaccines-13-00294-f006_3524b08f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g001_0b610137.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g003_7e286b18.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g004_ef2c9da9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g005_e47995f8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g006_cb3122df.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g007_1b6d43c7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11960958_pone.0320483.g009_f6d6876e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11965304_Fig2_6d73b066.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11971486_F1_0f42d2c4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11971486_F2_c12be088.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11971486_F4_8ff43deb.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11980200_F0001_0f201704.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11986440_FIG2_3539be77.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11986440_FIG4_c2108b15.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11986440_FIG8_a6ce11dd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11987307_Fig1_0767be09.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11987307_Fig2_dd251ff6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11987656_fig0004_b280abbe.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11995505_Fig2_96303e6b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11995505_Fig3_dac68776.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC11995505_Fig5_37c1bb42.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12002762_fig0001_c85e3779.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12016797_fig1_19b15e12.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12017716_fig2_0702d0a6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12017716_fig4_e7f1b4f9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12017716_fig6_01875c52.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12017716_fig7_ef2c19d4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12031470_viruses-17-00519-f003_4da213f9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12031470_viruses-17-00519-f004_5e5b5cc4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12031470_viruses-17-00519-f005_1b218c31.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12070898_animals-15-01281-f003_f06d50a3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12088461_idoj.idoj_1039_24-f002_7ba1dc04.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12088461_idoj.idoj_1039_24-f004_dad4a38a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12090714_F6_d23764c7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12090751_F4_7a9c9aba.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12090751_F5_a809823c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12102188_Fig1_5879e89c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12102188_Fig2_4856a42f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12102188_Fig4_876c92c9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12137113_Fig1_58c9b69f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12137113_Fig3_24e3116d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12137113_Fig4_d6275384.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12137113_Fig5_8302c6c6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12137113_Fig7_cf19a238.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12138426_fig0003_88c359a0.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12138426_fig0010_d7ee8dfb.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12144252_Fig3_fe7bc636.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12144252_Fig7_0469396f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12146021_F1_6c3e53f1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12146021_F2_ac58d679.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12146021_F3_beb56b4e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12169742_fig0002_40f64bd0.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12169742_fig0009_f261d17e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12172082_F0001_03a7e9b4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12172082_F0003_5fa6e83e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12173210_FIG1_247b2ddd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12173210_FIG2_f9058345.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12188715_F6_a81d0ae2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12188715_F7_72c49450.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12188715_F8_06bd53b8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12188715_F9_20da75de.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12213281_fig0004_38745df5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12224477_Fig2_27a4ed34.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12239568_F2_dce148ea.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12239568_F3_cca747b2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12239568_F4_5bee3c02.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig10_c097cf0a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig11_90a7219b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig1_ab9abdb3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig5_4d7510fc.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig6_d8dc7c34.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12255740_Fig7_7c4a0ddd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12269577_fig0001_79372cc8.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12282172_F5_2e2db4d7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12282323_F4_53d61dff.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12286695_fig1_8fdbcb44.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12286695_fig2_68466354.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12291917_animals-15-02057-f002_df5dd1e1.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12291917_animals-15-02057-f003_a82f128e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12326629_Fig11_c9084ae6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12326652_Fig6_6e8c32c5.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12327064_vms370504-fig-0009_e0665823.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12333254_Fig3_da081970.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12333254_Fig4_0bd06807.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12333254_Fig5_dd437f2e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12345485_animals-15-02187-f002_8f5ce37d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12362686_fig0004_daae7b51.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12362686_fig0005_cb40f6c0.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12363208_F1_4b9bcf8e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12363208_F4_aca03b26.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12363208_F5_243ae514.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12372494_F0001_7f9d3140.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12372494_F0003_d2f177d7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12372494_F0004_4acc3fed.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12372494_F0005_3ac147e3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12372494_F0007_0460fa3d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12373873_Fig3_0685dee3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12373873_Fig5_0695a228.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12373873_Fig6_e35bd648.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12381878_fig6_222d1b08.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12382773_animals-15-02327-f002_a513d532.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12383250_F5_7c05290a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12383250_F7_02d3bea6.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12385707_foods-14-02781-f008_54035c6b.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12388314_microorganisms-13-01738-f007_233405ae.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12388314_microorganisms-13-01738-f008_0471400d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12389831_vetsci-12-00689-f002_f8b87824.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12389831_vetsci-12-00689-f003_e9e90134.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12389831_vetsci-12-00689-f004_bc343a4d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12390582_vetsci-12-00726-f001_ec57ea1e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12390582_vetsci-12-00726-f004_fc40a5b9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12390651_viruses-17-01037-f003_14b24f6c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12396427_fig0004_3fa988bd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12396427_fig0005_100ea40e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig3_ce3d099d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig4_efd45745.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig5_4f013fbd.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig6_e9e64854.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig7_145d2308.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12398015_Fig8_303e4163.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12400679_fig2_d565d77e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12400679_fig5_85646b1f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12400679_fig6_e85d6962.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12400679_fig7_dc6af674.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12403985_F1_f3a6aa76.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12403985_F2_1844dc29.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12405288_fig1_825a62aa.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12410888_ppat.1013458.g001_9a892416.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12410888_ppat.1013458.g002_98c1785c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12410888_ppat.1013458.g004_59f3037d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12433649_f0001_37c79b0a.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12433649_f0003_16d40fcc.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12433649_f0005_c883e0fc.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12433649_f0006_e9cbae6f.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12434004_f2_9197a5bc.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12434004_f4_b9a769c7.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12434004_f6_cafcba59.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12444787_F4_e8fb5bb3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12456136_F4_52f46b94.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12456792_pone.0332213.g001_b38aaaa3.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12456792_pone.0332213.g003_52ae199c.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12472222_pathogens-14-00865-f002_26e3475d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12472222_pathogens-14-00865-f003_c756d249.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12474141_vetsci-12-00849-f001_78a49244.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12474141_vetsci-12-00849-f003_f98cdeae.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12474141_vetsci-12-00849-f005_f60bcb72.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12474430_vaccines-13-00946-f007_a92bcd58.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12474430_vaccines-13-00946-f008_35039df4.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12476818_F1_90ae0c84.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12495160_fig0002_1c08ad2d.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12497699_f3_225640ee.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12501596_F2_08d66881.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12501596_F4_12cdcb5e.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC12501596_F5_8fef5f23.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC9321215_vetsci-09-00347-f003_cc21c2f9.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC9321215_vetsci-09-00347-f004_25f5b3ff.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PMC9321215_vetsci-09-00347-f005_760d2ad2.jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>case 13(tfnd).jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>case 19(tfnd).jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>case 23(tfnd).jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>case 7(tfnd).jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>case 9(tfnd).jpg</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>cavp_a_2570722_sm4820.jpg</th>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Korelasyon Analizleri</h3>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>width</th>
+      <th>height</th>
+      <th>magnification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>width</th>
+      <td>1.000000</td>
+      <td>0.862986</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td>0.862986</td>
+      <td>1.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>magnification</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Görselleştirmeler</h2>
+<h3>Kategorik: Disease</h3>
+<img src='figures/bar_disease.png' style='max-width:800px'>
+<h3>Kategorik: Tissue</h3>
+<img src='figures/bar_tissue.png' style='max-width:800px'>
+<h3>Dağılım: width</h3>
+<img src='figures/hist_width.png' style='max-width:800px'>
+<h3>Dağılım: height</h3>
+<img src='figures/hist_height.png' style='max-width:800px'>
+<h3>Dağılım: magnification</h3>
+<img src='figures/hist_magnification.png' style='max-width:800px'>
+<h3>İlişki: Width vs Height</h3>
+<img src='figures/scatter_width_height.png' style='max-width:800px'>
+<h2>Veri Kalitesi Değerlendirmesi</h2>
+<h3>Outlier Tespiti (IQR)</h3>
+<ul>
+<li>width: 446 outlier, sınırlar [512.00, 512.00]</li>
+<li>height: 445 outlier, sınırlar [512.00, 512.00]</li>
+<li>magnification: 0 outlier, sınırlar [nan, nan]</li>
+</ul>
+<h3>Tutarsız/Problemli Kayıtlar</h3>
+<p>Geçersiz boyut değeri: 0</p>
+<p>Yinelenen image_path sayısı: 0</p>
+<p>Dosya mevcutluk kontrolü (örnek 200): eksik 200</p>
+<h3>Veri Temizleme Önerileri</h3>
+<ul>
+<li>Eksik numeric değerleri uygun stratejilerle doldur veya çıkar.</li>
+<li>Kategorik sınıfları standartlaştır ve yazım hatalarını düzelt.</li>
+<li>Yinelenen ve geçersiz dosya yollarını kaldır veya yeniden eşle.</li>
+<li>Boyut değerlerinde aşırı marjinalleri IQR/z-score ile ele al.</li>
+</ul>
