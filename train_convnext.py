@@ -59,6 +59,11 @@ def main():
     # Load Processor FIRST
     processor = ConvNextImageProcessor.from_pretrained(CONFIG['model_name'])
 
+    train_dir = os.path.join(data_dir, 'train')
+    val_dir = os.path.join(data_dir, 'val')
+    test_dir = os.path.join(data_dir, 'test')
+
+
     # Helper to collect paths ensuring consistent classes
     def collect_paths(directory, classes):
         paths = []
@@ -114,18 +119,26 @@ def main():
     
     print(f"Found {len(train_classes)} classes: {train_classes}")
     
+    # Augmentation for Training
+    train_transforms = transforms.Compose([
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomRotation(degrees=15),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+        transforms.RandomResizedCrop(size=224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
+    ])
+    
     train_dataset = PoultryHFDataset(train_paths, train_labels, processor, transform=train_transforms)
     val_dataset = PoultryHFDataset(val_paths, val_labels, processor)
     test_dataset = PoultryHFDataset(test_paths, test_labels, processor)
     
-    print(f"Found {len(classes)} classes: {classes}")
+    print(f"Found {len(train_classes)} classes: {train_classes}")
     print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}, Test: {len(test_dataset)}")
 
     # 2. Model Setup
     print(f"\nLoading {CONFIG['model_name']}...")
     model = ConvNextForImageClassification.from_pretrained(
         CONFIG['model_name'],
-        num_labels=len(classes),
+        num_labels=len(train_classes),
         id2label=id2label,
         label2id=label2id,
         ignore_mismatched_sizes=True
@@ -180,16 +193,16 @@ def main():
     true_labels = predictions.label_ids
 
     print("\nClassification Report:")
-    print(classification_report(true_labels, preds, target_names=classes))
+    print(classification_report(true_labels, preds, target_names=train_classes))
 
     cm = confusion_matrix(true_labels, preds)
     plt.figure(figsize=(10, 8))
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
     plt.title('Confusion Matrix - ConvNeXt-Tiny')
     plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
+    tick_marks = np.arange(len(train_classes))
+    plt.xticks(tick_marks, train_classes, rotation=45)
+    plt.yticks(tick_marks, train_classes)
     plt.tight_layout()
     plt.savefig(os.path.join(CONFIG['output_dir'], 'confusion_matrix.png'))
     print("✅ Saved confusion matrix")

@@ -3,32 +3,32 @@
     {
       "model": "ViT-B/16",
       "status": "SUCCESS",
-      "time_minutes": 31.7,
+      "time_minutes": 32.46,
       "output_dir": "vit_poultry_results"
     },
     {
       "model": "ResNeXt-50",
-      "status": "FAILED",
-      "time_minutes": 0.1,
-      "error": "Exit code 1"
+      "status": "SUCCESS",
+      "time_minutes": 30.35,
+      "output_dir": "resnext_poultry_results"
     },
     {
       "model": "ResNeSt-50d",
       "status": "SUCCESS",
-      "time_minutes": 0.11,
+      "time_minutes": 41.41,
       "output_dir": "resnest_poultry_results"
     },
     {
       "model": "ConvNeXt",
       "status": "FAILED",
-      "time_minutes": 0.14,
+      "time_minutes": 0.43,
       "error": "Exit code 1"
     },
     {
       "model": "CvT",
-      "status": "FAILED",
-      "time_minutes": 0.15,
-      "error": "Exit code 1"
+      "status": "SUCCESS",
+      "time_minutes": 22.54,
+      "output_dir": "cvt_poultry_results"
     }
   ],
   "performance_metrics": [
@@ -39,12 +39,24 @@
       "final_val_loss": null
     },
     {
+      "model": "ResNeXt-50",
+      "test_accuracy": null,
+      "best_val_accuracy": null,
+      "final_val_loss": null
+    },
+    {
       "model": "ResNeSt-50d",
+      "test_accuracy": null,
+      "best_val_accuracy": null,
+      "final_val_loss": null
+    },
+    {
+      "model": "CvT",
       "test_accuracy": null,
       "best_val_accuracy": null,
       "final_val_loss": null
     }
   ],
-  "total_time_minutes": 32.36,
-  "timestamp": "2025-12-14T20:42:04.185659"
+  "total_time_minutes": 127.37,
+  "timestamp": "2025-12-17T15:24:26.396190"
 }
