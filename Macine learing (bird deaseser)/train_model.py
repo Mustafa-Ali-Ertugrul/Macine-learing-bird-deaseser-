@@ -45,8 +45,7 @@ class PoultryDiseaseDataset(Dataset):
             image = Image.open(img_path).convert('RGB')
         except Exception as e:
             print(f"Error loading image {img_path}: {e}")
-            # Return a blank image if there's an error
-            image = Image.new('RGB', (224, 224), color='black')
+            return None, label_idx
         
         # Apply transforms
         if self.transform:
@@ -91,18 +90,21 @@ def train_model():
         generator=torch.Generator().manual_seed(42)
     )
     
-    # Apply different transforms to validation set
-    val_dataset.dataset.transform = val_transform
+    # Create separate datasets with different transforms
+    val_indices = val_dataset.indices
+    val_transform_dataset = type(dataset)(csv_file='poultry_labeled_12k.csv', root_dir='.', transform=val_transform)
+    val_dataset = torch.utils.data.Subset(val_transform_dataset, val_indices)
     
-    # Create data loaders
-    train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=0)
-    val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False, num_workers=0)
+    # Create data loaders with optimized settings for Windows
+    num_workers = 0 if os.name == 'nt' else 4
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=num_workers)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, num_workers=num_workers)
     
     print(f"Train samples: {len(train_dataset)}")
     print(f"Validation samples: {len(val_dataset)}")
     
     # Load pre-trained ResNet model
-    model = models.resnet18(pretrained=True)
+    model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
     
     # Freeze early layers
     for param in model.parameters():
@@ -118,14 +120,21 @@ def train_model():
     
     # Define loss and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.fc.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.fc.parameters(), lr=0.001, weight_decay=1e-4)
+    
+    # Add learning rate scheduler
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=3, verbose=True)
     
     # Training loop
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     
-    num_epochs = 10
+    num_epochs = 20
     best_val_acc = 0.0
+    patience = 5
+    epochs_no_improve = 0
+    all_labels = []
+    all_preds = []
     
     print("Starting training...")
     for epoch in range(num_epochs):
@@ -179,19 +188,30 @@ def train_model():
         print(f'  Train Loss: {train_loss/len(train_loader):.4f}, Acc: {train_acc:.2f}%')
         print(f'  Val Loss: {val_loss/len(val_loader):.4f}, Acc: {val_acc:.2f}%')
         
+        scheduler.step(val_acc)
+        
         # Save best model
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             torch.save(model.state_dict(), 'best_poultry_disease_model.pth')
+            epochs_no_improve = 0
             print(f'  🎉 Saved best model with validation accuracy: {val_acc:.2f}%')
+        else:
+            epochs_no_improve += 1
+        
+        # Early stopping
+        if epochs_no_improve >= patience:
+            print(f'\n⏹️ Early stopping triggered after {epoch+1} epochs')
+            break
     
     print(f"\n🎉 Training completed!")
     print(f"Best validation accuracy: {best_val_acc:.2f}%")
     
     # Print classification report
-    print("\n📊 Classification Report:")
-    target_names = dataset.classes
-    print(classification_report(all_labels, all_preds, target_names=target_names))
+    if all_labels and all_preds:
+        print("\n📊 Classification Report:")
+        target_names = dataset.classes
+        print(classification_report(all_labels, all_preds, target_names=target_names))
     
     # Save final model
     torch.save(model.state_dict(), 'final_poultry_disease_model.pth')

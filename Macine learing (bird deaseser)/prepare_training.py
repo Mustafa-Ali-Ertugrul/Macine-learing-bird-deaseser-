@@ -3,6 +3,10 @@ import sys
 from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
+import torch
+from torch.utils.data import DataLoader, Dataset
+from torchvision import transforms, models
+from PIL import Image
 
 def create_train_val_test_split(dataset_dir, csv_path, train_ratio=0.7, val_ratio=0.15, test_ratio=0.15):
     """
@@ -121,12 +125,13 @@ def train_model():
         transform=val_transform
     )
     
-    # Create data loaders
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, num_workers=4)
+    # Create data loaders with Windows compatibility
+    num_workers = 0 if os.name == 'nt' else 4
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=num_workers)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, num_workers=num_workers)
     
     # Load pre-trained Vision Transformer
-    model = models.vit_b_16(pretrained=True)
+    model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT)
     
     # Modify classifier for our number of classes
     num_classes = len(train_dataset.classes)
