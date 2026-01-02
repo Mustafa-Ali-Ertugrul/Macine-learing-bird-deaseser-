@@ -27,7 +27,7 @@ import numpy as np
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',
+    'data_dir': 'final_dataset_split',  # Fixed: Use correct path
     'output_dir': './convnext_poultry_results',
     'model_name': 'facebook/convnext-tiny-224',
     'batch_size': 16,
@@ -50,7 +50,7 @@ def main():
     print("=" * 60)
 
     # 1. Data Preparation
-    data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
+    data_dir = CONFIG['data_dir']  # Fixed: Use direct path
     if not os.path.exists(data_dir):
         print(f"❌ Data directory not found: {data_dir}")
         print("Please run organize_dataset_splits_physically.py first.")
