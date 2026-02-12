@@ -1,0 +1,18 @@
+Overall Accuracy: 0.9892
+
+                           precision    recall  f1-score   support
+
+          Avian Influenza       0.98      1.00      0.99       500
+              Coccidiosis       1.00      0.99      0.99       500
+                 Fowl Pox       0.99      0.97      0.98       480
+                  Healthy       0.99      0.97      0.98       500
+            Histomoniasis       1.00      1.00      1.00       500
+    Infectious Bronchitis       1.00      1.00      1.00       500
+Infectious Bursal Disease       0.99      1.00      1.00       500
+          Marek's Disease       0.99      1.00      1.00       500
+        Newcastle Disease       0.98      0.98      0.98       500
+               Salmonella       0.98      0.99      0.99       500
+
+                 accuracy                           0.99      4980
+                macro avg       0.99      0.99      0.99      4980
+             weighted avg       0.99      0.99      0.99      4980

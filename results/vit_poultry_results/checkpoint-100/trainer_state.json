@@ -1,0 +1,66 @@
+{
+  "best_global_step": 100,
+  "best_metric": 1.7907947301864624,
+  "best_model_checkpoint": "./vit_poultry_results\\checkpoint-100",
+  "epoch": 0.4444444444444444,
+  "eval_steps": 100,
+  "global_step": 100,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.2222222222222222,
+      "grad_norm": 1.7710040807724,
+      "learning_rate": 1.088888888888889e-05,
+      "loss": 2.2934,
+      "step": 50
+    },
+    {
+      "epoch": 0.4444444444444444,
+      "grad_norm": 2.155653715133667,
+      "learning_rate": 2.2000000000000003e-05,
+      "loss": 2.0346,
+      "step": 100
+    },
+    {
+      "epoch": 0.4444444444444444,
+      "eval_accuracy": 0.7894736842105263,
+      "eval_loss": 1.7907947301864624,
+      "eval_runtime": 6.9821,
+      "eval_samples_per_second": 57.146,
+      "eval_steps_per_second": 3.581,
+      "step": 100
+    }
+  ],
+  "logging_steps": 50,
+  "max_steps": 2250,
+  "num_input_tokens_seen": 0,
+  "num_train_epochs": 10,
+  "save_steps": 100,
+  "stateful_callbacks": {
+    "EarlyStoppingCallback": {
+      "args": {
+        "early_stopping_patience": 3,
+        "early_stopping_threshold": 0.0
+      },
+      "attributes": {
+        "early_stopping_patience_counter": 0
+      }
+    },
+    "TrainerControl": {
+      "args": {
+        "should_epoch_stop": false,
+        "should_evaluate": false,
+        "should_log": false,
+        "should_save": true,
+        "should_training_stop": false
+      },
+      "attributes": {}
+    }
+  },
+  "total_flos": 1.239960734466048e+17,
+  "train_batch_size": 16,
+  "trial_name": null,
+  "trial_params": null
+}

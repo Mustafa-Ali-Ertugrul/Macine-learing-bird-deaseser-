@@ -1,0 +1,39 @@
+
+TRAIN:
+  Avian_Influenza: 357
+  Coccidiosis: 5466
+  Fowl_Pox: 422
+  Healthy: 5566
+  Histomoniasis: 352
+  Infectious_Bronchitis: 352
+  Infectious_Bursal_Disease: 351
+  Mareks_Disease: 356
+  Newcastle_Disease: 1306
+  Salmonella: 5696
+  TOTAL: 20224
+
+VAL:
+  Avian_Influenza: 75
+  Coccidiosis: 351
+  Fowl_Pox: 75
+  Healthy: 358
+  Histomoniasis: 75
+  Infectious_Bronchitis: 75
+  Infectious_Bursal_Disease: 75
+  Mareks_Disease: 75
+  Newcastle_Disease: 84
+  Salmonella: 366
+  TOTAL: 1609
+
+TEST:
+  Avian_Influenza: 75
+  Coccidiosis: 352
+  Fowl_Pox: 75
+  Healthy: 358
+  Histomoniasis: 75
+  Infectious_Bronchitis: 75
+  Infectious_Bursal_Disease: 75
+  Mareks_Disease: 75
+  Newcastle_Disease: 84
+  Salmonella: 367
+  TOTAL: 1611

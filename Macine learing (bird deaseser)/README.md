@@ -1,140 +1,247 @@
-# 🐔 Poultry Disease Classification Project
+# 🐔 Poultry Disease Classification - Production Ready
 
-Complete machine learning solution for classifying poultry diseases using histopathology images.
+Production-grade machine learning system for classifying poultry diseases using histopathology images.
 
 ## 📊 Dataset
 
-The project uses **final_dataset_10_classes** containing histopathology images organized into 10 categories:
-
-### Disease Classes
-
-- 🟢 **Healthy** - Normal poultry tissue
-- 🔴 **Avian_Influenza** - Avian Influenza (Bird Flu)
-- 🟡 **Coccidiosis** - Coccidiosis infection
-- 🟠 **Fowl_Pox** - Fowl Pox disease
-- 🔵 **Healthy** - Normal healthy tissue
-- 🟤 **Histomoniasis** - Histomoniasis (Blackhead disease)
-- 🟣 **Infectious_Bronchitis** - Infectious Bronchitis (IB)
-- 🟠 **Infectious_Bursal_Disease** - Infectious Bursal Disease (IBD)
-- 🟢 **Mareks_Disease** - Marek's Disease
-- 🔶 **Newcastle_Disease** - Newcastle Disease (NDV)
-- 🔵 **Salmonella** - Salmonella infection
-
-## 🛠️ Available Tools
-
-### Data Management
-| Script | Description |
-|---------|-------------|
-| `verify_dataset.py` | Verify dataset integrity and check for corrupted images |
-| `analyze_dataset_enhanced.py` | Comprehensive dataset analysis with statistics |
-| `organize_dataset.py` | Organize images into class directories or create train/val/test splits |
-| `prepare_training.py` | Prepare datasets for model training |
-
-### Model Training
-| Script | Description |
-|---------|-------------|
-| `train_model.py` | Train ResNet18 model with early stopping and learning rate scheduling |
-
-### Labeling
-| Tool | Description |
-|------|-------------|
-| `poultry_labeling_tool.html` | Interactive web-based tool for labeling images |
+10 disease classes with 500+ images each:
+- **Avian_Influenza** - Avian Influenza (Bird Flu)
+- **Coccidiosis** - Coccidiosis infection
+- **Fowl_Pox** - Fowl Pox disease
+- **Healthy** - Normal healthy tissue
+- **Histomoniasis** - Histomoniasis (Blackhead disease)
+- **Infectious_Bronchitis** - Infectious Bronchitis (IB)
+- **Infectious_Bursal_Disease** - Infectious Bursal Disease (IBD)
+- **Mareks_Disease** - Marek's Disease
+- **Newcastle_Disease** - Newcastle Disease (NDV)
+- **Salmonella** - Salmonella infection
 
 ## 🚀 Quick Start
 
-### 1. Verify Dataset
+### Installation (Windows)
+
 ```bash
-python verify_dataset.py
+# Clone repository
+git clone <repo-url>
+cd <repo-name>
+
+# Create virtual environment
+python -m venv .venv
+.venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup DVC (for data versioning)
+dvc pull
 ```
 
-### 2. Analyze Dataset
+### Training
+
 ```bash
-python analyze_dataset_enhanced.py
+# Basic training
+python scripts/train.py --config config/training_config.yaml
+
+# With TensorBoard monitoring
+tensorboard --logdir runs
 ```
 
-### 3. Organize Dataset
+### API Server
+
 ```bash
-# Create train/val/test splits (70/15/15)
-python organize_dataset.py
-# Select option 2
+# Start FastAPI server
+uvicorn api.main:app --reload
+
+# Test prediction (PowerShell)
+curl.exe -X POST "http://localhost:8000/predict" -F "file=@test_image.jpg"
+
+# API docs: http://localhost:8000/docs
 ```
 
-### 4. Train Model
+## 📁 Project Structure
+
+```
+├── config/              # YAML configuration files
+│   └── training_config.yaml
+├── src/                 # Source code
+│   ├── models/          # Model definitions
+│   ├── training/        # Training pipeline
+│   ├── data/            # Dataset and transforms
+│   ├── utils/           # Logger, config loader, metrics
+│   ├── preprocessing/   # Data preprocessing
+│   ├── augmentation/    # Advanced augmentation (Phase 2)
+│   ├── visualization/   # Grad-CAM, plots (Phase 2)
+│   └── optimization/    # Hyperparameter tuning (Phase 2)
+├── api/                 # FastAPI REST API (Phase 2)
+├── tests/               # Unit tests (Phase 2)
+├── scripts/             # Training and utility scripts
+├── deployment/          # Docker, ONNX export (Phase 3)
+├── mlops/               # MLflow tracking (Phase 3)
+├── data/                # Dataset (managed by DVC)
+│   └── final_dataset_10_classes/
+├── models/              # Trained models (Git LFS/DVC)
+├── logs/                # Log files
+├── runs/                # TensorBoard logs
+├── requirements.txt     # Python dependencies
+└── README.md
+```
+
+## 🧠 Model Architectures
+
+Supported models (configured in `config/training_config.yaml`):
+- **ResNet18** - Fast, lightweight
+- **ResNet50** - Better accuracy
+- **EfficientNet B0, B2** - Efficient architecture
+- **ConvNeXt Tiny** - Modern architecture
+
+## 🔬 Features
+
+### Phase 1 (Implemented) ✅
+- **Modular Architecture**: Clean, maintainable code structure
+- **Configuration Management**: YAML-based config files
+- **Logging System**: Centralized logging to console and files
+- **Type Hints**: Full type annotations for better code quality
+- **Data Management**: Dataset class with transforms
+
+### Phase 2 (Planned)
+- **Advanced Augmentation**: CutMix, MixUp, AutoAugment
+- **K-Fold Cross-Validation**: Robust model evaluation
+- **Hyperparameter Tuning**: Optuna integration
+- **Model Interpretability**: Grad-CAM visualization
+- **REST API**: FastAPI for model serving
+- **TensorBoard**: Training visualization
+- **Unit Tests**: Comprehensive test coverage
+
+### Phase 3 (Planned)
+- **MLflow**: Experiment tracking
+- **Ensemble Models**: Multiple model fusion
+- **ONNX Export**: Model optimization
+- **Docker**: Containerization
+- **CI/CD**: Automated testing and deployment
+- **DVC**: Data versioning pipeline
+
+## 🛠️ Development
+
+### Code Quality
+
 ```bash
-python train_model.py
+# Format code
+black src/ tests/
+
+# Lint code
+ruff check src/ tests/
+
+# Type check
+mypy src/
+
+# Run tests
+pytest tests/ --cov=src --cov-report=html
 ```
 
-## 📦 Project Structure
+### Configuration
 
+Edit `config/training_config.yaml` to customize:
+- Model architecture
+- Training hyperparameters
+- Data augmentation
+- Logging settings
+
+Example:
+```yaml
+model:
+  architecture: "resnet50"  # Change to resnet18, efficientnet_b0, etc.
+  
+training:
+  num_epochs: 50
+  batch_size: 32
+  optimizer:
+    lr: 0.0001
 ```
-.
-├── final_dataset_10_classes/    # Main dataset (10 classes)
-├── poultry_labeled_12k.csv      # Labeled image metadata
-├── poultry_labeling_tool.html    # Interactive labeling tool
-├── train_model.py               # Model training script
-├── organize_dataset.py           # Dataset organization
-├── prepare_training.py          # Training preparation
-├── verify_dataset.py            # Dataset verification
-├── analyze_dataset_enhanced.py  # Dataset analysis
-├── reports/                     # Analysis reports and figures
-└── CODE_IMPROVEMENTS.md       # Recent code improvements
-```
-
-## 🎯 Model Features
-
-- **Architecture**: ResNet18 (pre-trained)
-- **Training**: Transfer learning with frozen early layers
-- **Optimization**: Adam optimizer with weight decay
-- **Scheduling**: ReduceLROnPlateau learning rate scheduler
-- **Regularization**: Early stopping (patience=5)
-- **Augmentation**: Random flip, rotation, color jitter
 
 ## 📈 Performance
 
-- **Batch Size**: 32 (optimized for GPU)
-- **Epochs**: 20 with early stopping
-- **Validation**: 80/20 train/validation split
-- **Metrics**: Accuracy, classification report per class
+Current implementation features:
+- **Mixed Precision Training**: Faster training with lower memory
+- **Class Weights**: Handle imbalanced datasets
+- **Early Stopping**: Prevent overfitting
+- **Learning Rate Scheduling**: Adaptive learning rate
+- **Data Augmentation**: Comprehensive transforms
 
 ## 🔧 Requirements
 
+See `requirements.txt` for full list. Key dependencies:
+- PyTorch >= 2.0.0
+- torchvision >= 0.15.0
+- timm >= 0.9.0 (PyTorch Image Models)
+- pyyaml >= 6.0
+- tensorboard >= 2.13.0
+
+## 📝 Usage Examples
+
+### Load Configuration
+
+```python
+from src.utils.config_loader import ConfigLoader
+
+config = ConfigLoader.load('config/training_config.yaml')
+print(config['model']['architecture'])
 ```
-torch>=1.12.0
-torchvision>=0.13.0
-pandas>=1.4.0
-scikit-learn>=1.1.0
-Pillow>=9.0.0
-tqdm>=4.64.0
+
+### Create Logger
+
+```python
+from src.utils.logger import get_logger
+
+logger = get_logger('training')
+logger.info('Training started')
+logger.warning('High memory usage detected')
 ```
 
-Install dependencies:
-```bash
-pip install torch torchvision pandas scikit-learn Pillow tqdm
+### Create Model
+
+```python
+from src.models.model_factory import get_model
+
+model = get_model(
+    model_name='resnet50',
+    num_classes=10,
+    pretrained=True
+)
 ```
 
-## 📝 Recent Improvements
+### Load Dataset
 
-### Code Quality
-- ✅ Updated deprecated model loading syntax
-- ✅ Added learning rate scheduling
-- ✅ Implemented early stopping
-- ✅ Enhanced error handling
-- ✅ Progress bars for better UX
-- ✅ Windows compatibility improvements
+```python
+from src.data.dataset import PoultryDiseaseDataset
+from src.data.transforms import get_train_transforms
 
-### Performance
-- ✅ Increased batch size for better GPU utilization
-- ✅ Added weight decay (L2 regularization)
-- ✅ Improved data validation
-- ✅ Better corrupted image handling
+dataset = PoultryDiseaseDataset(
+    image_paths=image_paths,
+    labels=labels,
+    class_to_idx=class_to_idx,
+    transform=get_train_transforms(224)
+)
+```
 
-### New Features
-- ✅ Enhanced dataset analyzer
-- ✅ Flexible train/val/test splits
-- ✅ Comprehensive error reporting
+## 🤝 Contributing
 
-See `CODE_IMPROVEMENTS.md` for detailed changes.
+This is an educational project. Contributions are welcome!
+
+1. Create a new branch
+2. Make your changes
+3. Run tests and linting
+4. Submit a pull request
 
 ## 📄 License
 
-This project is for educational and research purposes.
+Educational and research use only.
+
+## 🙏 Acknowledgments
+
+- PyTorch team for the amazing framework
+- torchvision for pre-trained models
+- The open-source community
+
+---
+
+**Status**: Phase 1 Implemented ✅ | Phase 2 In Progress 🚧 | Phase 3 Planned 📋
