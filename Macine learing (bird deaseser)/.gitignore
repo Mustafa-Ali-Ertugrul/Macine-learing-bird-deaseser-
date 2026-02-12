@@ -1,14 +1,63 @@
-# Python derleme ve çıktı dosyaları
+# Python
 __pycache__/
-*.pyc
-
-# Python derleme ve çıktı dosyaları
-__pycache__/
-*.pyc
-
-# Sanal ortamlar
-.venv/
+*.py[cod]
+*$py.class
+*.so
+.Python
 venv/
+.venv/
+ENV/
+env/
 
-# Veri toplama çıktı klasörü ve CSV
+# Data (use DVC instead)
+final_dataset_10_classes/
+data/
+*.csv
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+
+# Models (use Git LFS or DVC)
+models/*.pth
+models/*.pt
+*.onnx
+
+# Logs
+logs/
+*.log
+runs/
+mlruns/
+
+# Training outputs
+training_output/
+reports/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Temporary
+*.tmp
+*.temp
+
+# DVC
+.dvc/config.local
+.dvc/tmp
+.dvc/cache
+
+# Old project folders
 poultry_microscopy/
+Macine-learing-bird-deaseser-/
