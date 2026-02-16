@@ -27,6 +27,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.models.model_factory import get_model
 from src.data.dataset import PoultryDiseaseDataset
 from src.data.transforms import get_train_transforms, get_val_transforms
+from src.data.augmentation import AdvancedAugmentation, compute_mixed_loss
+from src.training.tta import predict_with_tta
 from src.utils.config_loader import ConfigLoader
 from src.utils.logger import get_logger
 
@@ -173,36 +175,63 @@ def train_epoch(
     criterion: nn.Module,
     optimizer: optim.Optimizer,
     device: torch.device,
-    scaler=None
+    scaler=None,
+    adv_aug=None,
+    gradient_accumulation_steps: int = 1
 ) -> Tuple[float, float]:
-    """Train for one epoch."""
+    """Train for one epoch with optional advanced augmentation and gradient accumulation."""
     model.train()
     running_loss = 0.0
     correct = 0
     total = 0
     
-    for images, labels in train_loader:
+    optimizer.zero_grad()
+    
+    for step, (images, labels) in enumerate(train_loader):
         images, labels = images.to(device), labels.to(device)
         
-        optimizer.zero_grad()
+        use_mix = adv_aug is not None
+        labels_a, labels_b, lam = labels, labels, 1.0
+        
+        if use_mix:
+            images, labels_a, labels_b, lam = adv_aug(images, labels)
         
         if scaler is not None:
             with torch.cuda.amp.autocast():
                 outputs = model(images)
-                loss = criterion(outputs, labels)
+                if use_mix:
+                    loss = compute_mixed_loss(criterion, outputs, labels_a, labels_b, lam)
+                else:
+                    loss = criterion(outputs, labels)
+                loss = loss / gradient_accumulation_steps
             scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
         else:
             outputs = model(images)
-            loss = criterion(outputs, labels)
+            if use_mix:
+                loss = compute_mixed_loss(criterion, outputs, labels_a, labels_b, lam)
+            else:
+                loss = criterion(outputs, labels)
+            loss = loss / gradient_accumulation_steps
             loss.backward()
-            optimizer.step()
         
-        running_loss += loss.item()
-        _, predicted = torch.max(outputs.data, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+        if (step + 1) % gradient_accumulation_steps == 0:
+            if scaler is not None:
+                scaler.step(optimizer)
+                scaler.update()
+            else:
+                optimizer.step()
+            optimizer.zero_grad()
+        
+        with torch.no_grad():
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            if use_mix:
+                correct += (lam * predicted.eq(labels_a).sum().item() + 
+                           (1 - lam) * predicted.eq(labels_b).sum().item())
+            else:
+                correct += (predicted == labels).sum().item()
+        
+        running_loss += loss.item() * gradient_accumulation_steps
     
     epoch_loss = running_loss / len(train_loader)
     epoch_acc = 100 * correct / total
@@ -244,6 +273,55 @@ def validate(
     f1 = f1_score(all_labels, all_preds, average='weighted') * 100
     
     return epoch_loss, epoch_acc, f1, all_preds, all_labels
+
+
+def validate_with_tta(
+    model: nn.Module,
+    val_loader: DataLoader,
+    criterion: nn.Module,
+    device: torch.device,
+    num_augmentations: int = 5
+) -> Tuple[float, float, float, List[int], List[int]]:
+    """Validate the model with Test-Time Augmentation."""
+    model.eval()
+    running_loss = 0.0
+    correct = 0
+    total = 0
+    all_preds = []
+    all_labels = []
+    
+    from src.training.tta import TTAAugmentation
+    tta_aug = TTAAugmentation(num_augmentations)
+    
+    with torch.no_grad():
+        for images, labels in val_loader:
+            images, labels = images.to(device), labels.to(device)
+            
+            augmented_images = tta_aug(images)
+            all_probs = []
+            
+            for aug_img in augmented_images:
+                outputs = model(aug_img)
+                probs = torch.softmax(outputs, dim=1)
+                all_probs.append(probs)
+            
+            avg_probs = torch.stack(all_probs).mean(dim=0)
+            loss = criterion(avg_probs.log(), labels)
+            
+            running_loss += loss.item()
+            _, predicted = torch.max(avg_probs, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+            
+            all_preds.extend(predicted.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+    
+    epoch_loss = running_loss / len(val_loader)
+    epoch_acc = 100 * correct / total
+    f1 = f1_score(all_labels, all_preds, average='weighted') * 100
+    
+    return epoch_loss, epoch_acc, f1, all_preds, all_labels
+
 
 
 def plot_confusion_matrix(
@@ -355,13 +433,17 @@ def main():
     # Create data loaders
     batch_size = config['training']['batch_size']
     num_workers = config['training']['num_workers']
+    persistent_workers = num_workers > 0
+    prefetch_factor = 2 if num_workers > 0 else None
     
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
         shuffle=True,
         num_workers=num_workers,
-        pin_memory=True if torch.cuda.is_available() else False
+        persistent_workers=persistent_workers,
+        prefetch_factor=prefetch_factor,
+        pin_memory=True
     )
     
     val_loader = DataLoader(
@@ -369,7 +451,9 @@ def main():
         batch_size=batch_size,
         shuffle=False,
         num_workers=num_workers,
-        pin_memory=True if torch.cuda.is_available() else False
+        persistent_workers=persistent_workers,
+        prefetch_factor=prefetch_factor,
+        pin_memory=True
     )
     
     test_loader = DataLoader(
@@ -377,17 +461,21 @@ def main():
         batch_size=batch_size,
         shuffle=False,
         num_workers=num_workers,
-        pin_memory=True if torch.cuda.is_available() else False
+        persistent_workers=persistent_workers,
+        prefetch_factor=prefetch_factor,
+        pin_memory=True
     )
     
     # Create model
     model_name = config['model']['architecture']
+    use_enhanced_head = config['model'].get('use_enhanced_head', True)
     logger.info(f"Creating model: {model_name}")
     model = get_model(
         model_name=model_name,
         num_classes=num_classes,
         pretrained=config['model']['pretrained'],
-        dropout=config['model']['dropout']
+        dropout=config['model']['dropout'],
+        use_enhanced_head=use_enhanced_head
     )
     model = model.to(device)
     
@@ -416,6 +504,34 @@ def main():
     if config['training']['mixed_precision'] and torch.cuda.is_available():
         scaler = torch.cuda.amp.GradScaler()
     
+    # Advanced augmentation (CutMix/MixUp/RandAugment)
+    adv_aug = None
+    aug_config = config.get('augmentation', {})
+    if aug_config.get('use_randaugment') or aug_config.get('cutmix_prob', 0) > 0:
+        adv_aug = AdvancedAugmentation(
+            use_randaugment=aug_config.get('use_randaugment', False),
+            randaugment_m=aug_config.get('randaugment_m', 9),
+            randaugment_n=aug_config.get('randaugment_n', 2),
+            cutmix_prob=aug_config.get('cutmix_prob', 0.5),
+            mixup_prob=aug_config.get('mixup_prob', 0.3),
+            cutmix_alpha=aug_config.get('cutmix_alpha', 1.0),
+            mixup_alpha=aug_config.get('mixup_alpha', 0.4)
+        )
+        logger.info(f"Advanced augmentation enabled: RandAugment={aug_config.get('use_randaugment')}, "
+                   f"CutMix={aug_config.get('cutmix_prob')}, MixUp={aug_config.get('mixup_prob')}")
+    
+    # Training strategy parameters
+    gradient_accumulation_steps = config['training'].get('gradient_accumulation_steps', 1)
+    warmup_epochs = config['training'].get('warmup_epochs', 0)
+    use_tta = config['training'].get('use_tta', False)
+    tta_num = config['training'].get('tta_num_aug', 5)
+    base_lr = config['training']['optimizer']['lr']
+    
+    effective_batch_size = batch_size * gradient_accumulation_steps
+    logger.info(f"Training strategy: Gradient Accumulation = {gradient_accumulation_steps}, "
+               f"Effective batch size = {effective_batch_size}, Warmup epochs = {warmup_epochs}, "
+               f"TTA = {use_tta}")
+    
     # Training history
     history = {
         'train_loss': [], 'train_acc': [],
@@ -440,15 +556,29 @@ def main():
     for epoch in range(num_epochs):
         epoch_start = time.time()
         
+        # Learning rate warmup
+        if warmup_epochs > 0 and epoch < warmup_epochs:
+            warmup_lr = base_lr * (epoch + 1) / warmup_epochs
+            for param_group in optimizer.param_groups:
+                param_group['lr'] = warmup_lr
+            logger.info(f"Warmup: LR = {warmup_lr:.2e}")
+        
         # Train
         train_loss, train_acc = train_epoch(
-            model, train_loader, criterion, optimizer, device, scaler
+            model, train_loader, criterion, optimizer, device, scaler, adv_aug,
+            gradient_accumulation_steps
         )
         
-        # Validate
-        val_loss, val_acc, val_f1, val_preds, val_labels = validate(
-            model, val_loader, criterion, device
-        )
+        # Validate (with TTA if enabled)
+        if use_tta and epoch >= num_epochs - 3:
+            logger.info(f"Using TTA for validation at epoch {epoch+1}")
+            val_loss, val_acc, val_f1, val_preds, val_labels = validate_with_tta(
+                model, val_loader, criterion, device, tta_num
+            )
+        else:
+            val_loss, val_acc, val_f1, val_preds, val_labels = validate(
+                model, val_loader, criterion, device
+            )
         
         # Update scheduler
         scheduler.step()
@@ -508,9 +638,16 @@ def main():
     checkpoint = torch.load(output_dir / 'best_model.pth')
     model.load_state_dict(checkpoint['model_state_dict'])
     
-    test_loss, test_acc, test_f1, test_preds, test_labels = validate(
-        model, test_loader, criterion, device
-    )
+    # Test evaluation with TTA if enabled
+    if use_tta:
+        logger.info(f"Using TTA ({tta_num} augmentations) for test evaluation...")
+        test_loss, test_acc, test_f1, test_preds, test_labels = validate_with_tta(
+            model, test_loader, criterion, device, tta_num
+        )
+    else:
+        test_loss, test_acc, test_f1, test_preds, test_labels = validate(
+            model, test_loader, criterion, device
+        )
     
     logger.info(f"Test Results:")
     logger.info(f"  Accuracy: {test_acc:.2f}%")
