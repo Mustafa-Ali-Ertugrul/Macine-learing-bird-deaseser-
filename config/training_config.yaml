@@ -1,0 +1,71 @@
+# Training Configuration
+experiment_name: "poultry_disease_classification"
+seed: 42
+
+# Data
+data:
+  dataset_dir: "data/final_dataset_10_classes"
+  image_size: 300  # 224 → 300 (EfficientNet-B3 için daha iyi)
+  num_classes: 10
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+# Model
+model:
+  architecture: "efficientnet_b3"  # ResNet50 → EfficientNet-B3 (daha iyi doğruluk)
+  pretrained: true
+  dropout: 0.4  # 0.3 → 0.4 (daha iyi genelleme)
+  use_enhanced_head: true  # Gelişmiş classifier head
+
+# Training
+training:
+  num_epochs: 10
+  batch_size: 16
+  num_workers: 0  # CPU training
+  persistent_workers: false
+  prefetch_factor: 2
+  pin_memory: false
+  gradient_accumulation_steps: 1
+  warmup_epochs: 2
+  use_tta: false  # Disabled for faster training
+  tta_num_aug: 5
+  
+  optimizer:
+    type: "adamw"
+    lr: 0.0001
+    weight_decay: 0.0001
+  
+  loss:
+    use_class_weights: true
+    label_smoothing: 0.1
+  
+  early_stopping:
+    enabled: true
+    patience: 10
+  
+  mixed_precision: true
+
+# Augmentation
+augmentation:
+  train:
+    horizontal_flip: 0.5
+    vertical_flip: 0.3
+    rotation: 15
+    color_jitter: true
+    random_erasing: 0.1
+  
+  # Advanced Augmentation (NEW)
+  use_randaugment: false  # Disabled - requires uint8 tensor
+  randaugment_m: 9
+  randaugment_n: 2
+  cutmix_prob: 0.5
+  mixup_prob: 0.3
+  cutmix_alpha: 1.0
+  mixup_alpha: 0.4
+
+# Logging
+logging:
+  log_dir: "logs"
+  tensorboard_dir: "runs"
+  save_model_dir: "models"
