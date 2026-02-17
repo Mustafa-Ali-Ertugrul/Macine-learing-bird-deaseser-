@@ -26,13 +26,13 @@ import numpy as np
 import json
 
 # Hugging Face ViT
-from transformers import ViTFeatureExtractor, ViTForImageClassification
+from transformers import ViTImageProcessor, ViTForImageClassification
 from transformers import TrainingArguments, Trainer
 from transformers import EarlyStoppingCallback
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',  # Updated dataset path
+    'data_dir': 'final_dataset_split',  # Fixed: Use correct path
     'output_dir': './vit_poultry_results',
     'img_size': 224,  # ViT-B/16 standard input size
     'batch_size': 16,  # Adjust based on GPU memory (8 for 6GB, 16 for 8GB+)
@@ -59,7 +59,7 @@ print("POULTRY DISEASE CLASSIFICATION - ViT-B/16")
 print("=" * 60)
 
 # Get class folders
-data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
+data_dir = CONFIG['data_dir']
 if not os.path.exists(data_dir):
     print(f"❌ Data directory not found: {data_dir}")
     print("Please run organize_dataset_splits_physically.py first!")
@@ -99,10 +99,10 @@ for i, cls in enumerate(classes, 1):
 
 # === 3. Custom Dataset for ViT ===
 class PoultryViTDataset(Dataset):
-    def __init__(self, image_paths, labels, feature_extractor, label2id, transform=None):
+    def __init__(self, image_paths, labels, processor, label2id, transform=None):
         self.image_paths = image_paths
         self.labels = labels
-        self.feature_extractor = feature_extractor
+        self.processor = processor
         self.label2id = label2id
         self.transform = transform
     
@@ -125,14 +125,14 @@ class PoultryViTDataset(Dataset):
 
         # Process with feature extractor
         try:
-            encoding = self.feature_extractor(images=image, return_tensors="pt")
+            encoding = self.processor(images=image, return_tensors="pt")
         except Exception as e:
             print(f"❌ Error processing image: {img_path}")
             print(f"   Mode: {image.mode}, Size: {image.size}")
             print(f"   Error: {e}")
             # Return a blank image to avoid crashing
             image = Image.new('RGB', (224, 224), color='black')
-            encoding = self.feature_extractor(images=image, return_tensors="pt")
+            encoding = self.processor(images=image, return_tensors="pt")
         
         # Prepare item
         item = {key: val.squeeze() for key, val in encoding.items()}
@@ -154,7 +154,7 @@ with open(os.path.join(CONFIG['output_dir'], 'label_mappings.json'), 'w') as f:
     json.dump({'label2id': label2id, 'id2label': id2label}, f, indent=2)
 
 # Load feature extractor
-feature_extractor = ViTFeatureExtractor.from_pretrained(
+processor = ViTImageProcessor.from_pretrained(
     "google/vit-base-patch16-224-in21k"
 )
 
@@ -179,9 +179,9 @@ train_transforms = transforms.Compose([
 ])
 
 print("\n📦 Creating datasets...")
-train_dataset = PoultryViTDataset(train_paths, train_labels, feature_extractor, label2id, transform=train_transforms)
-val_dataset = PoultryViTDataset(val_paths, val_labels, feature_extractor, label2id)
-test_dataset = PoultryViTDataset(test_paths, test_labels, feature_extractor, label2id)
+train_dataset = PoultryViTDataset(train_paths, train_labels, processor, label2id, transform=train_transforms)
+val_dataset = PoultryViTDataset(val_paths, val_labels, processor, label2id)
+test_dataset = PoultryViTDataset(test_paths, test_labels, processor, label2id)
 
 print(f"   Train dataset: {len(train_dataset)} samples (with on-the-fly augmentation)")
 print(f"   Val dataset: {len(val_dataset)} samples")
@@ -261,7 +261,7 @@ trainer.train()
 # === 11. Save Final Model ===
 final_model_path = os.path.join(CONFIG['output_dir'], 'final_model')
 trainer.save_model(final_model_path)
-feature_extractor.save_pretrained(final_model_path)
+processor.save_pretrained(final_model_path)
 
 print(f"\n✅ Model saved to: {final_model_path}")
 

@@ -53,3 +53,16 @@ poultry-pathology-app/node_modules/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Model weights and checkpoints (large files)
+*.pth
+*.safetensors
+*.bin
+optimizer.pt
+rng_state.pth
+scheduler.pt
+**/checkpoint-*/
+*_poultry_results/final_model/
+ml_venv/
+final_dataset_clean/
+models/

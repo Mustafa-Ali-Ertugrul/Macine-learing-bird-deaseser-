@@ -29,7 +29,7 @@ from tqdm import tqdm
 
 # === Configuration ===
 CONFIG = {
-    'data_dir': 'Macine learing (bird deaseser)/final_dataset_10_classes',
+    'data_dir': 'final_dataset_split',  # Fixed: Use correct path
     'output_dir': './resnext_poultry_results',
     'img_size': 224,
     'batch_size': 16,
@@ -54,7 +54,7 @@ def main():
     print(f"Device: {CONFIG['device']}")
 
     # 1. Data Preparation
-    data_dir = os.path.join(CONFIG['data_dir'].replace('final_dataset_10_classes', 'final_dataset_split'))
+    data_dir = CONFIG['data_dir']
     if not os.path.exists(data_dir):
         print(f"❌ Data directory not found: {data_dir}")
         print("Please run organize_dataset_splits_physically.py first.")
