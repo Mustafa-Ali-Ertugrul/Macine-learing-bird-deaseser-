@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Protokol Performans Verileri</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .buttons {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .country-selector {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .country-selector label {
+            margin-right: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .country-selector select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .timestamp {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .chart-container {
+            margin-bottom: 50px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+        
+        .current-country {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e9f5ff;
+            border-radius: 4px;
+            border-left: 4px solid #007BFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Protokol Performans Verileri</h1>
+
+    <div class="buttons">
+        <a href="{{ url_for('grafik_goster') }}" target="_blank">
+            <button type="button">Grafikleri Yeni Sekmede Aç</button>
+        </a>
+
+        <form action="{{ url_for('yeni_olcum') }}" method="get" style="display: inline;">
+            <input type="hidden" name="country" id="selected_country_input" value="{{ current_country }}">
+            <button type="submit">Yeni Ölçüm Yap</button>
+        </form>
+
+        <form action="{{ url_for('clear_data_route') }}" method="post" style="display: inline;">
+            <button type="submit">Verileri Temizle</button>
+        </form>
+        
+        <div class="country-selector">
+            <label for="country_select">Ülke Seçin:</label>
+            <select id="country_select" onchange="updateCountry()">
+                <option value="Turkiye" {% if current_country == 'Turkiye' %}selected{% endif %}>Türkiye</option>
+                <option value="ABD" {% if current_country == 'ABD' %}selected{% endif %}>ABD</option>
+                <option value="Cin" {% if current_country == 'Cin' %}selected{% endif %}>Çin</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="current-country">
+        Mevcut Ölçüm Ülkesi: {{ current_country if current_country else 'Türkiye' }}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Zaman</th>
+                <th>Ülke</th>
+                <th>HTTP Gecikme (s)</th>
+                <th>DNS IP</th>
+                <th>DNS Gecikme (s)</th>
+                <th>FTP Gecikme (s)</th>
+                <th>SMTP Gecikme (s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data|reverse %}
+            <tr>
+                <td>{{ record.Timestamp }}</td>
+                <td>{{ record.Country }}</td>
+                <td>{{ record.HTTP_Latency }}</td>
+                <td>{{ record.DNS_IP }}</td>
+                <td>{{ record.DNS_Latency }}</td>
+                <td>{{ record.FTP_Latency }}</td>
+                <td>{{ record.SMTP_Latency }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">Henüz veri yok.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="timestamp">
+        Son Güncelleme: {{ last_update }}
+    </div>
+    
+    <script>
+        function updateCountry() {
+            let select = document.getElementById('country_select');
+            let hiddenInput = document.getElementById('selected_country_input');
+            hiddenInput.value = select.value;
+        }
+        
+        // Set the initial value when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountry();
+        });
+    </script>
+</body>
+</html>

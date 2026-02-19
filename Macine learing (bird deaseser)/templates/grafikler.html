@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafikler</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            margin-bottom: 50px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .country-filter {
+            margin-right: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .all-data-btn {
+            margin-left: auto;
+        }
+        
+        .current-filter {
+            background-color: #e9f5ff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007BFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Protokol Gecikme Grafikleri</h1>
+    
+    <div class="controls">
+        <div class="country-filter">
+            <label for="countrySelect">Ülke Filtresi:</label>
+            <select id="countrySelect">
+                <option value="all">Tüm Ülkeler</option>
+                <option value="Turkiye">Türkiye</option>
+                <option value="ABD">ABD</option>
+                <option value="Cin">Çin</option>
+            </select>
+        </div>
+        <button onclick="applyFilter()">Filtrele</button>
+        <div class="all-data-btn">
+            <a href="{{ url_for('show_data') }}">
+                <button type="button">Ana Sayfaya Dön</button>
+            </a>
+        </div>
+    </div>
+    
+    <div class="current-filter" id="currentFilter">
+        Görüntülenen: Tüm Ülkeler
+    </div>
+
+    <div class="chart-container"><canvas id="httpChart"></canvas></div>
+    <div class="chart-container"><canvas id="dnsChart"></canvas></div>
+    <div class="chart-container"><canvas id="ftpChart"></canvas></div>
+    <div class="chart-container"><canvas id="smtpChart"></canvas></div>
+    <div class="chart-container"><canvas id="pingChart"></canvas></div>
+    <div class="chart-container"><canvas id="compareChart"></canvas></div>
+
+    <script>
+        // Parse data from Flask
+        const rawData = {{ data|tojson|safe }};
+        // Default current country from URL parameter or set to "all"
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialCountry = urlParams.get('country') || "all";
+        document.getElementById('countrySelect').value = initialCountry;
+        
+        // Setup initial filtered data
+        let filteredData = filterDataByCountry(rawData, initialCountry);
+        updateCurrentFilterText(initialCountry);
+        
+        // Create all charts with filtered data
+        createCharts(filteredData);
+        
+        // Filter function
+        function filterDataByCountry(data, country) {
+            if (country === "all") {
+                return data;
+            }
+            return data.filter(item => item.Country === country);
+        }
+        
+        // Update current filter text
+        function updateCurrentFilterText(country) {
+            let displayCountry = country;
+            if (country === "all") {
+                displayCountry = "Tüm Ülkeler";
+            } else if (country === "Turkiye") {
+                displayCountry = "Türkiye";
+            } else if (country === "Cin") {
+                displayCountry = "Çin";
+            }
+            document.getElementById('currentFilter').textContent = `Görüntülenen: ${displayCountry}`;
+        }
+        
+        // Apply filter button handler
+        function applyFilter() {
+            const country = document.getElementById('countrySelect').value;
+            filteredData = filterDataByCountry(rawData, country);
+            updateCurrentFilterText(country);
+            
+            // Clear existing charts
+            document.querySelectorAll('canvas').forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // Create new charts with filtered data
+            createCharts(filteredData);
+            
+            // Update URL to maintain state on page refresh
+            const url = new URL(window.location.href);
+            url.searchParams.set('country', country);
+            window.history.pushState({}, '', url);
+        }
+        
+        // Chart creation function
+        function createCharts(data) {
+            const labels = data.map(d => d.Timestamp);
+            const httpData = data.map(d => parseFloat(d.HTTP_Latency) || 0);
+            const dnsData = data.map(d => parseFloat(d.DNS_Latency) || 0);
+            const ftpData = data.map(d => parseFloat(d.FTP_Latency) || 0);
+            const smtpData = data.map(d => parseFloat(d.SMTP_Latency) || 0);
+            const pingData = data.map(d => parseFloat(d.Ping_Latency) || 0);
+            
+            // Group data by country for comparison chart
+            const countries = [...new Set(data.map(d => d.Country))];
+            const countryDatasets = countries.map((country, index) => {
+                const countryData = data.filter(d => d.Country === country);
+                const colors = [
+                    'rgba(54, 162, 235, 1)',  // Blue
+                    'rgba(255, 99, 132, 1)',  // Red
+                    'rgba(255, 206, 86, 1)'   // Yellow
+                ];
+                
+                return {
+                    label: `HTTP ${country}`,
+                    data: countryData.map(d => parseFloat(d.HTTP_Latency) || 0),
+                    borderColor: colors[index % colors.length],
+                    fill: false,
+                    tension: 0.3
+                };
+            });
+
+            renderChart("httpChart", "HTTP Gecikme", httpData, "rgba(54, 162, 235, 1)");
+            renderChart("dnsChart", "DNS Gecikme", dnsData, "rgba(255, 206, 86, 1)");
+            renderChart("ftpChart", "FTP Gecikme", ftpData, "rgba(75, 192, 192, 1)");
+            renderChart("smtpChart", "SMTP Gecikme", smtpData, "rgba(255, 99, 132, 1)");
+            renderChart("pingChart", "Ping Gecikme", pingData, "rgba(75, 75, 192, 1)");
+            
+            // Create comparison chart (all protocols)
+            renderComparisonChart("compareChart", "Protokol Karşılaştırması", labels, [
+                {
+                    label: "HTTP Gecikme",
+                    data: httpData,
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: "DNS Gecikme",
+                    data: dnsData,
+                    borderColor: "rgba(255, 206, 86, 1)",
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: "FTP Gecikme",
+                    data: ftpData,
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: "SMTP Gecikme",
+                    data: smtpData,
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: "Ping Gecikme",
+                    data: pingData,
+                    borderColor: "rgba(75, 75, 192, 1)",
+                    fill: false,
+                    tension: 0.3
+                }
+            ]);
+        }
+
+        function renderChart(canvasId, label, chartData, color) {
+            new Chart(document.getElementById(canvasId), {
+                type: 'line',
+                data: {
+                    labels: filteredData.map(d => d.Timestamp),
+                    datasets: [{
+                        label: label,
+                        data: chartData,
+                        borderColor: color,
+                        fill: false,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: label
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Saniye'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Zaman'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderComparisonChart(canvasId, label, labels, datasets) {
+            new Chart(document.getElementById(canvasId), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: label,
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Saniye'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Zaman'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

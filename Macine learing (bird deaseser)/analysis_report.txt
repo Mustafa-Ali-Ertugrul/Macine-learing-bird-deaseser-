@@ -1,0 +1,118 @@
+
+--- Class: Avian Influenza in Poultry _ The Poultry Site ---
+hen: 357
+cock: 55
+starfish: 18
+partridge: 10
+spoonbill: 8
+butcher shop: 7
+kuvasz: 6
+mask: 4
+clumber: 4
+banded gecko: 4
+
+--- Class: Coccidiosis - Bukoola Vet ---
+slug: 457
+flatworm: 431
+dough: 201
+tailed frog: 136
+trilobite: 115
+chiton: 103
+cheeseburger: 78
+dung beetle: 45
+sea cucumber: 43
+rock crab: 43
+
+--- Class: Fowl Pox ---
+hen: 241
+cock: 74
+vulture: 26
+Error: 20
+book jacket: 8
+face powder: 7
+burrito: 6
+ping-pong ball: 6
+ice cream: 6
+fig: 5
+
+--- Class: Healthy ---
+dung beetle: 390
+tailed frog: 198
+chiton: 139
+tick: 136
+hermit crab: 123
+vault: 100
+black widow: 99
+terrapin: 98
+conch: 96
+fiddler crab: 82
+
+--- Class: Histomoniasis ---
+butcher shop: 178
+head cabbage: 96
+American lobster: 39
+stole: 20
+Crock Pot: 17
+rotisserie: 16
+cheeseburger: 14
+mask: 13
+coral fungus: 12
+goblet: 11
+
+--- Class: Infectious Bronchitis ---
+hen: 317
+cock: 58
+ear: 44
+mask: 26
+knot: 15
+partridge: 7
+hen-of-the-woods: 6
+hamster: 5
+feather boa: 4
+vase: 4
+
+--- Class: Infectious Bursal Disease ---
+hen: 283
+butcher shop: 150
+jackfruit: 36
+crayfish: 25
+hot pot: 2
+cock: 2
+grocery store: 1
+head cabbage: 1
+
+--- Class: Marek's Disease ---
+hen: 80
+rotisserie: 39
+head cabbage: 37
+meat loaf: 25
+butcher shop: 25
+nematode: 24
+safety pin: 19
+pomegranate: 18
+American lobster: 18
+comic book: 17
+
+--- Class: Newcastle Disease ---
+chiton: 318
+ant: 91
+dung beetle: 40
+sea cucumber: 33
+water snake: 28
+hen-of-the-woods: 27
+cliff: 27
+water ouzel: 23
+rock crab: 22
+fiddler crab: 19
+
+--- Class: Salmonella ---
+nail: 375
+ant: 270
+chiton: 218
+fiddler crab: 196
+dung beetle: 128
+shovel: 111
+water ouzel: 103
+doormat: 96
+agama: 89
+night snake: 72

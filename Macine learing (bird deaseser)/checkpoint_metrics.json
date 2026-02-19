@@ -1,0 +1,20 @@
+{
+  "ViT-B/16": {
+    "best_val_accuracy": 0.9649122807017544,
+    "best_val_loss": 0.3148181438446045,
+    "latest_epoch": 1.3333333333333333,
+    "checkpoints_found": 3
+  },
+  "ConvNeXt-Tiny": {
+    "best_val_accuracy": 0.9924812030075187,
+    "best_val_loss": 0.05531513690948486,
+    "latest_epoch": 4.888888888888889,
+    "checkpoints_found": 2
+  },
+  "CvT-13": {
+    "best_val_accuracy": 0.9824561403508771,
+    "best_val_loss": 0.08644624054431915,
+    "latest_epoch": 5.777777777777778,
+    "checkpoints_found": 2
+  }
+}

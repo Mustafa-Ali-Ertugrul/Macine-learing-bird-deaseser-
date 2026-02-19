@@ -1,0 +1,64 @@
+================================================================================
+COMPREHENSIVE POULTRY DISEASE DATASET REPORT
+Generated: 2025-12-08 12:46:22
+================================================================================
+
+📊 METADATA ANALYSIS
+--------------------------------------------------------------------------------
+
+⚠️  No CSV metadata file found
+
+
+📁 IMAGE FILES ON DISK
+--------------------------------------------------------------------------------
+
+📂 data/
+   Path: data
+   Total Images: 23,342
+
+   Disease/Category Breakdown:
+   Category                            Count  Percentage
+   ------------------------------ ----------  ----------
+   Train                               8,067       34.6%
+   Salmonella                          2,625       11.2%
+   Coccidiosis                         2,476       10.6%
+   Healthy                             2,404       10.3%
+   cocci                               2,103        9.0%
+   healthy                             1,990        8.5%
+   poultry_microscopy                  1,711        7.3%
+   unclassified                          930        4.0%
+   New Castle Disease                    562        2.4%
+   all_images                            465        2.0%
+   downloads                               9        0.0%
+   ------------------------------ ----------  ----------
+   TOTAL                              23,342      100.0%
+
+🎯 GRAND TOTAL IMAGES: 23,342
+
+
+🤖 TRAINING RESULTS
+--------------------------------------------------------------------------------
+
+Results File: checkpoint_metrics.json
+
+ViT-B/16:
+   best_val_accuracy: 0.9649122807017544
+   best_val_loss: 0.3148181438446045
+   latest_epoch: 1.3333333333333333
+   checkpoints_found: 3
+
+ConvNeXt-Tiny:
+   best_val_accuracy: 0.9924812030075187
+   best_val_loss: 0.05531513690948486
+   latest_epoch: 4.888888888888889
+   checkpoints_found: 2
+
+CvT-13:
+   best_val_accuracy: 0.9824561403508771
+   best_val_loss: 0.08644624054431915
+   latest_epoch: 5.777777777777778
+   checkpoints_found: 2
+
+================================================================================
+END OF REPORT
+================================================================================

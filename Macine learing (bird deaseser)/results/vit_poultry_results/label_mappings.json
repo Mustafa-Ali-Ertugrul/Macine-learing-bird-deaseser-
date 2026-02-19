@@ -1,0 +1,26 @@
+{
+  "label2id": {
+    "Avian Influenza": 0,
+    "Coccidiosis": 1,
+    "Fowl Pox": 2,
+    "Healthy": 3,
+    "Histomoniasis": 4,
+    "Infectious Bronchitis": 5,
+    "Infectious Bursal Disease": 6,
+    "Marek's Disease": 7,
+    "Newcastle Disease": 8,
+    "Salmonella": 9
+  },
+  "id2label": {
+    "0": "Avian Influenza",
+    "1": "Coccidiosis",
+    "2": "Fowl Pox",
+    "3": "Healthy",
+    "4": "Histomoniasis",
+    "5": "Infectious Bronchitis",
+    "6": "Infectious Bursal Disease",
+    "7": "Marek's Disease",
+    "8": "Newcastle Disease",
+    "9": "Salmonella"
+  }
+}

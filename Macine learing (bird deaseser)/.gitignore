@@ -1,5 +1,18 @@
 # Python
 __pycache__/
+<<<<<<< HEAD
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+=======
 *.py[cod]
 *$py.class
 *.so
@@ -31,12 +44,64 @@ mlruns/
 training_output/
 reports/
 
+>>>>>>> 31a72715756cc21176fb1378d37f792ec1a11b75
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
+<<<<<<< HEAD
+# Data collection output
+poultry_microscopy/
+poultry_dataset.csv
+
+# Large datasets (not tracked)
+organized_poultry_dataset/
+chicken_disease_dataset/
+public_poultry_dataset/
+public_downloads/
+dataset_downloads/
+data/
+final_poultry_dataset_10_classes/
+new_diseases_dataset/
+organized_labeled_dataset/
+poultry_dataset_512x512/
+
+# Generated dataset splits
+final_dataset_split/
+quarantine_cleaned/
+
+# Logs and temporary files
+*.log
+*_training_log.txt
+status_full.txt
+evaluation_results.txt
+
+# Temporary leakage examples
+leakage_example_*.png
+
+# Node.js
+node_modules/
+poultry-pathology-app/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model weights and checkpoints (large files)
+*.pth
+*.safetensors
+*.bin
+optimizer.pt
+rng_state.pth
+scheduler.pt
+**/checkpoint-*/
+*_poultry_results/final_model/
+ml_venv/
+final_dataset_clean/
+models/
+=======
 # OS
 .DS_Store
 Thumbs.db
@@ -57,3 +122,4 @@ Thumbs.db
 # Old project folders
 poultry_microscopy/
 Macine-learing-bird-deaseser-/
+>>>>>>> 31a72715756cc21176fb1378d37f792ec1a11b75
