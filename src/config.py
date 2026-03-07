@@ -10,9 +10,10 @@ import os
 import torch
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(BASE_DIR)  # one level up from src/
 
 COMMON_CONFIG = {
-    'data_dir': os.path.join(BASE_DIR, 'Macine learing (bird deaseser)', 'final_dataset_split'),
+    'data_dir': os.path.join(PROJECT_DIR, 'clean_dataset_split'),
     'img_size': 224,
     'batch_size': 16,
     'epochs': 10,
@@ -24,7 +25,13 @@ COMMON_CONFIG = {
     'val_size': 0.1,
     'random_seed': 42,
     'device': 'cuda' if torch.cuda.is_available() else 'cpu',
-    'num_classes': 10
+    'num_classes': 10,
+    'fp16': True,
+    'pin_memory': True,
+    'gradient_accumulation_steps': 2,
+    'use_weighted_sampler': True,
+    'use_focal_loss': True,
+    'focal_gamma': 2.0,
 }
 
 TRANSFORM_CONFIG = {
@@ -62,8 +69,8 @@ DISEASE_CLASSES = [
     'Infectious_Bronchitis',
     'Infectious_Bursal_Disease',
     'Mareks_Disease',
-    'Necrotic_Enteritis',
-    'Salmonellosis'
+    'Newcastle_Disease',
+    'Salmonella'
 ]
 
 MODEL_CONFIGS = {

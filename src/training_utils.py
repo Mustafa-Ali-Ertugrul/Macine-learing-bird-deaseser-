@@ -141,15 +141,54 @@ class TrainerBase:
         
         return all_preds, all_labels
 
-class HuggingFaceTrainer:
-    """Trainer for Hugging Face models"""
+class CustomHFTrainer(Trainer):
+    """
+    Custom HuggingFace Trainer that supports FocalLoss with class weights.
     
-    def __init__(self, model, train_dataset, val_dataset, output_dir: str, config: dict):
+    Pass a custom loss function via the `custom_loss_fn` attribute
+    after initialization.
+    """
+    
+    def __init__(self, *args, custom_loss_fn=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.custom_loss_fn = custom_loss_fn
+    
+    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        labels = inputs.pop("labels")
+        outputs = model(**inputs)
+        logits = outputs.get("logits")
+        
+        if self.custom_loss_fn is not None:
+            loss = self.custom_loss_fn(logits, labels)
+        else:
+            loss = F.cross_entropy(logits, labels)
+        
+        return (loss, outputs) if return_outputs else loss
+
+
+class HuggingFaceTrainer:
+    """Trainer for Hugging Face models with FocalLoss + class weights support"""
+    
+    def __init__(self, model, train_dataset, val_dataset, output_dir: str, 
+                 config: dict, loss_fn=None):
+        """
+        Args:
+            model: HuggingFace model
+            train_dataset: Training dataset
+            val_dataset: Validation dataset
+            output_dir: Output directory for checkpoints
+            config: Training configuration dict
+            loss_fn: Custom loss function (e.g. FocalLoss). If None, uses default CE.
+        """
         self.model = model
         self.train_dataset = train_dataset
         self.val_dataset = val_dataset
         self.output_dir = output_dir
         self.config = config
+        self.loss_fn = loss_fn
+        
+        fp16_enabled = config.get('fp16', False) and torch.cuda.is_available()
+        grad_accum = config.get('gradient_accumulation_steps', 1)
         
         self.training_args = TrainingArguments(
             output_dir=output_dir,
@@ -168,17 +207,21 @@ class HuggingFaceTrainer:
             greater_is_better=True,
             save_total_limit=2,
             dataloader_num_workers=config['num_workers'],
+            dataloader_pin_memory=config.get('pin_memory', False),
             report_to="none",
-            seed=config['random_seed']
+            seed=config['random_seed'],
+            fp16=fp16_enabled,
+            gradient_accumulation_steps=grad_accum,
         )
         
-        self.trainer = Trainer(
+        self.trainer = CustomHFTrainer(
             model=model,
             args=self.training_args,
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             compute_metrics=self.compute_metrics,
-            callbacks=[EarlyStoppingCallback(early_stopping_patience=3)]
+            callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
+            custom_loss_fn=loss_fn,
         )
     
     @staticmethod
@@ -190,23 +233,25 @@ class HuggingFaceTrainer:
     
     def train(self):
         """Train the model"""
-        print("\n🚀 Starting training...")
+        print("\nStarting training...")
+        if self.loss_fn is not None:
+            print(f"  Using custom loss: {self.loss_fn.__class__.__name__}")
         self.trainer.train()
         
         final_model_path = os.path.join(self.output_dir, 'final_model')
         self.trainer.save_model(final_model_path)
-        print(f"✅ Model saved to: {final_model_path}")
+        print(f"Model saved to: {final_model_path}")
         
         return self.trainer
     
     def evaluate(self, test_dataset, classes: List[str]):
         """Evaluate on test set"""
-        print("\n📊 Evaluating on test set...")
+        print("\nEvaluating on test set...")
         predictions = self.trainer.predict(test_dataset)
         preds = np.argmax(predictions.predictions, axis=-1)
         true_labels = predictions.label_ids
         
-        print("\n📊 Classification Report:")
+        print("\nClassification Report:")
         print(classification_report(true_labels, preds, target_names=classes))
         
         plot_confusion_matrix(true_labels, preds, classes, self.output_dir)

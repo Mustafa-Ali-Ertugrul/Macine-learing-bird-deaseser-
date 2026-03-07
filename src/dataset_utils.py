@@ -7,13 +7,16 @@ Provides reusable dataset loading and preprocessing functions
 """
 
 import os
+import logging
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 from torchvision import transforms
 from PIL import Image
 import numpy as np
 from typing import List, Tuple, Optional
 from collections import Counter
+
+logger = logging.getLogger(__name__)
 
 class PoultryImageDataset(Dataset):
     """Standard dataset for poultry disease classification"""
@@ -31,6 +34,7 @@ class PoultryImageDataset(Dataset):
         try:
             image = Image.open(img_path).convert("RGB")
         except Exception as e:
+            logger.warning(f"Failed to load image {img_path}: {e}. Using black placeholder.")
             image = Image.new('RGB', (224, 224), color='black')
         
         if self.transform:
@@ -57,7 +61,8 @@ class HuggingFaceDataset(Dataset):
         img_path = self.image_paths[idx]
         try:
             image = Image.open(img_path).convert("RGB")
-        except Exception:
+        except Exception as e:
+            logger.warning(f"Failed to load image {img_path}: {e}. Using black placeholder.")
             image = Image.new('RGB', (224, 224), color='black')
         
         if self.transform:
@@ -159,25 +164,118 @@ def prepare_datasets(data_dir: str, config=None):
         'id2label': id2label
     }
 
-def create_dataloaders(datasets, batch_size=16, num_workers=0, shuffle_train=True):
-    """Create dataloaders for train, val, and test"""
-    train_loader = DataLoader(
-        datasets['train'], 
-        batch_size=batch_size, 
-        shuffle=shuffle_train, 
-        num_workers=num_workers
+def create_weighted_sampler(labels: List[int], num_classes: int) -> WeightedRandomSampler:
+    """
+    Create a WeightedRandomSampler to handle class imbalance.
+    
+    Each sample gets a weight inversely proportional to its class frequency,
+    so rare classes are sampled more often during training.
+    
+    Args:
+        labels: List of integer labels for training set
+        num_classes: Total number of classes
+    
+    Returns:
+        WeightedRandomSampler instance
+    """
+    class_counts = Counter(labels)
+    total = len(labels)
+    
+    # Weight per class = total_samples / (num_classes * class_count)
+    class_weights = {
+        cls: total / (num_classes * count)
+        for cls, count in class_counts.items()
+    }
+    
+    # Assign weight to each sample based on its class
+    sample_weights = [class_weights[label] for label in labels]
+    sample_weights = torch.tensor(sample_weights, dtype=torch.float64)
+    
+    sampler = WeightedRandomSampler(
+        weights=sample_weights,
+        num_samples=len(sample_weights),
+        replacement=True
     )
+    
+    logger.info(f"WeightedRandomSampler created. Class weights:")
+    for cls_id in sorted(class_weights.keys()):
+        logger.info(f"  Class {cls_id}: count={class_counts[cls_id]}, weight={class_weights[cls_id]:.4f}")
+    
+    return sampler
+
+
+def get_class_weights_tensor(labels: List[int], num_classes: int) -> torch.Tensor:
+    """
+    Calculate class weight tensor for use with loss functions.
+    
+    Args:
+        labels: List of integer labels for training set
+        num_classes: Total number of classes
+    
+    Returns:
+        torch.Tensor of shape (num_classes,) with per-class weights
+    """
+    class_counts = Counter(labels)
+    total = len(labels)
+    
+    weights = torch.zeros(num_classes, dtype=torch.float32)
+    for cls_id, count in class_counts.items():
+        weights[cls_id] = total / (num_classes * count)
+    
+    # Handle classes with 0 samples (set weight to 0)
+    weights[weights == float('inf')] = 0.0
+    
+    return weights
+
+
+def create_dataloaders(datasets, batch_size=16, num_workers=0, 
+                       use_weighted_sampler=False, pin_memory=False):
+    """
+    Create dataloaders for train, val, and test.
+    
+    Args:
+        datasets: dict with 'train', 'val', 'test' Dataset objects
+        batch_size: Batch size
+        num_workers: Number of data loading workers
+        use_weighted_sampler: If True, use WeightedRandomSampler for train loader
+        pin_memory: If True, pin memory for faster GPU transfer
+    """
+    train_dataset = datasets['train']
+    
+    if use_weighted_sampler and hasattr(train_dataset, 'labels'):
+        labels = train_dataset.labels
+        num_classes = len(set(labels))
+        sampler = create_weighted_sampler(labels, num_classes)
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=batch_size,
+            sampler=sampler,  # sampler and shuffle are mutually exclusive
+            num_workers=num_workers,
+            pin_memory=pin_memory
+        )
+        logger.info("Train DataLoader using WeightedRandomSampler (no shuffle).")
+    else:
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=pin_memory
+        )
+    
     val_loader = DataLoader(
-        datasets['val'], 
-        batch_size=batch_size, 
-        shuffle=False, 
-        num_workers=num_workers
+        datasets['val'],
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=pin_memory
     )
     test_loader = DataLoader(
-        datasets['test'], 
-        batch_size=batch_size, 
-        shuffle=False, 
-        num_workers=num_workers
+        datasets['test'],
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=pin_memory
     )
     
     return train_loader, val_loader, test_loader
