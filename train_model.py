@@ -2,481 +2,505 @@
 # -*- coding: utf-8 -*-
 
 """
-Universal Training Script for Poultry Disease Classification
+Çok-türlü hastalık sınıflandırma eğitim pipeline'ı.
 
-Supports all 5 model architectures:
-  - vit_b16      : Vision Transformer (torchvision)
-  - convnext_tiny: ConvNeXt-Tiny (HuggingFace)
-  - resnext50    : ResNeXt-50 (torchvision)
-  - resnest50    : ResNeSt-50d (timm)
-  - cvt          : CvT-13 (HuggingFace)
-
-Features:
-  - Clean dataset (no data leakage) via clean_dataset_split/
-  - FocalLoss with per-class weights for imbalanced data
-  - WeightedRandomSampler for balanced mini-batches
-  - Mixed precision training (fp16)
-  - Gradient accumulation
-  - Strong augmentation pipeline (on-the-fly, train only)
-
-Usage:
+Kullanım:
+    # Tavuk (varsayılan - geriye uyumlu)
     python train_model.py --model vit_b16
-    python train_model.py --model convnext_tiny
-    python train_model.py --model resnext50
-    python train_model.py --model resnest50
-    python train_model.py --model cvt
-    python train_model.py --model all   # Train all models sequentially
+
+    # Kaz
+    python train_model.py --model vit_b16 --species goose
+
+    # Ördek
+    python train_model.py --model vit_b16 --species duck
+
+    # YAML config ile
+    python train_model.py --config training_config_goose.yaml
 """
 
+import argparse
 import os
 import sys
-import argparse
-import logging
-
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
-from torch.cuda.amp import GradScaler, autocast
-from torchvision import transforms, models
+import json
+import time
+import random
+from datetime import datetime
 
 import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+from torch.optim.lr_scheduler import CosineAnnealingLR
 
-# Setup path
+# Proje modülleri
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from src.config import get_config, fix_windows_encoding, get_device, COMMON_CONFIG
-from src.dataset_utils import (
-    PoultryImageDataset, HuggingFaceDataset, prepare_datasets,
-    print_dataset_info, create_label_mappings,
-    create_weighted_sampler, get_class_weights_tensor, create_dataloaders
+from src.config import (
+    get_config,
+    validate_species,
+    check_dataset_exists,
+    SUPPORTED_SPECIES,
+    DISEASE_CLASSES,
 )
-from src.training_utils import (
-    TrainerBase, HuggingFaceTrainer, print_summary,
-    plot_training_history, save_results, setup_optimizer_scheduler
-)
-from src.losses import FocalLoss
-
-# Logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s'
-)
-logger = logging.getLogger(__name__)
 
 
-# ============================================================
-# Augmentation
-# ============================================================
+def set_seed(seed: int = 42):
+    """Tekrarlanabilirlik için tüm random seed'leri ayarla."""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
-IMAGENET_MEAN = [0.485, 0.456, 0.406]
-IMAGENET_STD = [0.229, 0.224, 0.225]
 
-
-def get_train_transforms(img_size: int = 224) -> transforms.Compose:
-    """
-    Strong augmentation pipeline for training.
-    Applied on-the-fly -- only to training split.
-    """
-    return transforms.Compose([
-        transforms.RandomResizedCrop(img_size, scale=(0.7, 1.0), ratio=(0.8, 1.2)),
+def get_data_transforms(image_size: int = 224):
+    """Eğitim ve doğrulama için veri dönüşümleri."""
+    train_transform = transforms.Compose([
+        transforms.Resize((image_size + 32, image_size + 32)),
+        transforms.RandomCrop(image_size),
         transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomVerticalFlip(p=0.3),
-        transforms.RandomRotation(degrees=20),
-        transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
-        transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)),
-        transforms.RandomErasing(p=0.2, scale=(0.02, 0.15)),  # applied after ToTensor
-        # Note: RandomErasing expects tensor, so we put ToTensor before it
-    ])
-
-
-def get_train_transforms_with_tensor(img_size: int = 224) -> transforms.Compose:
-    """Train transforms including ToTensor and Normalize."""
-    return transforms.Compose([
-        transforms.RandomResizedCrop(img_size, scale=(0.7, 1.0), ratio=(0.8, 1.2)),
-        transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomVerticalFlip(p=0.3),
-        transforms.RandomRotation(degrees=20),
-        transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
-        transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)),
+        transforms.RandomRotation(30),
+        transforms.ColorJitter(
+            brightness=0.2, contrast=0.2,
+            saturation=0.2, hue=0.1
+        ),
+        transforms.RandomAffine(
+            degrees=0, translate=(0.1, 0.1),
+            scale=(0.9, 1.1)
+        ),
         transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
-        transforms.RandomErasing(p=0.2, scale=(0.02, 0.15)),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225]
+        ),
     ])
 
-
-def get_val_transforms(img_size: int = 224) -> transforms.Compose:
-    """Simple transforms for validation/test (no augmentation)."""
-    return transforms.Compose([
-        transforms.Resize((img_size, img_size)),
+    val_transform = transforms.Compose([
+        transforms.Resize((image_size, image_size)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225]
+        ),
     ])
 
+    return train_transform, val_transform
 
-# ============================================================
-# Model Loading
-# ============================================================
 
-def load_model(model_name: str, num_classes: int, config: dict):
-    """
-    Load and configure model.
+def build_model(model_name: str, num_classes: int, pretrained: bool = True):
+    """Model oluştur."""
+    import torchvision.models as models
 
-    Returns:
-        (model, model_type, processor_or_none)
-        model_type is 'pytorch' or 'huggingface'
-    """
-    logger.info(f"Loading model: {model_name}")
-
-    if model_name == 'vit_b16':
-        model = models.vit_b_16(weights=models.ViT_B_16_Weights.IMAGENET1K_V1)
+    if model_name == "vit_b16":
+        if pretrained:
+            model = models.vit_b_16(weights=models.ViT_B_16_Weights.IMAGENET1K_V1)
+        else:
+            model = models.vit_b_16(weights=None)
         model.heads.head = nn.Linear(model.heads.head.in_features, num_classes)
-        return model, 'pytorch', None
 
-    elif model_name == 'convnext_tiny':
-        from transformers import ConvNextForImageClassification, ConvNextImageProcessor
-        processor = ConvNextImageProcessor.from_pretrained('facebook/convnext-tiny-224')
-        model = ConvNextForImageClassification.from_pretrained(
-            'facebook/convnext-tiny-224',
-            num_labels=num_classes,
-            ignore_mismatched_sizes=True
-        )
-        return model, 'huggingface', processor
-
-    elif model_name == 'resnext50':
-        model = models.resnext50_32x4d(weights=models.ResNeXt50_32X4D_Weights.IMAGENET1K_V1)
+    elif model_name == "resnet50":
+        if pretrained:
+            model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V2)
+        else:
+            model = models.resnet50(weights=None)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
-        return model, 'pytorch', None
 
-    elif model_name == 'resnest50':
-        try:
-            import timm
-            model = timm.create_model('resnest50d', pretrained=True, num_classes=num_classes)
-            return model, 'pytorch', None
-        except ImportError:
-            logger.error("timm package required for ResNeSt. Install: pip install timm")
-            raise
-
-    elif model_name == 'cvt':
-        from transformers import CvtForImageClassification, AutoImageProcessor
-        processor = AutoImageProcessor.from_pretrained('microsoft/cvt-13')
-        model = CvtForImageClassification.from_pretrained(
-            'microsoft/cvt-13',
-            num_labels=num_classes,
-            ignore_mismatched_sizes=True
+    elif model_name == "efficientnet_b0":
+        if pretrained:
+            model = models.efficientnet_b0(
+                weights=models.EfficientNet_B0_Weights.IMAGENET1K_V1
+            )
+        else:
+            model = models.efficientnet_b0(weights=None)
+        model.classifier[1] = nn.Linear(
+            model.classifier[1].in_features, num_classes
         )
-        return model, 'huggingface', processor
+
+    elif model_name == "mobilenet_v2":
+        if pretrained:
+            model = models.mobilenet_v2(
+                weights=models.MobileNet_V2_Weights.IMAGENET1K_V2
+            )
+        else:
+            model = models.mobilenet_v2(weights=None)
+        model.classifier[1] = nn.Linear(
+            model.classifier[1].in_features, num_classes
+        )
+
+    elif model_name == "resnext50":
+        if pretrained:
+            model = models.resnext50_32x4d(
+                weights=models.ResNeXt50_32X4D_Weights.IMAGENET1K_V1
+            )
+        else:
+            model = models.resnext50_32x4d(weights=None)
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
+
+    elif model_name == "convnext_tiny":
+        from transformers import ConvNextForImageClassification
+        if pretrained:
+            model = ConvNextForImageClassification.from_pretrained(
+                "facebook/convnext-tiny-224",
+                num_labels=num_classes,
+                ignore_mismatched_sizes=True,
+            )
+        else:
+            model = ConvNextForImageClassification.from_pretrained(
+                "facebook/convnext-tiny-224",
+                num_labels=num_classes,
+                ignore_mismatched_sizes=True,
+            )
+
+    elif model_name == "resnest50d":
+        import timm
+        model = timm.create_model(
+            "resnest50d",
+            pretrained=pretrained,
+            num_classes=num_classes,
+        )
+
+    elif model_name == "cvt_13":
+        from transformers import CvtForImageClassification
+        if pretrained:
+            model = CvtForImageClassification.from_pretrained(
+                "microsoft/cvt-13",
+                num_labels=num_classes,
+                ignore_mismatched_sizes=True,
+            )
+        else:
+            model = CvtForImageClassification.from_pretrained(
+                "microsoft/cvt-13",
+                num_labels=num_classes,
+                ignore_mismatched_sizes=True,
+            )
 
     else:
-        raise ValueError(f"Unsupported model: {model_name}. "
-                         f"Choose from: vit_b16, convnext_tiny, resnext50, resnest50, cvt")
+        raise ValueError(f"Desteklenmeyen model: {model_name}")
+
+    return model
 
 
-# ============================================================
-# Training with Mixed Precision + Gradient Accumulation
-# ============================================================
+def train_one_epoch(model, dataloader, criterion, optimizer, device):
+    """Tek epoch eğitim."""
+    model.train()
+    running_loss = 0.0
+    correct = 0
+    total = 0
 
-class EnhancedTrainer(TrainerBase):
-    """
-    Extended TrainerBase with:
-    - Mixed precision (fp16) via torch.cuda.amp
-    - Gradient accumulation
-    """
+    for batch_idx, (images, labels) in enumerate(dataloader):
+        images, labels = images.to(device), labels.to(device)
 
-    def __init__(self, model, device, criterion, optimizer, scheduler=None,
-                 use_fp16=False, grad_accum_steps=1):
-        super().__init__(model, device, criterion, optimizer, scheduler)
-        self.use_fp16 = use_fp16 and device.type == 'cuda'
-        self.grad_accum_steps = max(1, grad_accum_steps)
-        self.scaler = GradScaler(enabled=self.use_fp16)
+        optimizer.zero_grad()
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
 
-        if self.use_fp16:
-            logger.info("Mixed precision (fp16) enabled")
-        if self.grad_accum_steps > 1:
-            logger.info(f"Gradient accumulation: {self.grad_accum_steps} steps")
+        running_loss += loss.item() * images.size(0)
+        _, predicted = outputs.max(1)
+        total += labels.size(0)
+        correct += predicted.eq(labels).sum().item()
 
-    def train_epoch(self, train_loader: DataLoader):
-        """Train one epoch with fp16 + gradient accumulation."""
-        from tqdm import tqdm
-
-        self.model.train()
-        running_loss = 0.0
-        running_corrects = 0
-        self.optimizer.zero_grad()
-
-        for step, (inputs, labels) in enumerate(tqdm(train_loader, desc="Training")):
-            inputs = inputs.to(self.device)
-            labels = labels.to(self.device)
-
-            with autocast(enabled=self.use_fp16):
-                outputs = self.model(inputs)
-                _, preds = torch.max(outputs, 1)
-                loss = self.criterion(outputs, labels)
-                loss = loss / self.grad_accum_steps  # scale loss
-
-            self.scaler.scale(loss).backward()
-
-            if (step + 1) % self.grad_accum_steps == 0 or (step + 1) == len(train_loader):
-                self.scaler.step(self.optimizer)
-                self.scaler.update()
-                self.optimizer.zero_grad()
-
-            running_loss += loss.item() * self.grad_accum_steps * inputs.size(0)
-            running_corrects += torch.sum(preds == labels.data)
-
-        epoch_loss = running_loss / len(train_loader.dataset)
-        epoch_acc = running_corrects.float() / len(train_loader.dataset)
-        return epoch_loss, epoch_acc
-
-    def validate_epoch(self, val_loader: DataLoader):
-        """Validate with fp16 for speed."""
-        from tqdm import tqdm
-
-        self.model.eval()
-        val_loss = 0.0
-        val_corrects = 0
-
-        with torch.no_grad():
-            for inputs, labels in tqdm(val_loader, desc="Validation"):
-                inputs = inputs.to(self.device)
-                labels = labels.to(self.device)
-
-                with autocast(enabled=self.use_fp16):
-                    outputs = self.model(inputs)
-                    _, preds = torch.max(outputs, 1)
-                    loss = self.criterion(outputs, labels)
-
-                val_loss += loss.item() * inputs.size(0)
-                val_corrects += torch.sum(preds == labels.data)
-
-        val_loss = val_loss / len(val_loader.dataset)
-        val_acc = val_corrects.float() / len(val_loader.dataset)
-        return val_loss, val_acc
+    epoch_loss = running_loss / total
+    epoch_acc = correct / total
+    return epoch_loss, epoch_acc
 
 
-# ============================================================
-# Main Training Pipeline
-# ============================================================
+def validate(model, dataloader, criterion, device):
+    """Doğrulama."""
+    model.eval()
+    running_loss = 0.0
+    correct = 0
+    total = 0
 
-def train_single_model(model_name: str):
-    """Train a single model end-to-end."""
-    fix_windows_encoding()
+    with torch.no_grad():
+        for images, labels in dataloader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            loss = criterion(outputs, labels)
 
-    config = get_config(model_name)
-    device = get_device()
-    img_size = config.get('img_size', 224)
+            running_loss += loss.item() * images.size(0)
+            _, predicted = outputs.max(1)
+            total += labels.size(0)
+            correct += predicted.eq(labels).sum().item()
 
-    print("=" * 60)
-    print(f"POULTRY DISEASE CLASSIFICATION - {model_name.upper()}")
-    print("=" * 60)
-    print(f"  Device        : {config['device']}")
-    print(f"  Model         : {model_name}")
-    print(f"  Batch size    : {config['batch_size']}")
-    print(f"  Epochs        : {config['epochs']}")
-    print(f"  Learning rate : {config['learning_rate']}")
-    print(f"  FP16          : {config.get('fp16', False)}")
-    print(f"  Grad accum    : {config.get('gradient_accumulation_steps', 1)}")
-    print(f"  Focal Loss    : {config.get('use_focal_loss', False)}")
-    print(f"  Weighted Samp.: {config.get('use_weighted_sampler', False)}")
-
-    # --- Data ---
-    data_dir = config['data_dir']
-    if not os.path.exists(data_dir):
-        print(f"\nERROR: Data directory not found: {data_dir}")
-        print("Run rebuild_dataset.py first to create the clean split!")
-        return None, None
-
-    print(f"\n  Data dir: {data_dir}")
-    data_info = prepare_datasets(data_dir)
-    print_dataset_info(data_info)
-
-    classes = data_info['classes']
-    num_classes = len(classes)
-    label2id = data_info['label2id']
-    id2label = data_info['id2label']
-
-    # --- Class weights for loss ---
-    train_labels = data_info['train']['labels']
-    class_weights = get_class_weights_tensor(train_labels, num_classes).to(device)
-    logger.info(f"Class weights: {class_weights.tolist()}")
-
-    # --- Loss function ---
-    if config.get('use_focal_loss', False):
-        criterion = FocalLoss(
-            alpha=class_weights,
-            gamma=config.get('focal_gamma', 2.0)
-        )
-        logger.info(f"Using FocalLoss (gamma={config.get('focal_gamma', 2.0)})")
-    else:
-        criterion = nn.CrossEntropyLoss(weight=class_weights)
-        logger.info("Using weighted CrossEntropyLoss")
-
-    # --- Model ---
-    model, model_type, processor = load_model(model_name, num_classes, config)
-
-    # --- Datasets & DataLoaders ---
-    if model_type == 'pytorch':
-        train_transform = get_train_transforms_with_tensor(img_size)
-        val_transform = get_val_transforms(img_size)
-
-        train_dataset = PoultryImageDataset(
-            data_info['train']['paths'], data_info['train']['labels'],
-            transform=train_transform
-        )
-        val_dataset = PoultryImageDataset(
-            data_info['val']['paths'], data_info['val']['labels'],
-            transform=val_transform
-        )
-        test_dataset = PoultryImageDataset(
-            data_info['test']['paths'], data_info['test']['labels'],
-            transform=val_transform
-        )
-
-        datasets = {'train': train_dataset, 'val': val_dataset, 'test': test_dataset}
-        pin_memory = config.get('pin_memory', False) and torch.cuda.is_available()
-        use_ws = config.get('use_weighted_sampler', False)
-
-        train_loader, val_loader, test_loader = create_dataloaders(
-            datasets,
-            batch_size=config['batch_size'],
-            num_workers=config['num_workers'],
-            use_weighted_sampler=use_ws,
-            pin_memory=pin_memory
-        )
-
-        # --- Train (PyTorch loop) ---
-        model = model.to(device)
-
-        optimizer, scheduler = setup_optimizer_scheduler(
-            model, config['learning_rate'], config['weight_decay']
-        )
-
-        trainer = EnhancedTrainer(
-            model, device, criterion, optimizer, scheduler,
-            use_fp16=config.get('fp16', False),
-            grad_accum_steps=config.get('gradient_accumulation_steps', 1)
-        )
-
-        history = trainer.train(
-            train_loader, val_loader,
-            config['epochs'], config['output_dir']
-        )
-
-        preds, labels = trainer.evaluate(test_loader, classes, config['output_dir'])
-        plot_training_history(history, config['output_dir'])
-        test_acc = trainer.best_acc.item() if hasattr(trainer.best_acc, 'item') else float(trainer.best_acc)
-
-    elif model_type == 'huggingface':
-        # HuggingFace models (ConvNeXt, CvT)
-        train_aug = get_train_transforms(img_size)  # PIL-level augmentation (no ToTensor)
-
-        train_dataset = HuggingFaceDataset(
-            data_info['train']['paths'],
-            [id2label[l] for l in data_info['train']['labels']],
-            processor=processor, feature_extractor=None,
-            label2id=label2id, transform=train_aug
-        )
-        val_dataset = HuggingFaceDataset(
-            data_info['val']['paths'],
-            [id2label[l] for l in data_info['val']['labels']],
-            processor=processor, feature_extractor=None,
-            label2id=label2id, transform=None
-        )
-        test_dataset = HuggingFaceDataset(
-            data_info['test']['paths'],
-            [id2label[l] for l in data_info['test']['labels']],
-            processor=processor, feature_extractor=None,
-            label2id=label2id, transform=None
-        )
-
-        # Set id2label/label2id on model config
-        model.config.id2label = id2label
-        model.config.label2id = label2id
-
-        # Create FocalLoss for HF Trainer
-        hf_loss = criterion if config.get('use_focal_loss', False) else None
-
-        hf_trainer = HuggingFaceTrainer(
-            model=model,
-            train_dataset=train_dataset,
-            val_dataset=val_dataset,
-            output_dir=config['output_dir'],
-            config=config,
-            loss_fn=hf_loss
-        )
-
-        hf_trainer.train()
-        preds, labels = hf_trainer.evaluate(test_dataset, classes)
-
-        from sklearn.metrics import accuracy_score
-        test_acc = accuracy_score(labels, preds)
-        history = {}
-
-    else:
-        raise ValueError(f"Unknown model type: {model_type}")
-
-    # --- Summary ---
-    print_summary(model_name, test_acc, config['output_dir'], classes)
-
-    results = {
-        'model_name': model_name,
-        'test_accuracy': float(test_acc),
-        'num_classes': num_classes,
-        'classes': classes,
-        'config': {k: str(v) if not isinstance(v, (int, float, bool, str, list)) else v
-                   for k, v in config.items()},
-    }
-    save_results(results, config['output_dir'])
-
-    return model, results
+    epoch_loss = running_loss / total
+    epoch_acc = correct / total
+    return epoch_loss, epoch_acc
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Train poultry disease classification model',
-        formatter_class=argparse.RawTextHelpFormatter
+        description="Çok-türlü kümes hayvanı hastalık sınıflandırma eğitimi",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Örnekler:
+  python train_model.py --model vit_b16 --species chicken
+  python train_model.py --model resnext50 --species chicken
+  python train_model.py --model convnext_tiny --species chicken
+  python train_model.py --model resnest50d --species chicken
+  python train_model.py --model cvt_13 --species chicken
+  python train_model.py --model resnet50 --species goose
+  python train_model.py --model efficientnet_b0 --species duck
+  python train_model.py --model vit_b16  (varsayılan: chicken)
+        """,
     )
     parser.add_argument(
-        '--model', type=str, default='vit_b16',
-        choices=['vit_b16', 'convnext_tiny', 'resnext50', 'resnest50', 'cvt', 'all'],
-        help=(
-            'Model architecture to train:\n'
-            '  vit_b16       - Vision Transformer B/16\n'
-            '  convnext_tiny - ConvNeXt Tiny\n'
-            '  resnext50     - ResNeXt-50 32x4d\n'
-            '  resnest50     - ResNeSt-50d\n'
-            '  cvt           - CvT-13\n'
-            '  all           - Train all models sequentially'
-        )
+        "--model",
+        type=str,
+        default="vit_b16",
+        choices=["vit_b16", "resnext50", "resnest50d", "convnext_tiny", "cvt_13", "resnet50", "efficientnet_b0", "mobilenet_v2"],
+        help="Model mimarisi (varsayılan: vit_b16)",
     )
+    parser.add_argument(
+        "--species",
+        type=str,
+        default="chicken",
+        choices=SUPPORTED_SPECIES,
+        help="Hayvan türü (varsayılan: chicken)",
+    )
+    parser.add_argument("--epochs", type=int, default=None, help="Epoch sayısı")
+    parser.add_argument("--batch-size", type=int, default=None, help="Batch boyutu")
+    parser.add_argument("--lr", type=float, default=None, help="Öğrenme oranı")
+    parser.add_argument(
+        "--data-dir", type=str, default=None,
+        help="Veri dizini (belirtilmezse config'den alınır)",
+    )
+    parser.add_argument("--resume", type=str, default=None, help="Checkpoint'tan devam")
+    parser.add_argument("--no-pretrained", action="store_true", help="Sıfırdan eğit")
+
     args = parser.parse_args()
 
-    if args.model == 'all':
-        all_models = ['vit_b16', 'convnext_tiny', 'resnext50', 'resnest50', 'cvt']
-        results_summary = {}
-        for m in all_models:
-            print(f"\n{'#' * 60}")
-            print(f"# Training: {m}")
-            print(f"{'#' * 60}\n")
-            try:
-                _, result = train_single_model(m)
-                if result:
-                    results_summary[m] = result.get('test_accuracy', 'N/A')
-            except Exception as e:
-                logger.error(f"Failed to train {m}: {e}")
-                results_summary[m] = f"FAILED: {e}"
+    # ── Konfigürasyon ──
+    config = get_config(args.model, args.species)
 
-        print("\n" + "=" * 60)
-        print("ALL MODELS TRAINING SUMMARY")
-        print("=" * 60)
-        for m, acc in results_summary.items():
-            if isinstance(acc, float):
-                print(f"  {m:<20} Test Acc: {acc*100:.2f}%")
-            else:
-                print(f"  {m:<20} {acc}")
-        print("=" * 60)
-    else:
-        train_single_model(args.model)
+    # CLI argümanları ile override
+    if args.epochs:
+        config["epochs"] = args.epochs
+    if args.batch_size:
+        config["batch_size"] = args.batch_size
+    if args.lr:
+        config["learning_rate"] = args.lr
+    if args.data_dir:
+        config["data_dir"] = args.data_dir
+
+    # ── Dataset kontrol ──
+    dataset_report = check_dataset_exists(args.species)
+    if not dataset_report["exists"]:
+        print(f"\n❌ HATA: {args.species} için dataset dizini bulunamadı!")
+        print(f"   Beklenen dizin: {dataset_report['raw_data_dir']}")
+        print(f"\n   Önce klasör yapısını oluşturun:")
+        print(f"     python create_species_folders.py")
+        print(f"\n   Sonra görüntüleri ekleyin.")
+        sys.exit(1)
+
+    if not dataset_report["ready_for_training"]:
+        print(f"\n⚠️  UYARI: {args.species} dataset'i eğitim için yeterli değil!")
+        print(f"   Toplam görüntü: {dataset_report['total_images']}")
+        print(f"\n   Sınıf bazlı dağılım:")
+        for cls, count in dataset_report["classes"].items():
+            status = "✅" if count >= 10 else "❌"
+            print(f"     {status} {cls}: {count}")
+        print(f"\n   Her sınıfta en az 10 görüntü gereklidir.")
+
+        response = input("\n   Yine de devam etmek istiyor musunuz? (e/h): ")
+        if response.lower() != "e":
+            sys.exit(0)
+
+    # ── Başlık ──
+    species_display = config.get("display_name", args.species)
+    print(f"\n{'='*60}")
+    print(f"  🐦 KÜMES HAYVANI HASTALIK SINIFLANDIRMA EĞİTİMİ")
+    print(f"{'='*60}")
+    print(f"  Tür        : {species_display}")
+    print(f"  Model      : {config.get('display_name', args.model)}")
+    print(f"  Veri Dizini: {config['data_dir']}")
+    print(f"  Epoch      : {config['epochs']}")
+    print(f"  Batch      : {config['batch_size']}")
+    print(f"  LR         : {config['learning_rate']}")
+    print(f"  Sınıf Sayısı: {config['num_classes']}")
+    print(f"{'='*60}\n")
+
+    # ── Seed ──
+    set_seed(config["seed"])
+
+    # ── Device ──
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"  Device: {device}")
+    if device.type == "cuda":
+        print(f"  GPU   : {torch.cuda.get_device_name(0)}")
+
+    # ── Data Loaders ──
+    train_transform, val_transform = get_data_transforms(config["image_size"])
+
+    # Split dizin yapısını kontrol et
+    split_dir = config.get("split_data_dir", config["data_dir"])
+    train_dir = os.path.join(split_dir, "train")
+    val_dir = os.path.join(split_dir, "val")
+
+    # Eğer split yapılmamışsa doğrudan data_dir kullan
+    if not os.path.exists(train_dir):
+        print(f"\n⚠️  Split dizini bulunamadı: {train_dir}")
+        print(f"   Doğrudan data_dir kullanılıyor: {config['data_dir']}")
+        print(f"   Daha iyi sonuç için önce split yapın:")
+        print(f"     python rebuild_dataset.py --species {args.species}\n")
+        train_dir = config["data_dir"]
+        val_dir = config["data_dir"]
+
+    train_dataset = datasets.ImageFolder(train_dir, transform=train_transform)
+    val_dataset = datasets.ImageFolder(val_dir, transform=val_transform)
+
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=config["batch_size"],
+        shuffle=True,
+        num_workers=4,
+        pin_memory=True,
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=config["batch_size"],
+        shuffle=False,
+        num_workers=4,
+        pin_memory=True,
+    )
+
+    print(f"  Train: {len(train_dataset)} görüntü")
+    print(f"  Val  : {len(val_dataset)} görüntü")
+    print(f"  Sınıflar: {train_dataset.classes}\n")
+
+    # ── Model ──
+    model = build_model(
+        args.model,
+        config["num_classes"],
+        pretrained=not args.no_pretrained,
+    )
+    model = model.to(device)
+
+    # Resume
+    start_epoch = 0
+    if args.resume and os.path.exists(args.resume):
+        checkpoint = torch.load(args.resume, map_location=device)
+        model.load_state_dict(checkpoint["model_state_dict"])
+        start_epoch = checkpoint.get("epoch", 0)
+        print(f"  Checkpoint yüklendi: {args.resume} (epoch {start_epoch})")
+
+    # ── Optimizer & Scheduler ──
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.AdamW(
+        model.parameters(),
+        lr=config["learning_rate"],
+        weight_decay=0.01,
+    )
+    scheduler = CosineAnnealingLR(optimizer, T_max=config["epochs"])
+
+    # ── Output dizinleri ──
+    output_dir = config["output_dir"]
+    model_dir = os.path.dirname(config["model_save_path"])
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(model_dir, exist_ok=True)
+
+    # ── Eğitim döngüsü ──
+    best_val_acc = 0.0
+    patience_counter = 0
+    history = {"train_loss": [], "train_acc": [], "val_loss": [], "val_acc": []}
+
+    print(f"  {'Epoch':>5} | {'Train Loss':>10} | {'Train Acc':>9} | "
+          f"{'Val Loss':>8} | {'Val Acc':>7} | {'LR':>10} | {'Durum':>8}")
+    print(f"  {'-'*75}")
+
+    start_time = time.time()
+
+    for epoch in range(start_epoch, config["epochs"]):
+        # Train
+        train_loss, train_acc = train_one_epoch(
+            model, train_loader, criterion, optimizer, device
+        )
+
+        # Validate
+        val_loss, val_acc = validate(model, val_loader, criterion, device)
+
+        # Scheduler step
+        scheduler.step()
+        current_lr = scheduler.get_last_lr()[0]
+
+        # History
+        history["train_loss"].append(train_loss)
+        history["train_acc"].append(train_acc)
+        history["val_loss"].append(val_loss)
+        history["val_acc"].append(val_acc)
+
+        # Best model
+        status = ""
+        if val_acc > best_val_acc:
+            best_val_acc = val_acc
+            patience_counter = 0
+            status = "✅ BEST"
+
+            torch.save(
+                {
+                    "epoch": epoch + 1,
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "val_acc": val_acc,
+                    "val_loss": val_loss,
+                    "species": args.species,
+                    "model_name": args.model,
+                    "class_names": DISEASE_CLASSES,
+                    "config": config,
+                },
+                config["model_save_path"],
+            )
+        else:
+            patience_counter += 1
+
+        print(
+            f"  {epoch+1:>5} | {train_loss:>10.4f} | {train_acc:>8.2%} | "
+            f"{val_loss:>8.4f} | {val_acc:>6.2%} | {current_lr:>10.6f} | {status}"
+        )
+
+        # Early stopping
+        if patience_counter >= config["early_stopping_patience"]:
+            print(f"\n  ⏹ Early stopping: {config['early_stopping_patience']} "
+                  f"epoch boyunca iyileşme yok.")
+            break
+
+    elapsed = time.time() - start_time
+
+    # ── Özet ──
+    print(f"\n{'='*60}")
+    print(f"  EĞİTİM TAMAMLANDI")
+    print(f"{'='*60}")
+    print(f"  Tür          : {species_display}")
+    print(f"  Model        : {args.model}")
+    print(f"  En İyi Val Acc: {best_val_acc:.2%}")
+    print(f"  Süre         : {elapsed/60:.1f} dakika")
+    print(f"  Model Kaydı  : {config['model_save_path']}")
+    print(f"{'='*60}\n")
+
+    # ── History kaydet ──
+    history_path = os.path.join(output_dir, "training_history.json")
+    with open(history_path, "w") as f:
+        json.dump(
+            {
+                "species": args.species,
+                "model": args.model,
+                "best_val_acc": best_val_acc,
+                "elapsed_seconds": elapsed,
+                "history": history,
+                "config": {
+                    k: str(v) if not isinstance(v, (int, float, str, list, bool))
+                    else v
+                    for k, v in config.items()
+                },
+            },
+            f,
+            indent=2,
+        )
+    print(f"  Training history: {history_path}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

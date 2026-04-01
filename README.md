@@ -1,10 +1,11 @@
 # 🐔 Poultry Disease Classification - Production Ready
 
-Production-grade machine learning system for classifying poultry diseases using histopathology images.
+Production-grade deep learning system for classifying poultry diseases using histopathology images.
+Supports **multi-species** classification: Chicken 🐔, Goose 🦢, and Duck 🦆.
 
 ## 📊 Dataset
 
-10 disease classes with 500+ images each:
+10 disease classes with 500+ images each per species:
 - **Avian_Influenza** - Avian Influenza (Bird Flu)
 - **Coccidiosis** - Coccidiosis infection
 - **Fowl_Pox** - Fowl Pox disease
@@ -15,6 +16,13 @@ Production-grade machine learning system for classifying poultry diseases using 
 - **Mareks_Disease** - Marek's Disease
 - **Newcastle_Disease** - Newcastle Disease (NDV)
 - **Salmonella** - Salmonella infection
+
+### Supported Species
+| Species | Dataset | Status |
+|---------|---------|--------|
+| 🐔 Chicken | `final_dataset_10_classes` | ✅ Ready |
+| 🦢 Goose | `goose_dataset_10_classes` | ✅ Ready |
+| 🦆 Duck | `duck_dataset_10_classes` | ✅ Ready |
 
 ## 🚀 Quick Start
 
@@ -31,26 +39,51 @@ python -m venv .venv
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Setup DVC (for data versioning)
-dvc pull
 ```
 
 ### Training
 
 ```bash
-# Basic training
-python scripts/train.py --config config/training_config.yaml
+# Train ViT-B/16 for chicken (default)
+python train_model.py --model vit_b16
 
-# With TensorBoard monitoring
-tensorboard --logdir runs
+# Train for goose
+python train_model.py --model vit_b16 --species goose
+
+# Train for duck
+python train_model.py --model vit_b16 --species duck
+
+# Train ResNet50
+python train_model.py --model resnet50 --species chicken
+
+# With YAML config
+python train_model.py --config config/training_config.yaml
+```
+
+### Evaluation
+
+```bash
+# Evaluate model
+python evaluate_model.py --model vit_b16 --species chicken
+
+# Compare all models
+python compare_models.py
+python compare_models.py --species goose
+```
+
+### Single Image Prediction
+
+```bash
+# Predict disease from image
+python predict_single.py --image test_image.jpg --species chicken
+python predict_single.py --image test_image.jpg --species goose --model resnet50
 ```
 
 ### API Server
 
 ```bash
 # Start FastAPI server
-uvicorn api.main:app --reload
+uvicorn api.main:app --reload --port 8000
 
 # Test prediction (PowerShell)
 curl.exe -X POST "http://localhost:8000/predict" -F "file=@test_image.jpg"
@@ -61,64 +94,75 @@ curl.exe -X POST "http://localhost:8000/predict" -F "file=@test_image.jpg"
 ## 📁 Project Structure
 
 ```
-├── config/              # YAML configuration files
-│   └── training_config.yaml
-├── src/                 # Source code
-│   ├── models/          # Model definitions
-│   ├── training/        # Training pipeline
-│   ├── data/            # Dataset and transforms
-│   ├── utils/           # Logger, config loader, metrics
-│   ├── preprocessing/   # Data preprocessing
-│   ├── augmentation/    # Advanced augmentation (Phase 2)
-│   ├── visualization/   # Grad-CAM, plots (Phase 2)
-│   └── optimization/    # Hyperparameter tuning (Phase 2)
-├── api/                 # FastAPI REST API (Phase 2)
-├── tests/               # Unit tests (Phase 2)
-├── scripts/             # Training and utility scripts
-├── deployment/          # Docker, ONNX export (Phase 3)
-├── mlops/               # MLflow tracking (Phase 3)
-├── data/                # Dataset (managed by DVC)
-│   └── final_dataset_10_classes/
-├── models/              # Trained models (Git LFS/DVC)
-├── logs/                # Log files
-├── runs/                # TensorBoard logs
-├── requirements.txt     # Python dependencies
-└── README.md
+├── config/                    # YAML configuration files
+│   ├── training_config.yaml   # Chicken training config
+│   ├── training_config_duck.yaml
+│   └── training_config_goose.yaml
+├── src/                       # Source code
+│   ├── config.py              # Multi-species configuration
+│   ├── models/                # Model factory (ResNet, EfficientNet, etc.)
+│   ├── training/              # Training pipeline (Trainer, callbacks, metrics)
+│   ├── data/                  # Dataset utilities
+│   └── utils/                 # Logger, helpers
+├── api/                       # FastAPI REST API
+│   └── main.py                # Multi-species prediction API
+├── scripts/                   # Training and utility scripts
+├── tests/                     # Unit tests
+├── final_dataset_10_classes/  # Chicken dataset
+├── duck_dataset_10_classes/   # Duck dataset
+├── goose_dataset_10_classes/  # Goose dataset
+├── models/                    # Trained model weights
+├── vit_poultry_results/       # ViT-B/16 training results
+├── resnext_poultry_results/   # ResNeXt-50 results
+├── resnest_poultry_results/   # ResNeSt-50d results
+├── convnext_poultry_results/  # ConvNeXt-Tiny results
+├── cvt_poultry_results/       # CvT-13 results
+├── train_model.py             # Main training script
+├── evaluate_model.py          # Model evaluation
+├── predict_single.py          # Single image prediction
+├── compare_models.py          # Model comparison
+└── requirements.txt           # Python dependencies
 ```
 
 ## 🧠 Model Architectures
 
-Supported models (configured in `config/training_config.yaml`):
-- **ResNet18** - Fast, lightweight
-- **ResNet50** - Better accuracy
-- **EfficientNet B0, B2** - Efficient architecture
-- **ConvNeXt Tiny** - Modern architecture
+| Model | Parameters | Test Accuracy | Training Time |
+|-------|-----------|---------------|---------------|
+| **ViT-B/16** | ~86M | **98.14%** | 32.5 min |
+| **ResNeXt-50** | ~25M | ✅ Completed | 30.4 min |
+| **ResNeSt-50d** | ~27M | ✅ Completed | 41.4 min |
+| **ConvNeXt-Tiny** | ~28M | ✅ Completed | - |
+| **CvT-13** | ~11M | ✅ Completed | 22.5 min |
+
+Additional supported models:
+- **ResNet18/34/50/101** - Classic architectures
+- **EfficientNet B0/B1/B2** - Efficient scaling
+- **MobileNetV2** - Lightweight, mobile-friendly
 
 ## 🔬 Features
 
-### Phase 1 (Implemented) ✅
-- **Modular Architecture**: Clean, maintainable code structure
-- **Configuration Management**: YAML-based config files
-- **Logging System**: Centralized logging to console and files
-- **Type Hints**: Full type annotations for better code quality
-- **Data Management**: Dataset class with transforms
+### Implemented ✅
+- **Multi-Species Support**: Chicken, Goose, Duck classification
+- **5+ Model Architectures**: ViT, ResNeXt, ResNeSt, ConvNeXt, CvT
+- **Advanced Training Pipeline**: Cosine annealing, early stopping, mixed precision
+- **Data Augmentation**: Flip, rotation, color jitter, affine transforms
+- **FastAPI REST API**: Multi-species prediction endpoint
+- **Model Evaluation**: Confusion matrix, classification report, F1 scores
+- **Single Image Prediction**: Quick inference script
+- **Model Comparison**: Compare all trained models at once
+- **TensorBoard Logging**: Training visualization
+- **Checkpoint Saving**: Best model + final model
+- **Label Smoothing**: Better generalization
+- **Class Weights**: Handle imbalanced data
 
-### Phase 2 (Planned)
-- **Advanced Augmentation**: CutMix, MixUp, AutoAugment
-- **K-Fold Cross-Validation**: Robust model evaluation
+### Planned 📋
+- **Grad-CAM Visualization**: Model interpretability
+- **K-Fold Cross-Validation**: Robust evaluation
 - **Hyperparameter Tuning**: Optuna integration
-- **Model Interpretability**: Grad-CAM visualization
-- **REST API**: FastAPI for model serving
-- **TensorBoard**: Training visualization
-- **Unit Tests**: Comprehensive test coverage
-
-### Phase 3 (Planned)
-- **MLflow**: Experiment tracking
-- **Ensemble Models**: Multiple model fusion
 - **ONNX Export**: Model optimization
-- **Docker**: Containerization
-- **CI/CD**: Automated testing and deployment
-- **DVC**: Data versioning pipeline
+- **Docker Deployment**: Containerization
+- **MLflow Tracking**: Experiment management
+- **CI/CD Pipeline**: Automated testing
 
 ## 🛠️ Development
 
@@ -126,13 +170,10 @@ Supported models (configured in `config/training_config.yaml`):
 
 ```bash
 # Format code
-black src/ tests/
+black train_model.py evaluate_model.py predict_single.py src/ api/
 
 # Lint code
-ruff check src/ tests/
-
-# Type check
-mypy src/
+ruff check train_model.py evaluate_model.py predict_single.py src/ api/
 
 # Run tests
 pytest tests/ --cov=src --cov-report=html
@@ -149,13 +190,21 @@ Edit `config/training_config.yaml` to customize:
 Example:
 ```yaml
 model:
-  architecture: "resnet50"  # Change to resnet18, efficientnet_b0, etc.
-  
+  architecture: "vit_b16"  # Change to resnet50, efficientnet_b0, etc.
+  pretrained: true
+  dropout: 0.4
+
 training:
-  num_epochs: 50
-  batch_size: 32
+  num_epochs: 30
+  batch_size: 16
   optimizer:
+    type: "adamw"
     lr: 0.0001
+    weight_decay: 0.0001
+  early_stopping:
+    enabled: true
+    patience: 10
+  mixed_precision: true
 ```
 
 ## 📈 Performance
@@ -163,69 +212,56 @@ training:
 Current implementation features:
 - **Mixed Precision Training**: Faster training with lower memory
 - **Class Weights**: Handle imbalanced datasets
-- **Early Stopping**: Prevent overfitting
-- **Learning Rate Scheduling**: Adaptive learning rate
-- **Data Augmentation**: Comprehensive transforms
-
-## 🔧 Requirements
-
-See `requirements.txt` for full list. Key dependencies:
-- PyTorch >= 2.0.0
-- torchvision >= 0.15.0
-- timm >= 0.9.0 (PyTorch Image Models)
-- pyyaml >= 6.0
-- tensorboard >= 2.13.0
+- **Early Stopping**: Prevent overfitting (patience=10)
+- **Cosine Annealing LR**: Adaptive learning rate scheduling
+- **Data Augmentation**: Comprehensive transforms (flip, rotation, color jitter, affine)
+- **Label Smoothing**: Better generalization (0.1)
+- **Multi-Species**: Separate models for chicken, goose, duck
 
 ## 📝 Usage Examples
 
 ### Load Configuration
 
 ```python
-from src.utils.config_loader import ConfigLoader
+from src.config import get_config, SUPPORTED_SPECIES
 
-config = ConfigLoader.load('config/training_config.yaml')
-print(config['model']['architecture'])
+config = get_config("vit_b16", species="chicken")
+print(config["model_save_path"])
+print(config["num_classes"])
 ```
 
-### Create Logger
+### Train a Model
 
-```python
-from src.utils.logger import get_logger
+```bash
+# Train ViT-B/16 for chicken
+python train_model.py --model vit_b16 --species chicken
 
-logger = get_logger('training')
-logger.info('Training started')
-logger.warning('High memory usage detected')
+# Train ResNet50 for goose
+python train_model.py --model resnet50 --species goose
 ```
 
-### Create Model
+### Evaluate a Model
 
-```python
-from src.models.model_factory import get_model
-
-model = get_model(
-    model_name='resnet50',
-    num_classes=10,
-    pretrained=True
-)
+```bash
+# Evaluate and get confusion matrix
+python evaluate_model.py --model vit_b16 --species chicken
 ```
 
-### Load Dataset
+### Predict Single Image
 
 ```python
-from src.data.dataset import PoultryDiseaseDataset
-from src.data.transforms import get_train_transforms
+from predict_single import predict
 
-dataset = PoultryDiseaseDataset(
-    image_paths=image_paths,
-    labels=labels,
-    class_to_idx=class_to_idx,
-    transform=get_train_transforms(224)
-)
+result = predict("test_image.jpg", model_name="vit_b16", species="chicken")
+print(f"Disease: {result['top_prediction']}")
+print(f"Confidence: {result['confidence']:.2%}")
+for pred in result['predictions']:
+    print(f"  {pred['class']}: {pred['confidence']:.2%}")
 ```
 
 ## 🤝 Contributing
 
-This is an educational project. Contributions are welcome!
+This is an educational and research project. Contributions are welcome!
 
 1. Create a new branch
 2. Make your changes
@@ -239,9 +275,10 @@ Educational and research use only.
 ## 🙏 Acknowledgments
 
 - PyTorch team for the amazing framework
-- torchvision for pre-trained models
+- Hugging Face for pre-trained transformers
+- timm library for additional model architectures
 - The open-source community
 
 ---
 
-**Status**: Phase 1 Implemented ✅ | Phase 2 In Progress 🚧 | Phase 3 Planned 📋
+**Status**: Multi-species support implemented ✅ | 5 models trained ✅ | REST API ready ✅
