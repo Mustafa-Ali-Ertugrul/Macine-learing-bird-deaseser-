@@ -113,11 +113,17 @@ def main():
     model = model.to(device)
 
     # Loss
+    label_smoothing = cfg.get("label_smoothing", 0.0)
     if class_weights is not None and cfg["use_class_weights"]:
-        criterion = nn.CrossEntropyLoss(weight=class_weights.to(device))
-        logger.info(f"Class weighted loss aktif")
+        criterion = nn.CrossEntropyLoss(
+            weight=class_weights.to(device),
+            label_smoothing=label_smoothing,
+        )
+        logger.info(f"Class weighted loss aktif | label_smoothing={label_smoothing}")
     else:
-        criterion = nn.CrossEntropyLoss()
+        criterion = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
+        if label_smoothing > 0:
+            logger.info(f"Label smoothing={label_smoothing}")
 
     # Optimizer & Scheduler
     optimizer = get_optimizer(model, cfg)

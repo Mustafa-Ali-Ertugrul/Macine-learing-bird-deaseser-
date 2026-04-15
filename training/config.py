@@ -26,6 +26,8 @@ def get_default_config():
         "weight_decay": 1e-4,
         "patience": 8,           # Early stopping
         "min_delta": 0.001,
+        "label_smoothing": 0.0,   # 0.0-0.1 arasi
+        "unfreeze_last_n": 0,     # Son N blogu ac (0 = hepsi donuk/acik)
 
         # Optimizer & Scheduler
         "optimizer": "adam",      # adam, adamw, sgd
@@ -63,6 +65,15 @@ def parse_args():
     parser.add_argument("--image-size", type=int, default=224)
     parser.add_argument("--no-class-weights", action="store_true")
     parser.add_argument("--freeze-backbone", action="store_true")
+    parser.add_argument("--unfreeze-last-n", type=int, default=0,
+                        help="Backbone'un son N blogunu ac (freeze ile birlikte kullan)")
+    parser.add_argument("--label-smoothing", type=float, default=0.0,
+                        help="Label smoothing (0.0-0.1)")
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--optimizer", type=str, default="adam",
+                        choices=["adam", "adamw", "sgd"])
+    parser.add_argument("--scheduler", type=str, default="cosine",
+                        choices=["cosine", "steplr", "plateau"])
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"])
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num-workers", type=int, default=2)
@@ -79,6 +90,11 @@ def parse_args():
     cfg["image_size"] = args.image_size
     cfg["use_class_weights"] = not args.no_class_weights
     cfg["freeze_backbone"] = args.freeze_backbone
+    cfg["unfreeze_last_n"] = args.unfreeze_last_n
+    cfg["label_smoothing"] = args.label_smoothing
+    cfg["weight_decay"] = args.weight_decay
+    cfg["optimizer"] = args.optimizer
+    cfg["scheduler"] = args.scheduler
     cfg["device"] = args.device
     cfg["seed"] = args.seed
     cfg["num_workers"] = args.num_workers

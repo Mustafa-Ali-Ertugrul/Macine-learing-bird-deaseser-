@@ -69,6 +69,30 @@ def create_model(cfg):
     else:
         raise ValueError(f"Desteklenmeyen model: {model_name}")
 
+    # Kismi unfreeze: backbone donuk ama son N blok acik
+    unfreeze_n = cfg.get("unfreeze_last_n", 0)
+    if freeze_backbone and unfreeze_n > 0:
+        if model_name == "efficientnet_b0":
+            blocks = list(model.features.children())
+            for block in blocks[-unfreeze_n:]:
+                for param in block.parameters():
+                    param.requires_grad = True
+            logger.info(f"EfficientNet: son {unfreeze_n}/{len(blocks)} blok acildi")
+
+        elif model_name in ("resnet50", "resnet18"):
+            layers = [model.layer1, model.layer2, model.layer3, model.layer4]
+            for layer in layers[-unfreeze_n:]:
+                for param in layer.parameters():
+                    param.requires_grad = True
+            logger.info(f"ResNet: son {unfreeze_n}/4 layer acildi")
+
+        elif model_name == "mobilenet_v3":
+            blocks = list(model.features.children())
+            for block in blocks[-unfreeze_n:]:
+                for param in block.parameters():
+                    param.requires_grad = True
+            logger.info(f"MobileNet: son {unfreeze_n}/{len(blocks)} blok acildi")
+
     # Egitilecek parametre sayisi
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
