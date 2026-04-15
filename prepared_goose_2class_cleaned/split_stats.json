@@ -1,0 +1,31 @@
+{
+  "dataset_name": "prepared_goose_2class_cleaned",
+  "timestamp": "2026-04-15T23:17:40.900430",
+  "seed": 42,
+  "split_ratios": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "classes": {
+    "Fowl_Pox": {
+      "total": 46,
+      "train": 32,
+      "val": 7,
+      "test": 7
+    },
+    "Goose_Parvovirus": {
+      "total": 29,
+      "train": 20,
+      "val": 4,
+      "test": 5
+    }
+  },
+  "totals": {
+    "train": 52,
+    "val": 11,
+    "test": 12,
+    "total": 75
+  },
+  "imbalance_ratio": 1.59
+}
