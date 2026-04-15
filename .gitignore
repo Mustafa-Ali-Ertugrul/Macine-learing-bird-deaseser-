@@ -1,4 +1,6 @@
+# ============================================
 # Python
+# ============================================
 __pycache__/
 *.pyc
 *.pyo
@@ -9,6 +11,7 @@ __pycache__/
 dist/
 build/
 .Python
+*.egg
 
 # Virtual environments
 .venv/
@@ -22,15 +25,19 @@ ml_venv/
 .idea/
 *.swp
 *.swo
+*.swn
+*.bak
 
 # OS
 .DS_Store
 Thumbs.db
 nul
+Desktop.ini
 
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
+.tpap/
 
 # ============================================
 # Datasets (large, not tracked in git)
@@ -40,7 +47,8 @@ final_dataset_split/
 final_dataset_clean/
 clean_dataset_split/
 data/
-!src/data/
+duck_dataset_10_classes/
+goose_dataset_10_classes/
 organized_poultry_dataset/
 chicken_disease_dataset/
 public_poultry_dataset/
@@ -51,55 +59,97 @@ new_diseases_dataset/
 organized_labeled_dataset/
 poultry_dataset_512x512/
 quarantine_cleaned/
+duck_split_dataset/
+goose_split_dataset/
+dataset/
+downloaded_disease_images/
+prepared_duck_3class/
+prepared_goose_2class/
+outputs/
+removed_unrelated/
 
-# Dataset CSVs
+# Dataset files
 poultry_labeled_12k.csv
 labeling_batch.csv
 poultry_dataset.csv
+poultry_labeling_tool.html
 
 # ============================================
-# Model weights & checkpoints (large files)
+# Model weights & checkpoints
 # ============================================
 *.pth
+*.pt
 *.safetensors
 *.bin
 *.onnx
 optimizer.pt
 rng_state.pth
 scheduler.pt
+poultry_disease_vit.pth
 **/checkpoint-*/
 *_poultry_results/final_model/
-models/*.pth
-models/*.pt
+models/
 
 # ============================================
 # Training outputs & logs
 # ============================================
 *.log
 *_training_log.txt
+vit_training_log.txt
+resnext_training_log.txt
+resnest_training_log.txt
+convnext_training_log.txt
+cvt_training_log.txt
+build_log.txt
 training_output/
 reports/
 logs/
 runs/
 mlruns/
 output/
+temp_*.jpg
+temp_*.png
+temp_predict_*
 
-# Temporary
+# Analysis outputs
+data_leakage_details.html
+data_leakage_report.csv
+dataset_cleaning_report.txt
+analysis_report.txt
+evaluation_results.txt
+checkpoint_metrics.json
+training_results_summary.json
+all_models_training_results.json
+dataset_validation_report.json
+DATASET_REPORT.html
+DATASET_REPORT.txt
+DATASET_VALIDATION_SUMMARY.txt
+FINAL_TRAINING_REPORT.html
+model_performance_comparison.png
+
+# ============================================
+# Temporary files
+# ============================================
 *.tmp
 *.temp
 status_full.txt
-evaluation_results.txt
 leakage_example_*.png
+*.tmp.jpg
+*.tmp.png
 
 # Node.js
 node_modules/
 
-# Old / unrelated project folders
+# Project-specific (untracked)
 poultry_microscopy/
 Macine-learing-bird-deaseser-/
 C++/
 
+# Vercel
+.vercel/
+
+# Archive (optional - for deprecated files)
+# archive/
+
 # DVC
-.dvc/config.local
-.dvc/tmp
-.dvc/cache
+.dvc/
