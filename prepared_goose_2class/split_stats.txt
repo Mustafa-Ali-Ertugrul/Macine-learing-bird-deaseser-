@@ -1,0 +1,15 @@
+DATASET: prepared_goose_2class
+Tarih: 2026-04-15 22:30:37
+Seed: 42
+Split: train=0.7 val=0.15 test=0.15
+============================================================
+
+Sinif                        Train      Val     Test   Toplam
+------------------------------------------------------------
+Fowl_Pox                        32        7        7       46
+Goose_Parvovirus                22        5        4       31
+------------------------------------------------------------
+TOPLAM                          54       12       11       77
+
+Dengesizlik orani: 1.48x
+Cikarilan duplicate: 0

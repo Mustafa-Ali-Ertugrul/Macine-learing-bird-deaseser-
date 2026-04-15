@@ -1,0 +1,47 @@
+{
+  "dataset_name": "prepared_duck_3class",
+  "seed": 42,
+  "split_ratios": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "classes": {
+    "Bumblefoot": {
+      "source": "dataset/duck/Bumblefoot",
+      "total_source": 58,
+      "duplicates": 0,
+      "unique": 58,
+      "train": 41,
+      "val": 9,
+      "test": 8
+    },
+    "Fowl_Pox": {
+      "source": "dataset/duck/Fowl_Pox",
+      "total_source": 58,
+      "duplicates": 0,
+      "unique": 58,
+      "train": 41,
+      "val": 9,
+      "test": 8
+    },
+    "Duck_Plague": {
+      "source": "dataset/duck/Duck_Plague",
+      "total_source": 41,
+      "duplicates": 1,
+      "unique": 40,
+      "train": 28,
+      "val": 6,
+      "test": 6
+    }
+  },
+  "totals": {
+    "train": 110,
+    "val": 24,
+    "test": 22,
+    "total": 156
+  },
+  "duplicates_removed": 1,
+  "imbalance_ratio": 1.45,
+  "timestamp": "2026-04-15T22:30:37.377993"
+}

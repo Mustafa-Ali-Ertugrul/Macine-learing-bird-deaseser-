@@ -1,0 +1,16 @@
+DATASET: prepared_duck_3class
+Tarih: 2026-04-15 22:30:37
+Seed: 42
+Split: train=0.7 val=0.15 test=0.15
+============================================================
+
+Sinif                        Train      Val     Test   Toplam
+------------------------------------------------------------
+Bumblefoot                      41        9        8       58
+Fowl_Pox                        41        9        8       58
+Duck_Plague                     28        6        6       40
+------------------------------------------------------------
+TOPLAM                         110       24       22      156
+
+Dengesizlik orani: 1.45x
+Cikarilan duplicate: 1

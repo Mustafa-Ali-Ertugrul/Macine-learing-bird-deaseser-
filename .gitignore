@@ -63,8 +63,6 @@ duck_split_dataset/
 goose_split_dataset/
 dataset/
 downloaded_disease_images/
-prepared_duck_3class/
-prepared_goose_2class/
 outputs/
 removed_unrelated/
 
