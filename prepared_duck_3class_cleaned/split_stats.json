@@ -1,0 +1,32 @@
+{
+  "dataset_name": "prepared_duck_3class_cleaned",
+  "timestamp": "2026-04-16T00:08:00.994950",
+  "seed": 42,
+  "classes": {
+    "Bumblefoot": {
+      "total": 58,
+      "train": 41,
+      "val": 9,
+      "test": 8
+    },
+    "Fowl_Pox": {
+      "total": 58,
+      "train": 41,
+      "val": 9,
+      "test": 8
+    },
+    "Duck_Plague": {
+      "total": 39,
+      "train": 27,
+      "val": 6,
+      "test": 6
+    }
+  },
+  "totals": {
+    "train": 109,
+    "val": 24,
+    "test": 22,
+    "total": 155
+  },
+  "imbalance_ratio": 1.49
+}
