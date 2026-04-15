@@ -1,0 +1,66 @@
+# training_config_goose.yaml
+# Kaz (Goose) eğitim konfigürasyonu
+
+species: goose
+experiment_name: goose_vit_b16
+
+# Dataset
+dataset_dir: goose_dataset_10_classes
+split_dataset_dir: goose_split_dataset
+num_classes: 10
+class_names:
+  - Avian_Influenza
+  - Coccidiosis
+  - Fowl_Pox
+  - Healthy
+  - Histomoniasis
+  - Infectious_Bronchitis
+  - Infectious_Bursal_Disease
+  - Mareks_Disease
+  - Newcastle_Disease
+  - Salmonella
+
+# Model
+model_architecture: vit_b16
+pretrained: true
+pretrained_weights: imagenet21k
+freeze_backbone: true
+unfreeze_after_epoch: 5
+
+# Training Hyperparameters
+image_size: 224
+batch_size: 16
+epochs: 30
+learning_rate: 0.0003
+weight_decay: 0.01
+scheduler: cosine
+warmup_epochs: 3
+
+# Data Augmentation
+augmentation:
+  horizontal_flip: true
+  vertical_flip: false
+  rotation_range: 30
+  zoom_range: 0.2
+  width_shift_range: 0.2
+  height_shift_range: 0.2
+  brightness_range: [0.8, 1.2]
+  fill_mode: nearest
+
+# Early Stopping
+early_stopping:
+  enabled: true
+  patience: 5
+  monitor: val_loss
+  restore_best_weights: true
+
+# Output
+output_dir: results/goose/vit_b16
+model_save_path: models/goose/vit_b16_best.pth
+save_confusion_matrix: true
+save_training_history: true
+
+# Logging
+log_level: INFO
+tensorboard: true
+tensorboard_dir: runs/goose_vit_b16

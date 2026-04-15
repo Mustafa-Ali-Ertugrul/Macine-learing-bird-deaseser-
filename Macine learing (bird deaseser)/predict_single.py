@@ -1,151 +1,174 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
-Single Image Prediction using trained ViT-B/16 model
-For Poultry Disease Classification
+Tek görüntü tahmini (çok-türlü).
+
+Kullanım:
+    python predict_single.py --image foto.jpg --species chicken
+    python predict_single.py --image foto.jpg --species goose --model resnet50
 """
 
+import argparse
 import os
 import sys
+
 import torch
-from transformers import ViTFeatureExtractor, ViTForImageClassification
+from torchvision import transforms
 from PIL import Image
-import json
-import numpy as np
 
-def predict_image(image_path, model_path="./vit_poultry_results/final_model"):
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from src.config import get_config, SUPPORTED_SPECIES, DISEASE_CLASSES
+from train_model import build_model
+
+
+def predict(image_path: str, model_name: str = "vit_b16",
+            species: str = "chicken", model_path: str = None,
+            top_k: int = 3):
     """
-    Predict disease class for a single image
-    
-    Args:
-        image_path: Path to image file
-        model_path: Path to trained model directory
-    
+    Tek bir görüntü için hastalık tahmini yap.
+
     Returns:
-        dict with prediction results
+        dict: {
+            "species": str,
+            "predictions": [{"class": str, "confidence": float}, ...],
+            "top_prediction": str,
+            "confidence": float,
+        }
     """
-    
-    # Check if model exists
-    if not os.path.exists(model_path):
-        print(f"❌ Model not found at: {model_path}")
-        print("Please train the model first using train_vit_b16.py")
-        return None
-    
-    # Load model and feature extractor
-    print(f"🔮 Loading model from {model_path}...")
-    feature_extractor = ViTFeatureExtractor.from_pretrained(model_path)
-    model = ViTForImageClassification.from_pretrained(model_path)
-    
-    # Set to evaluation mode
-    model.eval()
+    config = get_config(model_name, species)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+
+    # Model yükle
+    _model_path = model_path or config["model_save_path"]
+    if not os.path.exists(_model_path):
+        raise FileNotFoundError(
+            f"Model dosyası bulunamadı: {_model_path}\n"
+            f"Önce eğitim yapın: python train_model.py "
+            f"--model {model_name} --species {species}"
+        )
+
+    model = build_model(model_name, config["num_classes"], pretrained=False)
     
-    # Load and preprocess image
-    print(f"📸 Loading image: {image_path}")
-    try:
-        image = Image.open(image_path).convert("RGB")
-    except Exception as e:
-        print(f"❌ Error loading image: {e}")
-        return None
+    # HuggingFace modelleri için farklı yükleme
+    if model_name in ["convnext_tiny", "cvt_13"]:
+        if os.path.isdir(_model_path):
+            from transformers import AutoModelForImageClassification
+            model = AutoModelForImageClassification.from_pretrained(_model_path)
+        else:
+            checkpoint = torch.load(_model_path, map_location=device)
+            if "model_state_dict" in checkpoint:
+                model.load_state_dict(checkpoint["model_state_dict"])
+    elif model_name == "resnest50d":
+        checkpoint = torch.load(_model_path, map_location=device)
+        if "model_state_dict" in checkpoint:
+            model.load_state_dict(checkpoint["model_state_dict"])
+        elif "state_dict" in checkpoint:
+            model.load_state_dict(checkpoint["state_dict"])
+    else:
+        checkpoint = torch.load(_model_path, map_location=device)
+        if "model_state_dict" in checkpoint:
+            model.load_state_dict(checkpoint["model_state_dict"])
+        elif "state_dict" in checkpoint:
+            model.load_state_dict(checkpoint["state_dict"])
     
-    # Extract features
-    inputs = feature_extractor(images=image, return_tensors="pt")
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    
-    # Predict
-    print("🤖 Making prediction...")
+    model = model.to(device)
+    model.eval()
+
+    # Sınıf isimleri — checkpoint'tan veya config'den
+    class_names = checkpoint.get("class_names", DISEASE_CLASSES)
+
+    # Görüntü ön-işleme
+    transform = transforms.Compose([
+        transforms.Resize((config["image_size"], config["image_size"])),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225],
+        ),
+    ])
+
+    image = Image.open(image_path).convert("RGB")
+    input_tensor = transform(image).unsqueeze(0).to(device)
+
+    # Tahmin
     with torch.no_grad():
-        outputs = model(**inputs)
-        logits = outputs.logits
-        probabilities = torch.softmax(logits, dim=-1)[0]
-    
-    # Get prediction
-    predicted_class_idx = logits.argmax(-1).item()
-    predicted_class = model.config.id2label[predicted_class_idx]
-    confidence = probabilities[predicted_class_idx].item()
-    
-    # Get top 3 predictions
-    top3_probs, top3_indices = torch.topk(probabilities, min(3, len(probabilities)))
-    top3_predictions = [
-        {
-            'class': model.config.id2label[idx.item()],
-            'confidence': prob.item()
-        }
-        for prob, idx in zip(top3_probs, top3_indices)
-    ]
-    
-    # Prepare results
-    results = {
-        'image_path': image_path,
-        'predicted_class': predicted_class,
-        'confidence': confidence,
-        'top3_predictions': top3_predictions,
-        'all_probabilities': {
-            model.config.id2label[i]: probabilities[i].item()
-            for i in range(len(probabilities))
-        }
+        outputs = model(input_tensor)
+        # HuggingFace modelleri ModelOutput döner
+        if hasattr(outputs, 'logits'):
+            outputs = outputs.logits
+        probabilities = torch.nn.functional.softmax(outputs, dim=1)
+        top_probs, top_indices = probabilities.topk(top_k, dim=1)
+
+    predictions = []
+    for i in range(top_k):
+        idx = top_indices[0][i].item()
+        prob = top_probs[0][i].item()
+        predictions.append({
+            "class": class_names[idx],
+            "confidence": round(prob, 4),
+        })
+
+    result = {
+        "species": species,
+        "species_display": config.get("display_name", species),
+        "model": model_name,
+        "image": image_path,
+        "predictions": predictions,
+        "top_prediction": predictions[0]["class"],
+        "confidence": predictions[0]["confidence"],
     }
-    
-    return results
 
-
-def print_results(results):
-    """Pretty print prediction results"""
-    if results is None:
-        return
-    
-    print("\n" + "=" * 60)
-    print("PREDICTION RESULTS")
-    print("=" * 60)
-    print(f"\n📸 Image: {results['image_path']}")
-    print(f"\n🎯 Predicted Disease: {results['predicted_class'].upper()}")
-    print(f"   Confidence: {results['confidence']*100:.2f}%")
-    
-    print(f"\n📊 Top 3 Predictions:")
-    for i, pred in enumerate(results['top3_predictions'], 1):
-        bar = "█" * int(pred['confidence'] * 50)
-        print(f"   {i}. {pred['class']:<20} {pred['confidence']*100:>6.2f}% {bar}")
-    
-    print("\n📈 All Class Probabilities:")
-    sorted_probs = sorted(results['all_probabilities'].items(), 
-                         key=lambda x: x[1], reverse=True)
-    for cls, prob in sorted_probs:
-        bar = "▓" * int(prob * 30)
-        print(f"   {cls:<20} {prob*100:>6.2f}% {bar}")
-    
-    print("=" * 60 + "\n")
+    return result
 
 
 def main():
-    """Main function for command line usage"""
-    
-    if len(sys.argv) < 2:
-        print("Usage: python predict_single.py <image_path> [model_path]")
-        print("\nExample:")
-        print("  python predict_single.py test_image.jpg")
-        print("  python predict_single.py test_image.jpg ./vit_poultry_results/final_model")
+    parser = argparse.ArgumentParser(
+        description="Tek görüntü hastalık tahmini (çok-türlü)"
+    )
+    parser.add_argument("--image", type=str, required=True, help="Görüntü yolu")
+    parser.add_argument(
+        "--model", type=str, default="vit_b16",
+        choices=["vit_b16", "resnet50", "efficientnet_b0", "mobilenet_v2"],
+    )
+    parser.add_argument(
+        "--species", type=str, default="chicken", choices=SUPPORTED_SPECIES,
+    )
+    parser.add_argument("--model-path", type=str, default=None)
+    parser.add_argument("--top-k", type=int, default=5)
+
+    args = parser.parse_args()
+
+    if not os.path.exists(args.image):
+        print(f"❌ Görüntü bulunamadı: {args.image}")
         sys.exit(1)
-    
-    image_path = sys.argv[1]
-    model_path = sys.argv[2] if len(sys.argv) > 2 else "./vit_poultry_results/final_model"
-    
-    # Check if image exists
-    if not os.path.exists(image_path):
-        print(f"❌ Image not found: {image_path}")
-        sys.exit(1)
-    
-    # Make prediction
-    results = predict_image(image_path, model_path)
-    
-    # Print results
-    print_results(results)
-    
-    # Optionally save results to JSON
-    output_json = image_path.rsplit('.', 1)[0] + '_prediction.json'
-    with open(output_json, 'w') as f:
-        json.dump(results, f, indent=2)
-    print(f"💾 Results saved to: {output_json}")
+
+    result = predict(
+        args.image, args.model, args.species, args.model_path, args.top_k
+    )
+
+    species_display = result["species_display"]
+    print(f"\n{'='*50}")
+    print(f"  🐦 TAHMİN SONUCU — {species_display}")
+    print(f"{'='*50}")
+    print(f"  Görüntü : {result['image']}")
+    print(f"  Model   : {result['model']}")
+    print(f"  Tür     : {species_display}")
+    print(f"\n  Top-{args.top_k} Tahminler:")
+
+    for i, pred in enumerate(result["predictions"], 1):
+        bar_len = int(pred["confidence"] * 30)
+        bar = "█" * bar_len + "░" * (30 - bar_len)
+        emoji = "🔴" if pred["class"] != "Healthy" else "🟢"
+        print(
+            f"    {i}. {emoji} {pred['class']:<30} "
+            f"{pred['confidence']:>6.2%}  {bar}"
+        )
+
+    print(f"\n  ➡️  Sonuç: {result['top_prediction']} "
+          f"({result['confidence']:.2%} güven)")
+    print(f"{'='*50}\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

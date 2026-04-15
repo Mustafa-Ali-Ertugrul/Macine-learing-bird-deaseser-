@@ -1,0 +1,134 @@
+======================================================================
+  DATASET TEMIZLEME & AUGMENTATION PIPELINE
+  Tarih: 2026-02-12 20:54:12
+======================================================================
+
+======================================================================
+ADIM 0: Orijinal veriyi hedef dizine kopyalama
+======================================================================
+  Kopyalaniyor: final_dataset_split -> final_dataset_clean
+  Kopyalama tamamlandi.
+  TRAIN: 20224 goruntu, 10 sinif
+  VAL: 1609 goruntu, 10 sinif
+  TEST: 1611 goruntu, 10 sinif
+
+======================================================================
+ADIM 1: Intra-split duplicate tespiti (pHash)
+======================================================================
+
+  --- TRAIN ---
+  Avian_Influenza: 7 duplicate silindi (kalan: 350)
+  Coccidiosis: 13 duplicate silindi (kalan: 5453)
+  Fowl_Pox: 2 duplicate silindi (kalan: 420)
+  Healthy: 89 duplicate silindi (kalan: 5477)
+  Histomoniasis: 20 duplicate silindi (kalan: 332)
+  Infectious_Bronchitis: 35 duplicate silindi (kalan: 317)
+  Infectious_Bursal_Disease: 105 duplicate silindi (kalan: 246)
+  Mareks_Disease: 7 duplicate silindi (kalan: 349)
+  Newcastle_Disease: 1 duplicate silindi (kalan: 1305)
+  Salmonella: 7 duplicate silindi (kalan: 5689)
+
+  --- VAL ---
+  Avian_Influenza: 1 duplicate silindi (kalan: 74)
+  Histomoniasis: 2 duplicate silindi (kalan: 73)
+  Infectious_Bronchitis: 1 duplicate silindi (kalan: 74)
+  Infectious_Bursal_Disease: 3 duplicate silindi (kalan: 72)
+  Mareks_Disease: 1 duplicate silindi (kalan: 74)
+
+  --- TEST ---
+  Infectious_Bronchitis: 2 duplicate silindi (kalan: 73)
+  Infectious_Bursal_Disease: 3 duplicate silindi (kalan: 72)
+
+  TOPLAM intrra-split duplicate silinen: 299
+
+======================================================================
+ADIM 2: Cross-split leakage tespiti (pHash)
+======================================================================
+  Avian_Influenza: 7 leakage tespit edildi ve silindi
+  Fowl_Pox: 1 leakage tespit edildi ve silindi
+  Histomoniasis: 22 leakage tespit edildi ve silindi
+  Infectious_Bronchitis: 25 leakage tespit edildi ve silindi
+  Infectious_Bursal_Disease: 45 leakage tespit edildi ve silindi
+  Mareks_Disease: 7 leakage tespit edildi ve silindi
+
+  TOPLAM cross-split leakage silinen: 107
+
+======================================================================
+ADIM 3: Sadece TRAIN set augmentation
+======================================================================
+  Hedef: Her sinif minimum 1500 goruntu
+  Avian_Influenza: 350 -> 1500 (+1150 augmentation)
+  Coccidiosis: Zaten yeterli (5453 >= 1500)
+  Fowl_Pox: 420 -> 1500 (+1080 augmentation)
+  Healthy: Zaten yeterli (5477 >= 1500)
+  Histomoniasis: 332 -> 1500 (+1168 augmentation)
+  Infectious_Bronchitis: 317 -> 1500 (+1183 augmentation)
+  Infectious_Bursal_Disease: 246 -> 1500 (+1254 augmentation)
+  Mareks_Disease: 349 -> 1500 (+1151 augmentation)
+  Newcastle_Disease: 1305 -> 1500 (+195 augmentation)
+  Salmonella: Zaten yeterli (5689 >= 1500)
+
+  TOPLAM augmented goruntu uretildi: 7181
+  NOT: Val ve Test set'lere augmentation UYGULANMADI.
+
+======================================================================
+ADIM 4: Detayli rapor
+======================================================================
+
+  --- FINAL DATASET DISTRIBUTION ---
+
+  TRAIN:
+    Avian_Influenza: 1500
+    Coccidiosis: 5453
+    Fowl_Pox: 1500
+    Healthy: 5477
+    Histomoniasis: 1500
+    Infectious_Bronchitis: 1500
+    Infectious_Bursal_Disease: 1500
+    Mareks_Disease: 1500
+    Newcastle_Disease: 1500
+    Salmonella: 5689
+    TOPLAM: 27119
+
+  VAL:
+    Avian_Influenza: 70
+    Coccidiosis: 351
+    Fowl_Pox: 75
+    Healthy: 358
+    Histomoniasis: 61
+    Infectious_Bronchitis: 61
+    Infectious_Bursal_Disease: 51
+    Mareks_Disease: 72
+    Newcastle_Disease: 84
+    Salmonella: 366
+    TOPLAM: 1549
+
+  TEST:
+    Avian_Influenza: 72
+    Coccidiosis: 352
+    Fowl_Pox: 74
+    Healthy: 358
+    Histomoniasis: 65
+    Infectious_Bronchitis: 61
+    Infectious_Bursal_Disease: 48
+    Mareks_Disease: 70
+    Newcastle_Disease: 84
+    Salmonella: 367
+    TOPLAM: 1551
+
+  GENEL TOPLAM: 30219
+
+  --- OZET ---
+  Intra-split duplicate silinen: 299
+  Cross-split leakage silinen:   107
+  Augmented goruntu uretilen:    7181
+  Kaynak dizin:  C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\final_dataset_split
+  Hedef dizin:   C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\final_dataset_clean
+  Tarih:         2026-02-12 21:06:23
+
+  Rapor yazildi: C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\dataset_cleaning_report.txt
+
+======================================================================
+ADIM 5: Final dogrulama - Cross-split leakage kontrolu
+======================================================================
+  BASARILI: Cross-split leakage tespit edilmedi!

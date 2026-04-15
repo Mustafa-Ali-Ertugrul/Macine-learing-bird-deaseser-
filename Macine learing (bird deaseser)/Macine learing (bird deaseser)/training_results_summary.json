@@ -1,0 +1,31 @@
+{
+  "models": [
+    {
+      "model": "ViT-B/16",
+      "completed": true,
+      "status": "Completed"
+    },
+    {
+      "model": "ResNeXt-50",
+      "completed": false,
+      "status": "Started but incomplete"
+    },
+    {
+      "model": "ResNeSt-50d",
+      "completed": false,
+      "status": "Started but incomplete"
+    },
+    {
+      "model": "ConvNeXt-Tiny",
+      "completed": true,
+      "status": "Completed"
+    },
+    {
+      "model": "CvT-13",
+      "completed": true,
+      "status": "Completed"
+    }
+  ],
+  "completed_count": 3,
+  "total_models": 5
+}

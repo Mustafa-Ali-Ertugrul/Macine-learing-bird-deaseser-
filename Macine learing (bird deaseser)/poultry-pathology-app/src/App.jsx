@@ -1,323 +1,582 @@
-import { useState } from 'react';
-import { Download, Search, Database, CheckCircle, AlertCircle, FileText, Image } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from "react";
 
-const PoultryDataCollector = () => {
-  const [activeTab, setActiveTab] = useState('pubmed');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [downloading, setDownloading] = useState(false);
-  const [stats, setStats] = useState({
-    total: 0,
-    downloaded: 0,
-    labeled: 0,
-    failed: 0
-  });
+const API_BASE = "http://localhost:8000";
 
-  // Örnek hastalık kategorileri
-  const diseases = [
-    { id: 'healthy', name: 'Sağlıklı Doku', color: 'bg-green-100 text-green-800' },
-    { id: 'ib', name: 'Infectious Bronchitis (IB)', color: 'bg-red-100 text-red-800' },
-    { id: 'ibd', name: 'Infectious Bursal Disease (IBD)', color: 'bg-orange-100 text-orange-800' },
-    { id: 'nd', name: 'Newcastle Disease', color: 'bg-purple-100 text-purple-800' },
-    { id: 'coccidiosis', name: 'Coccidiosis', color: 'bg-yellow-100 text-yellow-800' },
-    { id: 'fatty_liver', name: 'Fatty Liver Syndrome', color: 'bg-blue-100 text-blue-800' },
-    { id: 'histomoniasis', name: 'Histomoniasis', color: 'bg-pink-100 text-pink-800' }
-  ];
+// Tür tanımları
+const SPECIES_OPTIONS = [
+  { id: "chicken", label: "Tavuk", emoji: "🐔" },
+  { id: "goose",   label: "Kaz",   emoji: "🦢" },
+  { id: "duck",    label: "Ördek", emoji: "🦆" },
+];
 
-  // Veri kaynakları
-  const dataSources = [
-    {
-      id: 'pubmed',
-      name: 'PubMed Central (PMC)',
-      icon: FileText,
-      description: 'Open-access makalelerden supplemental görüntüler',
-      estimatedImages: '~1,600',
-      query: 'poultry histopathology microscopy'
-    },
-    {
-      id: 'cornell',
-      name: 'Cornell Vet Atlas',
-      icon: Database,
-      description: 'CC-BY-NC lisanslı yüksek çözünürlüklü histopatoloji',
-      estimatedImages: '~1,100',
-      query: 'avian diseases atlas'
-    },
-    {
-      id: 'ispah',
-      name: 'ISPAH Slide Set',
-      icon: Image,
-      description: 'Kişisel bilimsel kullanım için DVD set',
-      estimatedImages: '~2,400',
-      query: 'poultry pathology slides'
+const MODEL_OPTIONS = [
+  { id: "vit_b16",         label: "ViT-B/16" },
+  { id: "resnet50",        label: "ResNet-50" },
+  { id: "efficientnet_b0", label: "EfficientNet-B0" },
+  { id: "mobilenet_v2",    label: "MobileNetV2" },
+];
+
+function App() {
+  // State
+  const [selectedSpecies, setSelectedSpecies] = useState("chicken");
+  const [selectedModel, setSelectedModel]     = useState("vit_b16");
+  const [selectedFile, setSelectedFile]       = useState(null);
+  const [previewUrl, setPreviewUrl]           = useState(null);
+  const [result, setResult]                   = useState(null);
+  const [loading, setLoading]                 = useState(false);
+  const [error, setError]                     = useState(null);
+  const [speciesInfo, setSpeciesInfo]         = useState({});
+
+  // Tür bilgilerini yükle
+  useEffect(() => {
+    fetch(`${API_BASE}/species`)
+      .then((res) => res.json())
+      .then((data) => {
+        const info = {};
+        data.species.forEach((sp) => { info[sp.id] = sp; });
+        setSpeciesInfo(info);
+      })
+      .catch((err) => console.error("Species bilgisi yüklenemedi:", err));
+  }, []);
+
+  // Dosya seçimi
+  const handleFileChange = useCallback((e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+      setResult(null);
+      setError(null);
     }
-  ];
+  }, []);
 
-  // Örnek arama sonuçları
-  const mockSearchResults = [
-    {
-      id: 1,
-      title: 'Histopathological changes in broiler chickens with IB',
-      source: 'PMC8745632',
-      images: 12,
-      tissue: 'Trachea',
-      magnification: '200x',
-      license: 'CC-BY',
-      disease: 'ib'
-    },
-    {
-      id: 2,
-      title: 'Bursal lesions in IBD-infected chickens',
-      source: 'PMC9234567',
-      images: 8,
-      tissue: 'Bursa Fabricius',
-      magnification: '100x, 400x',
-      license: 'CC-BY-NC',
-      disease: 'ibd'
-    },
-    {
-      id: 3,
-      title: 'Hepatic lipidosis in layer hens',
-      source: 'Cornell Atlas #247',
-      images: 15,
-      tissue: 'Liver',
-      magnification: '40x-400x',
-      license: 'CC-BY-NC',
-      disease: 'fatty_liver'
-    },
-    {
-      id: 4,
-      title: 'Coccidial oocysts in intestinal mucosa',
-      source: 'ISPAH-2020-134',
-      images: 6,
-      tissue: 'Intestine',
-      magnification: '400x',
-      license: 'Educational',
-      disease: 'coccidiosis'
+  // Tahmin gönder
+  const handlePredict = useCallback(async () => {
+    if (!selectedFile) {
+      setError("Lütfen bir görüntü seçin.");
+      return;
     }
-  ];
 
-  const handleSearch = () => {
-    setDownloading(true);
-    setTimeout(() => {
-      setResults(mockSearchResults);
-      setStats({
-        total: mockSearchResults.reduce((sum, r) => sum + r.images, 0),
-        downloaded: 0,
-        labeled: 0,
-        failed: 0
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    const url = new URL(`${API_BASE}/predict`);
+    url.searchParams.append("species", selectedSpecies);
+    url.searchParams.append("model", selectedModel);
+    url.searchParams.append("top_k", "5");
+
+    try {
+      const response = await fetch(url.toString(), {
+        method: "POST",
+        body: formData,
       });
-      setDownloading(false);
-    }, 1500);
-  };
 
-  const handleDownload = (resultId) => {
-    const result = results.find(r => r.id === resultId);
-    if (result) {
-      setStats(prev => ({
-        ...prev,
-        downloaded: prev.downloaded + result.images
-      }));
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || "Tahmin başarısız.");
+      }
+
+      const data = await response.json();
+      setResult(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [selectedFile, selectedSpecies, selectedModel]);
 
-  const getCurrentSource = () => dataSources.find(s => s.id === activeTab);
+  // Sıfırla
+  const handleReset = useCallback(() => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    setResult(null);
+    setError(null);
+  }, []);
+
+  const currentSpecies = SPECIES_OPTIONS.find((s) => s.id === selectedSpecies);
+  const currentSpeciesInfo = speciesInfo[selectedSpecies];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                <Database className="text-indigo-600" size={36} />
-                Kanatlı Patoloji Veri Toplama
-              </h1>
-              <p className="text-gray-600 mt-2">
-                Transformer model eğitimi için histopatoloji görüntüleri toplama ve organizasyon
-              </p>
-            </div>
-          </div>
-        </div>
+    <div style={styles.container}>
+      {/* Header */}
+      <header style={styles.header}>
+        <h1 style={styles.title}>
+          🐦 Kümes Hayvanı Hastalık Sınıflandırma
+        </h1>
+        <p style={styles.subtitle}>
+          Derin öğrenme ile tavuk, kaz ve ördek hastalıklarını tespit edin
+        </p>
+      </header>
 
-        {/* İstatistikler */}
-        <div className="grid grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Toplam Görüntü</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              </div>
-              <Image className="text-blue-500" size={32} />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">İndirildi</p>
-                <p className="text-2xl font-bold text-green-600">{stats.downloaded}</p>
-              </div>
-              <Download className="text-green-500" size={32} />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Etiketlendi</p>
-                <p className="text-2xl font-bold text-indigo-600">{stats.labeled}</p>
-              </div>
-              <CheckCircle className="text-indigo-500" size={32} />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Başarısız</p>
-                <p className="text-2xl font-bold text-red-600">{stats.failed}</p>
-              </div>
-              <AlertCircle className="text-red-500" size={32} />
-            </div>
-          </div>
-        </div>
+      <div style={styles.mainGrid}>
+        {/* Sol Panel — Kontroller */}
+        <div style={styles.panel}>
+          <h2 style={styles.panelTitle}>⚙️ Ayarlar</h2>
 
-        {/* Veri Kaynağı Seçimi */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Veri Kaynağı Seçin</h2>
-          <div className="flex gap-2 mb-6">
-            {dataSources.map(source => {
-              const Icon = source.icon;
-              return (
-                <button
-                  key={source.id}
-                  onClick={() => setActiveTab(source.id)}
-                  className={`flex-1 p-4 rounded-lg border-2 transition-all ${
-                    activeTab === source.id
-                      ? 'border-indigo-500 bg-indigo-50'
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  <Icon className={activeTab === source.id ? 'text-indigo-600' : 'text-gray-400'} size={24} />
-                  <p className="font-semibold mt-2">{source.name}</p>
-                  <p className="text-sm text-gray-600">{source.estimatedImages}</p>
-                </button>
-              );
-            })}
-          </div>
+          {/* Tür Seçimi */}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Hayvan Türü</label>
+            <div style={styles.speciesGrid}>
+              {SPECIES_OPTIONS.map((sp) => {
+                const info = speciesInfo[sp.id];
+                const isSelected = selectedSpecies === sp.id;
+                const isAvailable = info?.model_available;
 
-          {/* Kaynak Detayları */}
-          {getCurrentSource() && (
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <p className="text-gray-700">{getCurrentSource().description}</p>
-              <p className="text-sm text-gray-500 mt-2">
-                Önerilen sorgu: <code className="bg-white px-2 py-1 rounded">{getCurrentSource().query}</code>
-              </p>
-            </div>
-          )}
-
-          {/* Arama */}
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Arama terimi girin (örn: chicken trachea histology)"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-            <button
-              onClick={handleSearch}
-              disabled={downloading}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 flex items-center gap-2"
-            >
-              {downloading ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                  Aranıyor...
-                </>
-              ) : (
-                <>
-                  <Search size={20} />
-                  Ara
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Hastalık Kategorileri */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Hedef Hastalıklar (7 Sınıf)</h2>
-          <div className="grid grid-cols-4 gap-3">
-            {diseases.map(disease => (
-              <div key={disease.id} className={`${disease.color} rounded-lg p-3`}>
-                <p className="font-semibold text-sm">{disease.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Sonuçlar */}
-        {results.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Bulunan Kaynaklar ({results.length})
-            </h2>
-            <div className="space-y-3">
-              {results.map(result => {
-                const disease = diseases.find(d => d.id === result.disease);
                 return (
-                  <div key={result.id} className="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition-colors">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900">{result.title}</h3>
-                        <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                          <span className="flex items-center gap-1">
-                            <FileText size={14} />
-                            {result.source}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Image size={14} />
-                            {result.images} görüntü
-                          </span>
-                          <span>Doku: {result.tissue}</span>
-                          <span>Büyütme: {result.magnification}</span>
-                        </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className={`${disease?.color} px-2 py-1 rounded text-xs font-medium`}>
-                            {disease?.name}
-                          </span>
-                          <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
-                            {result.license}
-                          </span>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => handleDownload(result.id)}
-                        className="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
-                      >
-                        <Download size={16} />
-                        İndir
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    key={sp.id}
+                    onClick={() => {
+                      setSelectedSpecies(sp.id);
+                      setResult(null);
+                    }}
+                    style={{
+                      ...styles.speciesButton,
+                      ...(isSelected ? styles.speciesButtonActive : {}),
+                      opacity: isAvailable === false ? 0.6 : 1,
+                    }}
+                  >
+                    <span style={styles.speciesEmoji}>{sp.emoji}</span>
+                    <span style={styles.speciesLabel}>{sp.label}</span>
+                    {isAvailable === false && (
+                      <span style={styles.speciesBadge}>Model Yok</span>
+                    )}
+                    {isAvailable === true && (
+                      <span style={styles.speciesBadgeReady}>Hazır ✓</span>
+                    )}
+                  </button>
                 );
               })}
             </div>
           </div>
-        )}
 
-        {/* Kullanım Talimatları */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-900 mb-2">📋 Sonraki Adımlar</h3>
-          <ol className="text-sm text-blue-800 space-y-1 ml-4 list-decimal">
-            <li>Yukarıdaki kaynakları arayın ve indirin</li>
-            <li>İndirilen görüntüleri <code className="bg-white px-1 rounded">poultry_microscopy/</code> klasörüne kaydedin</li>
-            <li>Her görüntü için metadata CSV dosyası oluşturun (image_path, disease, tissue, magnification)</li>
-            <li>Etiketleme arayüzüne geçin (sonraki artifact)</li>
-          </ol>
+          {/* Model Seçimi */}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Model Mimarisi</label>
+            <select
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+              style={styles.select}
+            >
+              {MODEL_OPTIONS.map((m) => (
+                <option key={m.id} value={m.id}>{m.label}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Görüntü Yükleme */}
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Görüntü</label>
+            <div style={styles.uploadArea}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={styles.fileInput}
+                id="imageUpload"
+              />
+              <label htmlFor="imageUpload" style={styles.uploadLabel}>
+                {previewUrl ? (
+                  <img
+                    src={previewUrl}
+                    alt="Önizleme"
+                    style={styles.preview}
+                  />
+                ) : (
+                  <div style={styles.uploadPlaceholder}>
+                    <span style={{ fontSize: "2rem" }}>📷</span>
+                    <span>Görüntü seçin veya sürükleyin</span>
+                  </div>
+                )}
+              </label>
+            </div>
+          </div>
+
+          {/* Butonlar */}
+          <div style={styles.buttonGroup}>
+            <button
+              onClick={handlePredict}
+              disabled={!selectedFile || loading}
+              style={{
+                ...styles.predictButton,
+                opacity: !selectedFile || loading ? 0.5 : 1,
+              }}
+            >
+              {loading ? "⏳ Analiz ediliyor..." : `${currentSpecies.emoji} Analiz Et`}
+            </button>
+            <button onClick={handleReset} style={styles.resetButton}>
+              🔄 Sıfırla
+            </button>
+          </div>
+
+          {/* Tür bilgisi */}
+          {currentSpeciesInfo && (
+            <div style={styles.infoBox}>
+              <strong>{currentSpecies.emoji} {currentSpecies.label} Durumu:</strong>
+              <br />
+              Toplam görüntü: {currentSpeciesInfo.total_images}
+              <br />
+              Dataset: {currentSpeciesInfo.dataset_ready ? "✅ Hazır" : "⏳ Veri bekleniyor"}
+              <br />
+              Model: {currentSpeciesInfo.model_available ? "✅ Mevcut" : "⏳ Eğitilmedi"}
+            </div>
+          )}
+        </div>
+
+        {/* Sağ Panel — Sonuçlar */}
+        <div style={styles.panel}>
+          <h2 style={styles.panelTitle}>📊 Sonuçlar</h2>
+
+          {error && (
+            <div style={styles.errorBox}>
+              ❌ {error}
+            </div>
+          )}
+
+          {result && (
+            <div>
+              {/* Üst sonuç */}
+              <div style={{
+                ...styles.topResult,
+                borderColor: result.top_prediction === "Healthy"
+                  ? "#22c55e" : "#ef4444",
+              }}>
+                <div style={styles.topResultEmoji}>
+                  {result.top_prediction === "Healthy" ? "🟢" : "🔴"}
+                </div>
+                <div>
+                  <div style={styles.topResultClass}>
+                    {result.top_prediction.replace(/_/g, " ")}
+                  </div>
+                  <div style={styles.topResultConf}>
+                    Güven: {(result.confidence * 100).toFixed(1)}%
+                  </div>
+                  <div style={styles.topResultSpecies}>
+                    Tür: {result.species_display}
+                  </div>
+                </div>
+              </div>
+
+              {/* Tüm tahminler */}
+              <div style={styles.predictionsContainer}>
+                <h3 style={{ marginBottom: "0.5rem" }}>Top Tahminler</h3>
+                {result.predictions.map((pred, idx) => (
+                  <div key={idx} style={styles.predictionRow}>
+                    <div style={styles.predictionInfo}>
+                      <span style={styles.predictionRank}>#{idx + 1}</span>
+                      <span>{pred.class.replace(/_/g, " ")}</span>
+                    </div>
+                    <div style={styles.predictionBarContainer}>
+                      <div
+                        style={{
+                          ...styles.predictionBar,
+                          width: `${pred.confidence * 100}%`,
+                          backgroundColor:
+                            pred.class === "Healthy" ? "#22c55e" : "#ef4444",
+                        }}
+                      />
+                    </div>
+                    <span style={styles.predictionPercent}>
+                      {(pred.confidence * 100).toFixed(1)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Meta bilgi */}
+              <div style={styles.metaInfo}>
+                <span>⏱ {result.inference_time_ms}ms</span>
+                <span>🧠 {result.model}</span>
+                <span>{currentSpecies.emoji} {result.species}</span>
+              </div>
+            </div>
+          )}
+
+          {!result && !error && (
+            <div style={styles.placeholder}>
+              <span style={{ fontSize: "3rem" }}>🔬</span>
+              <p>Bir görüntü seçin ve analiz edin</p>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Footer */}
+      <footer style={styles.footer}>
+        Desteklenen hastalıklar: {" "}
+        {[
+          "Avian Influenza", "Coccidiosis", "Fowl Pox", "Healthy",
+          "Histomoniasis", "Infectious Bronchitis", "IBD",
+          "Marek's Disease", "Newcastle Disease", "Salmonella",
+        ].join(" • ")}
+      </footer>
     </div>
   );
+}
+
+// ─────────────────────────────────────────
+// Styles
+// ─────────────────────────────────────────
+const styles = {
+  container: {
+    maxWidth: "1100px",
+    margin: "0 auto",
+    padding: "1.5rem",
+    fontFamily: "'Segoe UI', system-ui, sans-serif",
+    color: "#1f2937",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: "2rem",
+  },
+  title: {
+    fontSize: "1.8rem",
+    marginBottom: "0.3rem",
+  },
+  subtitle: {
+    color: "#6b7280",
+    fontSize: "1rem",
+  },
+  mainGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "1.5rem",
+  },
+  panel: {
+    background: "#fff",
+    borderRadius: "12px",
+    padding: "1.5rem",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    border: "1px solid #e5e7eb",
+  },
+  panelTitle: {
+    fontSize: "1.2rem",
+    marginBottom: "1rem",
+    paddingBottom: "0.5rem",
+    borderBottom: "2px solid #e5e7eb",
+  },
+  formGroup: {
+    marginBottom: "1.2rem",
+  },
+  label: {
+    display: "block",
+    fontWeight: "600",
+    marginBottom: "0.4rem",
+    fontSize: "0.9rem",
+  },
+  speciesGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gap: "0.5rem",
+  },
+  speciesButton: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "0.8rem 0.5rem",
+    border: "2px solid #e5e7eb",
+    borderRadius: "10px",
+    background: "#fff",
+    cursor: "pointer",
+    transition: "all 0.2s",
+    position: "relative",
+  },
+  speciesButtonActive: {
+    borderColor: "#3b82f6",
+    background: "#eff6ff",
+  },
+  speciesEmoji: {
+    fontSize: "1.5rem",
+  },
+  speciesLabel: {
+    fontSize: "0.85rem",
+    fontWeight: "600",
+    marginTop: "0.2rem",
+  },
+  speciesBadge: {
+    fontSize: "0.6rem",
+    background: "#fef3c7",
+    color: "#92400e",
+    padding: "1px 6px",
+    borderRadius: "4px",
+    marginTop: "0.2rem",
+  },
+  speciesBadgeReady: {
+    fontSize: "0.6rem",
+    background: "#d1fae5",
+    color: "#065f46",
+    padding: "1px 6px",
+    borderRadius: "4px",
+    marginTop: "0.2rem",
+  },
+  select: {
+    width: "100%",
+    padding: "0.6rem",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    fontSize: "0.9rem",
+  },
+  uploadArea: {
+    position: "relative",
+  },
+  fileInput: {
+    position: "absolute",
+    opacity: 0,
+    width: "100%",
+    height: "100%",
+    cursor: "pointer",
+  },
+  uploadLabel: {
+    display: "block",
+    cursor: "pointer",
+  },
+  uploadPlaceholder: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "150px",
+    border: "2px dashed #d1d5db",
+    borderRadius: "10px",
+    color: "#9ca3af",
+    gap: "0.5rem",
+  },
+  preview: {
+    width: "100%",
+    maxHeight: "200px",
+    objectFit: "contain",
+    borderRadius: "10px",
+    border: "1px solid #e5e7eb",
+  },
+  buttonGroup: {
+    display: "flex",
+    gap: "0.5rem",
+    marginBottom: "1rem",
+  },
+  predictButton: {
+    flex: 1,
+    padding: "0.8rem",
+    borderRadius: "8px",
+    border: "none",
+    background: "#3b82f6",
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: "0.95rem",
+    cursor: "pointer",
+  },
+  resetButton: {
+    padding: "0.8rem 1.2rem",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    background: "#fff",
+    cursor: "pointer",
+    fontSize: "0.95rem",
+  },
+  infoBox: {
+    background: "#f9fafb",
+    padding: "0.8rem",
+    borderRadius: "8px",
+    fontSize: "0.85rem",
+    lineHeight: "1.6",
+    border: "1px solid #e5e7eb",
+  },
+  errorBox: {
+    background: "#fef2f2",
+    color: "#dc2626",
+    padding: "1rem",
+    borderRadius: "8px",
+    border: "1px solid #fecaca",
+  },
+  topResult: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+    padding: "1.2rem",
+    borderRadius: "10px",
+    border: "2px solid",
+    marginBottom: "1rem",
+    background: "#fafafa",
+  },
+  topResultEmoji: {
+    fontSize: "2.5rem",
+  },
+  topResultClass: {
+    fontSize: "1.2rem",
+    fontWeight: "700",
+  },
+  topResultConf: {
+    fontSize: "0.95rem",
+    color: "#6b7280",
+  },
+  topResultSpecies: {
+    fontSize: "0.85rem",
+    color: "#9ca3af",
+  },
+  predictionsContainer: {
+    marginBottom: "1rem",
+  },
+  predictionRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    marginBottom: "0.4rem",
+  },
+  predictionInfo: {
+    width: "180px",
+    display: "flex",
+    gap: "0.4rem",
+    fontSize: "0.85rem",
+  },
+  predictionRank: {
+    color: "#9ca3af",
+    fontWeight: "600",
+  },
+  predictionBarContainer: {
+    flex: 1,
+    height: "8px",
+    background: "#f3f4f6",
+    borderRadius: "4px",
+    overflow: "hidden",
+  },
+  predictionBar: {
+    height: "100%",
+    borderRadius: "4px",
+    transition: "width 0.5s ease",
+  },
+  predictionPercent: {
+    width: "50px",
+    textAlign: "right",
+    fontSize: "0.85rem",
+    fontWeight: "600",
+  },
+  metaInfo: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "1.5rem",
+    fontSize: "0.8rem",
+    color: "#9ca3af",
+    paddingTop: "0.5rem",
+    borderTop: "1px solid #f3f4f6",
+  },
+  placeholder: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "300px",
+    color: "#9ca3af",
+    gap: "0.5rem",
+  },
+  footer: {
+    textAlign: "center",
+    marginTop: "2rem",
+    fontSize: "0.75rem",
+    color: "#9ca3af",
+    lineHeight: "1.6",
+  },
 };
 
-export default PoultryDataCollector;
+export default App;

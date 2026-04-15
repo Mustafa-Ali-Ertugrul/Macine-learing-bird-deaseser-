@@ -1,0 +1,543 @@
+﻿-- The C compiler identification is MSVC 19.44.35224.0
+-- The CXX compiler identification is MSVC 19.44.35224.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python3: C:\Users\Ali\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe (found suitable version "3.13.12", minimum required is "3.6") found components: Interpreter Development Development.Module Development.Embed
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX17
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX17 - Success
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX20
+-- Performing Test ABSL_INTERNAL_AT_LEAST_CXX20 - Failed
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Using libclang archive: C:/Users/Ali/ycmd/cpp/../clang_archives/libclang-21.1.3-win64.tar.bz2
+-- Using libclang to provide semantic completion for C/C++/ObjC
+-- Using external libclang: C:/Users/Ali/AppData/Local/Temp/ycm_build_m8m1ew0g/lib/libclang.lib
+-- Using Abseil hash tables
+-- Configuring done (29.1s)
+-- Generating done (1.5s)
+-- Build files have been written to: C:/Users/Ali/AppData/Local/Temp/ycm_build_m8m1ew0g
+.NET Framework i├ºin MSBuild s├╝r├╝m 17.14.40+3e7442088
+
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ZERO_CHECK.vcxproj]
+  1>Checking Build System
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_log_severity.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  log_severity.cc
+  absl_log_severity.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_log_severity.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_raw_logging_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  raw_logging.cc
+  absl_raw_logging_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_raw_logging_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\types\absl_bad_optional_access.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/types/CMakeLists.txt
+  bad_optional_access.cc
+  absl_bad_optional_access.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\types\Release\absl_bad_optional_access.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\types\absl_bad_variant_access.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/types/CMakeLists.txt
+  bad_variant_access.cc
+  absl_bad_variant_access.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\types\Release\absl_bad_variant_access.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_spinlock_wait.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  spinlock_wait.cc
+  absl_spinlock_wait.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_spinlock_wait.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_base.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  cycleclock.cc
+  spinlock.cc
+  sysinfo.cc
+  thread_identity.cc
+  unscaledcycleclock.cc
+  absl_base.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_base.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\absl_city.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/hash/CMakeLists.txt
+  city.cc
+  absl_city.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\Release\absl_city.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\absl_civil_time.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/time/CMakeLists.txt
+  civil_time_detail.cc
+  absl_civil_time.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\Release\absl_civil_time.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\absl_crc_cpu_detect.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/crc/CMakeLists.txt
+  cpu_detect.cc
+  absl_crc_cpu_detect.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\Release\absl_crc_cpu_detect.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\absl_crc_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/crc/CMakeLists.txt
+  crc.cc
+  crc_x86_arm_combined.cc
+  absl_crc_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\Release\absl_crc_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\numeric\absl_int128.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/numeric/CMakeLists.txt
+  int128.cc
+  absl_int128.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\numeric\Release\absl_int128.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_throw_delegate.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  throw_delegate.cc
+  absl_throw_delegate.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_throw_delegate.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_string_view.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  string_view.cc
+  absl_string_view.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_string_view.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_strings_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  ostringstream.cc
+  utf8.cc
+  escaping.cc
+  absl_strings_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_strings_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_strings.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  ascii.cc
+  charconv.cc
+  escaping.cc
+  charconv_bigint.cc
+  charconv_parse.cc
+  damerau_levenshtein_distance.cc
+  memutil.cc
+  stringify_sink.cc
+  match.cc
+  numbers.cc
+  str_cat.cc
+  str_replace.cc
+  str_split.cc
+  substitute.cc
+  absl_strings.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_strings.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_str_format_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  arg.cc
+  bind.cc
+  extension.cc
+  float_conversion.cc
+  output.cc
+  parser.cc
+  absl_str_format_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_str_format_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\absl_crc32c.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/crc/CMakeLists.txt
+  crc32c.cc
+  crc_memcpy_fallback.cc
+  crc_memcpy_x86_arm_combined.cc
+  crc_non_temporal_memcpy.cc
+  absl_crc32c.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\Release\absl_crc32c.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\absl_crc_cord_state.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/crc/CMakeLists.txt
+  crc_cord_state.cc
+  absl_crc_cord_state.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\crc\Release\absl_crc_cord_state.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\absl_debugging_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/debugging/CMakeLists.txt
+  address_is_readable.cc
+  elf_mem_image.cc
+  vdso_support.cc
+  absl_debugging_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\Release\absl_debugging_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_cord_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  cord_internal.cc
+  cord_rep_btree.cc
+  cord_rep_btree_navigator.cc
+  cord_rep_btree_reader.cc
+  cord_rep_crc.cc
+  cord_rep_consume.cc
+  absl_cord_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_cord_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\profiling\absl_exponential_biased.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/profiling/CMakeLists.txt
+  exponential_biased.cc
+  absl_exponential_biased.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\profiling\Release\absl_exponential_biased.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_cordz_functions.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  cordz_functions.cc
+  absl_cordz_functions.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_cordz_functions.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\absl_demangle_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/debugging/CMakeLists.txt
+  demangle.cc
+  absl_demangle_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\Release\absl_demangle_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\absl_malloc_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/base/CMakeLists.txt
+  low_level_alloc.cc
+  absl_malloc_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\base\Release\absl_malloc_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\absl_graphcycles_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/synchronization/CMakeLists.txt
+  graphcycles.cc
+  absl_graphcycles_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\Release\absl_graphcycles_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\absl_time_zone.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/time/CMakeLists.txt
+  time_zone_fixed.cc
+  time_zone_format.cc
+  time_zone_if.cc
+  time_zone_impl.cc
+  time_zone_info.cc
+  time_zone_libc.cc
+  time_zone_lookup.cc
+  time_zone_posix.cc
+  zone_info_source.cc
+  absl_time_zone.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\Release\absl_time_zone.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\absl_time.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/time/CMakeLists.txt
+  civil_time.cc
+  clock.cc
+  duration.cc
+  format.cc
+  time.cc
+  absl_time.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\time\Release\absl_time.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\absl_kernel_timeout_internal.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/synchronization/CMakeLists.txt
+  kernel_timeout.cc
+  absl_kernel_timeout_internal.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\Release\absl_kernel_timeout_internal.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\absl_stacktrace.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/debugging/CMakeLists.txt
+  stacktrace.cc
+  absl_stacktrace.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\Release\absl_stacktrace.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\absl_symbolize.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/debugging/CMakeLists.txt
+  symbolize.cc
+  absl_symbolize.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\debugging\Release\absl_symbolize.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\absl_synchronization.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/synchronization/CMakeLists.txt
+  barrier.cc
+  blocking_counter.cc
+  create_thread_identity.cc
+  futex_waiter.cc
+  per_thread_sem.cc
+  pthread_waiter.cc
+  sem_waiter.cc
+  stdcpp_waiter.cc
+  waiter_base.cc
+  win32_waiter.cc
+  notification.cc
+  mutex.cc
+  absl_synchronization.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\synchronization\Release\absl_synchronization.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_cordz_handle.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  cordz_handle.cc
+  absl_cordz_handle.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_cordz_handle.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_cordz_info.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  cordz_info.cc
+  absl_cordz_info.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_cordz_info.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\absl_cord.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/strings/CMakeLists.txt
+  cord.cc
+  cord_analysis.cc
+  cord_buffer.cc
+  absl_cord.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\strings\Release\absl_cord.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\absl_low_level_hash.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/hash/CMakeLists.txt
+  low_level_hash.cc
+  absl_low_level_hash.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\Release\absl_low_level_hash.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\absl_hash.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/hash/CMakeLists.txt
+  hash.cc
+  absl_hash.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\hash\Release\absl_hash.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\container\absl_hashtablez_sampler.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/container/CMakeLists.txt
+  hashtablez_sampler.cc
+  hashtablez_sampler_force_weak_definition.cc
+  absl_hashtablez_sampler.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\container\Release\absl_hashtablez_sampler.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\container\absl_raw_hash_set.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/absl/absl/container/CMakeLists.txt
+  raw_hash_set.cc
+  absl_raw_hash_set.vcxproj -> C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\_deps\absl-build\absl\container\Release\absl_raw_hash_set.lib
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(548,5): warning MSB8029: The Intermediate directory or Output directory cannot reside under the Temporary directory as it could lead to issues with incremental build. [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  Building Custom Rule C:/Users/Ali/ycmd/cpp/ycm/CMakeLists.txt
+  Candidate.cpp
+  Character.cpp
+  CodePoint.cpp
+  IdentifierCompleter.cpp
+  IdentifierDatabase.cpp
+  IdentifierUtils.cpp
+  PythonSupport.cpp
+  Repository.cpp
+  Result.cpp
+  Utils.cpp
+  Word.cpp
+  versioning.cpp
+  ycm_core.cpp
+  ClangCompleter.cpp
+  ClangHelpers.cpp
+  ClangUtils.cpp
+  CompilationDatabase.cpp
+  CompletionData.cpp
+  Documentation.cpp
+  Range.cpp
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(112,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(125,66): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(136,64): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(215,53): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(270,62): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(283,58): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompletionData.cpp(282,58): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  TranslationUnit.cpp
+  TranslationUnitStore.cpp
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\CompilationDatabase.cpp(102,63): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\ClangHelpers.cpp(67,58): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\ClangHelpers.cpp(117,67): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\ClangHelpers.cpp(147,75): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,38686): warning C5255: unterminated bidirectional character encountered: 'U+202a' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,38692): warning C5255: unterminated bidirectional character encountered: 'U+202b' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,38704): warning C5255: unterminated bidirectional character encountered: 'U+202d' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,38710): warning C5255: unterminated bidirectional character encountered: 'U+202e' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,39016): warning C5255: unterminated bidirectional character encountered: 'U+2066' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,39022): warning C5255: unterminated bidirectional character encountered: 'U+2067' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(17,39028): warning C5255: unterminated bidirectional character encountered: 'U+2068' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40143): warning C5255: unterminated bidirectional character encountered: 'U+202a' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40149): warning C5255: unterminated bidirectional character encountered: 'U+202b' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40161): warning C5255: unterminated bidirectional character encountered: 'U+202d' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40167): warning C5255: unterminated bidirectional character encountered: 'U+202e' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40473): warning C5255: unterminated bidirectional character encountered: 'U+2066' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40479): warning C5255: unterminated bidirectional character encountered: 'U+2067' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(18,40485): warning C5255: unterminated bidirectional character encountered: 'U+2068' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40137): warning C5255: unterminated bidirectional character encountered: 'U+202a' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40143): warning C5255: unterminated bidirectional character encountered: 'U+202b' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40155): warning C5255: unterminated bidirectional character encountered: 'U+202d' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40161): warning C5255: unterminated bidirectional character encountered: 'U+202e' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40467): warning C5255: unterminated bidirectional character encountered: 'U+2066' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40473): warning C5255: unterminated bidirectional character encountered: 'U+2067' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(19,40479): warning C5255: unterminated bidirectional character encountered: 'U+2068' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40156): warning C5255: unterminated bidirectional character encountered: 'U+202a' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40162): warning C5255: unterminated bidirectional character encountered: 'U+202b' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40174): warning C5255: unterminated bidirectional character encountered: 'U+202d' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40180): warning C5255: unterminated bidirectional character encountered: 'U+202e' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40486): warning C5255: unterminated bidirectional character encountered: 'U+2066' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40492): warning C5255: unterminated bidirectional character encountered: 'U+2067' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\UnicodeTable.inc(20,40498): warning C5255: unterminated bidirectional character encountered: 'U+2068' [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+  (compiling source file '../../../../../ycmd/cpp/ycm/CodePoint.cpp')
+  
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(104,47): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(102,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(183,47): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(459,37): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(457,55): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+C:\Users\Ali\ycmd\cpp\ycm\ClangCompleter\TranslationUnit.cpp(481,71): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data [C:\Users\Ali\AppData\Local\Temp\ycm_build_m8m1ew0g\ycm\ycm_core.vcxproj]
+     Creating library C:/Users/Ali/AppData/Local/Temp/ycm_build_m8m1ew0g/ycm/Release/ycm_core.lib and object C:/Users/Ali/AppData/Local/Temp/ycm_build_m8m1ew0g/ycm/Release/ycm_core.exp
+  ycm_core.vcxproj -> C:\Users\Ali\ycmd\ycm_core.cp313-win_amd64.pyd
+python : C:\Users\Ali\AppDa
+ta\Local\Packages\PythonSof
+twareFoundation.Python.3.13
+_qbz5n2kfra8p0\LocalCache\l
+ocal-packages\Python313\sit
+e-packages\setuptools\dist.
+py:759: SetuptoolsDeprecati
+onWarning: License classifi
+ers are deprecated.
+At line:1 char:178
++ ... $env:PATH"; python C:
+\Users\Ali\ycmd\build.py --
+all --verbose 2>&1 |  ...
++                 ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (C:\  
+  Users\Ali\Ap...are dep   
+ recated.:String) [], R    
+emoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+!!
+
+        *******************
+***************************
+***************************
+*******
+        Please consider rem
+oving the following classif
+iers in favor of a SPDX lic
+ense expression:
+
+        License :: OSI Appr
+oved :: Apache Software Lic
+ense
+
+        See https://packagi
+ng.python.org/en/latest/gui
+des/writing-pyproject-toml/
+#license for details.
+        *******************
+***************************
+***************************
+*******
+
+!!
+  self._finalize_license_ex
+pression()
+running build
+running build_py
+creating C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+copying src\watchdog\events.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+copying src\watchdog\version.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+copying src\watchdog\watchmedo.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+copying src\watchdog\__init__.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+creating C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\api.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\fsevents.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\fsevents2.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\inotify.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\inotify_buffer.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\inotify_c.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\kqueue.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\polling.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\read_directory_changes.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\winapi.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+copying src\watchdog\observers\__init__.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\observers
+creating C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\tricks
+copying src\watchdog\tricks\__init__.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\tricks
+creating C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\bricks.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\delayed_queue.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\dirsnapshot.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\echo.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\event_debouncer.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\patterns.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\platform.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\process_watcher.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+copying src\watchdog\utils\__init__.py -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog\utils
+running egg_info
+writing src\watchdog.egg-info\PKG-INFO
+writing dependency_links to src\watchdog.egg-info\dependency_links.txt
+writing entry points to src\watchdog.egg-info\entry_points.txt
+writing requirements to src\watchdog.egg-info\requires.txt
+writing top-level names to src\watchdog.egg-info\top_level.txt
+reading manifest file 'src\watchdog.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found mat
+ching '*.h' under directory
+ 'src'
+warning: no files found mat
+ching 'docs\*.txt'
+adding license file 'LICENSE'
+adding license file 'COPYING'
+adding license file 'AUTHORS'
+writing manifest file 'src\watchdog.egg-info\SOURCES.txt'
+copying src\watchdog\py.typed -> C:\Users\Ali\ycmd\third_party\watchdog_deps\watchdog\build\lib3\watchdog
+C:\Users\Ali\AppData\Local\
+Packages\PythonSoftwareFoun
+dation.Python.3.13_qbz5n2kf
+ra8p0\LocalCache\local-pack
+ages\Python313\site-package
+s\setuptools\dist.py:759: S
+etuptoolsDeprecationWarning
+: License classifiers are d
+eprecated.
+!!
+
+        *******************
+***************************
+***************************
+*******
+        Please consider rem
+oving the following classif
+iers in favor of a SPDX lic
+ense expression:
+
+        License :: OSI Appr
+oved :: Apache Software Lic
+ense
+
+        See https://packagi
+ng.python.org/en/latest/gui
+des/writing-pyproject-toml/
+#license for details.
+        *******************
+***************************
+***************************
+*******
+
+!!
+  self._finalize_license_ex
+pression()
+running build
+running build_py
+creating C:\Users\Ali\ycmd\third_party\regex-build\regex
+copying regex_3\__init__.py -> C:\Users\Ali\ycmd\third_party\regex-build\regex
+copying regex_3\__init__.py -> C:\Users\Ali\ycmd\third_party\regex-build\regex
+copying regex_3\regex.py -> C:\Users\Ali\ycmd\third_party\regex-build\regex
+copying regex_3\_regex_core.py -> C:\Users\Ali\ycmd\third_party\regex-build\regex
+copying regex_3\test_regex.py -> C:\Users\Ali\ycmd\third_party\regex-build\regex
+running build_ext
+building 'regex._regex' extension
+creating C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX86\x64\cl.exe" /c /nologo /O2 /W3 /GL /DNDEBUG /MD "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\include" "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\ATLMFC\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" "-IC:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" "-IC:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" /Tcregex_3\_regex.c /FoC:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex.obj
+_regex.c
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX86\x64\cl.exe" /c /nologo /O2 /W3 /GL /DNDEBUG /MD "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\include" "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\ATLMFC\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" "-IC:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" "-IC:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" /Tcregex_3\_regex_unicode.c /FoC:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex_unicode.obj
+_regex_unicode.c
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX86\x64\link.exe" /nologo /INCREMENTAL:NO /LTCG /DLL /MANIFEST:EMBED,ID=2 /MANIFESTUAC:NO "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\libs" "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0" "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\PCbuild\amd64" "/LIBPATH:C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\ATLMFC\lib\x64" "/LIBPATH:C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64" "/LIBPATH:C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\lib\um\x64" "/LIBPATH:C:\Program Files (x86)\Windows Kits\10\lib\10.0.26100.0\ucrt\x64" "/LIBPATH:C:\Program Files (x86)\Windows Kits\10\\lib\10.0.26100.0\\um\x64" /EXPORT:PyInit__regex C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex.obj C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex_unicode.obj /OUT:C:\Users\Ali\ycmd\third_party\regex-build\regex\_regex.cp313-win_amd64.pyd /IMPLIB:C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex.cp313-win_amd64.lib
+   Creating library C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex.cp313-win_amd64.lib and object C:\Users\Ali\ycmd\third_party\regex-build\3\temp.win-amd64-cpython-313\Release\regex_3\_regex.cp313-win_amd64.exp
+Generating code
+Finished generating code
+Calling C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe -latest -property installationVersion
+vswhere -latest returned version 17.14.37027.9
+Searching Python 3.13 libraries...
+Found Python library: C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\libs\python313.lib
+Found Python headers folder: C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Include
+Installing Omnisharp v1.37.11
+Using cached Omnisharp: omnisharp.http-win-x64.zip
+Extracting Omnisharp to C:\Users\Ali\ycmd\third_party\omnisharp-roslyn...DONE
+Done installing Omnisharp
+
+ERROR: Unable to find execu
+table 'go'. go is required 
+to build gopls.

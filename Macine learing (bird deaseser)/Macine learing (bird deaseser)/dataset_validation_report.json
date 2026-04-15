@@ -1,0 +1,1078 @@
+{
+  "issues": [
+    "🚨 Severe class imbalance detected! Ratio: 12.3x",
+    "🚨 Class 'Avian_Influenza': 25.0% of test set leaked from training!",
+    "🚨 Class 'Histomoniasis': 82.5% of test set leaked from training!",
+    "🚨 Class 'Infectious_Bronchitis': 72.5% of test set leaked from training!",
+    "🚨 Class 'Infectious_Bursal_Disease': 95.0% of test set leaked from training!",
+    "🚨 Class 'Mareks_Disease': 27.5% of test set leaked from training!",
+    "🚨 CRITICAL: 121 duplicate images found between train/test splits!",
+    "🚨 This causes data leakage and inflates validation metrics!"
+  ],
+  "warnings": [
+    "⚠️  Class 'Avian_Influenza' has only 199 samples - may cause overfitting",
+    "⚠️  Class 'Histomoniasis' has only 199 samples - may cause overfitting",
+    "⚠️  Class 'Infectious_Bronchitis' has only 198 samples - may cause overfitting",
+    "⚠️  Class 'Infectious_Bursal_Disease' has only 199 samples - may cause overfitting",
+    "⚠️  Class 'Mareks_Disease' has only 198 samples - may cause overfitting",
+    "⚠️  Duplicate in training set: safe_aug_35_safe_aug_12_IntervetAIbird.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_201611171511240_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_24_safe_aug_11_Swollen_chicken.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_safe_aug_10_IntervetAIbird.jpg",
+    "⚠️  Duplicate in training set: safe_aug_37_safe_aug_15_202213102110.jpg",
+    "⚠️  Duplicate in training set: 20146191353150_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_symptoms-of-avian-flu-in-chickens-1024x683.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_20146191353150_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_202213102110.jpg",
+    "⚠️  Duplicate in training set: safe_aug_1_202213102110.jpg",
+    "⚠️  Duplicate in training set: safe_aug_20_safe_aug_11_201611171511240_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_8_safe_aug_1_20161117159390_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_36_safe_aug_11_5247073958_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_safe_aug_1_2022131048150_Big.jpg",
+    "⚠️  Duplicate in training set: safe_aug_28_safe_aug_1_0.jpg",
+    "⚠️  Duplicate in training set: safe_aug_7_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_150_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_139_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_91_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_86_safe_aug_11_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_48_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_104_safe_aug_17_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_12_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_22_safe_aug_11_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_46_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_24_safe_aug_0_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_145_safe_aug_14_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_42_safe_aug_14_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: safe_aug_6_safe_aug_10_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_149_safe_aug_15_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_21_safe_aug_0_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_114_safe_aug_10_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_107_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_67_safe_aug_0_histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: safe_aug_111_safe_aug_15_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_histomoniasis_0013.jpg",
+    "⚠️  Duplicate in training set: safe_aug_95_safe_aug_0_histomoniasis_0013.jpg",
+    "⚠️  Duplicate in training set: safe_aug_63_safe_aug_10_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0013.jpg",
+    "⚠️  Duplicate in training set: safe_aug_110_safe_aug_14_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_50_safe_aug_10_histomoniasis_0013.jpg",
+    "⚠️  Duplicate in training set: safe_aug_4_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_135_safe_aug_15_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_26_safe_aug_14_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_58_histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: safe_aug_142_safe_aug_10_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_137_safe_aug_14_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_histomoniasis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_33_safe_aug_14_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_60_safe_aug_10_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_52_safe_aug_15_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_71_safe_aug_0_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_59_safe_aug_0_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_44_safe_aug_11_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: histomoniasis_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_17_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_127_safe_aug_14_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_40_safe_aug_10_histomoniasis_0013.jpg",
+    "⚠️  Duplicate in training set: safe_aug_61_safe_aug_14_histomoniasis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_123_safe_aug_17_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_1_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_79_safe_aug_0_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_83_histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_histomoniasis_0021.jpg",
+    "⚠️  Duplicate in training set: safe_aug_74_safe_aug_0_histomoniasis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_39_safe_aug_14_histomoniasis_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_102_safe_aug_14_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_144_histomoniasis_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_153_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_69_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_7_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_144_safe_aug_0_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_34_safe_aug_17_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_57_safe_aug_15_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_160_safe_aug_0_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_21_safe_aug_14_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_safe_aug_15_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_116_safe_aug_15_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_89_safe_aug_14_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_65_safe_aug_15_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_73_safe_aug_0_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_77_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_158_safe_aug_14_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_17_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_43_safe_aug_0_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_98_safe_aug_17_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_114_safe_aug_0_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_113_safe_aug_0_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_88_safe_aug_10_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_4_safe_aug_0_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_51_safe_aug_11_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_81_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_145_safe_aug_15_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_22_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_121_safe_aug_14_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_28_safe_aug_15_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_60_safe_aug_10_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_84_safe_aug_14_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_52_safe_aug_0_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_safe_aug_0_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_19_safe_aug_14_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_152_safe_aug_17_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_2_safe_aug_11_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_32_safe_aug_0_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_154_safe_aug_10_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_124_safe_aug_15_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_59_safe_aug_14_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_44_safe_aug_10_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_17_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_82_infectious_bronchitis_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_61_safe_aug_17_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_87_safe_aug_15_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_126_safe_aug_11_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_159_safe_aug_17_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_151_safe_aug_15_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_79_safe_aug_10_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_99_safe_aug_11_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_157_safe_aug_17_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bronchitis_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_100_safe_aug_17_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_135_safe_aug_17_infectious_bronchitis_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_74_safe_aug_0_infectious_bronchitis_0005.jpg",
+    "⚠️  Duplicate in training set: safe_aug_3_safe_aug_15_infectious_bronchitis_0002.jpg",
+    "⚠️  Duplicate in training set: safe_aug_104_safe_aug_10_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_147_safe_aug_0_infectious_bronchitis_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_117_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_167_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_13_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_144_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_171_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_64_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_76_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_53_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_36_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_130_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_69_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_31_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_160_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_86_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_124_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_111_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_49_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_48_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_116_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_107_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_73_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_35_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_27_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_140_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_30_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_22_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_174_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_176_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_75_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_72_safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_47_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_103_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_121_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_128_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_156_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_43_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_42_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_136_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_184_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_66_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_127_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_23_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_113_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_3_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_178_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_6_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_131_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_21_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_88_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_45_safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_122_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_145_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_67_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_179_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_11_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_95_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_63_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_101_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_114_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_89_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_119_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_180_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_50_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_96_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_4_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_146_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_26_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_51_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_81_safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_58_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_148_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_12_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_84_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_115_safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_126_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_33_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_5_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_60_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_112_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_110_safe_aug_106_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_56_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_52_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_163_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_18_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_161_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_166_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_125_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_71_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_132_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_175_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_59_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_129_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_44_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_185_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_138_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_40_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_99_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_61_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_87_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_134_safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_162_safe_aug_0_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_120_safe_aug_105_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_172_safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_79_safe_aug_103_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_83_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_170_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_102_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_104_safe_aug_105_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_143_safe_aug_103_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_74_safe_aug_0_infectious_bursal_disease_0006.jpg",
+    "⚠️  Duplicate in training set: safe_aug_39_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_106_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_155_safe_aug_102_infectious_bursal_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_56_marek's_disease_0015.jpg",
+    "⚠️  Duplicate in training set: safe_aug_65_safe_aug_0_marek's_disease_0008.jpg",
+    "⚠️  Duplicate in training set: safe_aug_44_marek's_disease_0010.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_marek's_disease_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_marek's_disease_0010.jpg",
+    "⚠️  Duplicate in training set: safe_aug_31_safe_aug_0_marek's_disease_0023.jpg",
+    "⚠️  Duplicate in training set: safe_aug_57_safe_aug_17_marek's_disease_0008.jpg",
+    "⚠️  Duplicate in training set: marek's_disease_0010.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_marek's_disease_0020.jpg",
+    "⚠️  Duplicate in training set: safe_aug_27_safe_aug_15_marek's_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_64_safe_aug_0_marek's_disease_0008.jpg",
+    "⚠️  Duplicate in training set: safe_aug_26_safe_aug_14_marek's_disease_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_28_safe_aug_0_marek's_disease_0010.jpg",
+    "⚠️  Duplicate in training set: marek's_disease_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_marek's_disease_0012.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_safe_aug_0_marek's_disease_0003.jpg",
+    "⚠️  Duplicate in training set: safe_aug_37_safe_aug_15_marek's_disease_0012.jpg",
+    "⚠️  Duplicate in training set: safe_aug_29_safe_aug_0_marek's_disease_0026.jpg",
+    "⚠️  Duplicate in training set: safe_aug_10_safe_aug_14_marek's_disease_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_15_marek's_disease_0004.jpg",
+    "⚠️  Duplicate in training set: safe_aug_35_safe_aug_15_marek's_disease_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_18_marek's_disease_0001.jpg",
+    "⚠️  Duplicate in training set: safe_aug_0_marek's_disease_0022.jpg",
+    "⚠️  Duplicate in training set: marek's_disease_0011.jpg",
+    "⚠️  Duplicate in training set: safe_aug_50_safe_aug_10_marek's_disease_0009.jpg",
+    "⚠️  Duplicate in training set: safe_aug_17_marek's_disease_0026.jpg",
+    "⚠️  Duplicate in training set: marek's_disease_0025.jpg",
+    "⚠️  Duplicate in training set: safe_aug_14_marek's_disease_0003.jpg"
+  ],
+  "stats": {
+    "class_counts": {
+      "Avian_Influenza": 199,
+      "Coccidiosis": 2343,
+      "Fowl_Pox": 451,
+      "Healthy": 2386,
+      "Histomoniasis": 199,
+      "Infectious_Bronchitis": 198,
+      "Infectious_Bursal_Disease": 199,
+      "Mareks_Disease": 198,
+      "Newcastle_Disease": 560,
+      "Salmonella": 2442
+    },
+    "total_images": 9175,
+    "total_leaks": 121,
+    "leak_details": [
+      {
+        "test_image": "safe_aug_10_8541693159_Big.jpg",
+        "train_image": "safe_aug_17_safe_aug_10_8541693159_Big.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_14_avian_influenza_hemorrhagic_skin_head_chicken_high-1.jpg",
+        "train_image": "safe_aug_38_safe_aug_14_avian_influenza_hemorrhagic_skin_head_chicken_high-1.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_10_17.jpg",
+        "train_image": "safe_aug_33_safe_aug_10_17.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_42_safe_aug_0_201611171515320_Big.jpg",
+        "train_image": "safe_aug_0_201611171515320_Big.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_14_5247073958_Big.jpg",
+        "train_image": "safe_aug_13_5247073958_Big.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_9_safe_aug_1_Swollen_chicken.jpg",
+        "train_image": "safe_aug_1_Swollen_chicken.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_3_safe_aug_10_2022131048150_Big.jpg",
+        "train_image": "safe_aug_10_2022131048150_Big.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "2022151625560.jpg",
+        "train_image": "safe_aug_23_2022151625560.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_31_safe_aug_14_20146191353150_Big.jpg",
+        "train_image": "safe_aug_14_20146191353150_Big.jpg",
+        "class": "Avian_Influenza",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_14_2022151625560.jpg",
+        "train_image": "safe_aug_4_safe_aug_14_2022151625560.jpg",
+        "class": "Avian_Influenza",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_78_safe_aug_15_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_15_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_41_safe_aug_0_histomoniasis_0021.jpg",
+        "train_image": "histomoniasis_0021.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_70_safe_aug_10_histomoniasis_0015.jpg",
+        "train_image": "safe_aug_63_safe_aug_10_histomoniasis_0015.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_85_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_136_safe_aug_17_histomoniasis_0011.jpg",
+        "train_image": "safe_aug_116_safe_aug_17_histomoniasis_0011.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_128_safe_aug_17_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_35_safe_aug_17_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_17_safe_aug_14_histomoniasis_0011.jpg",
+        "train_image": "safe_aug_153_safe_aug_15_histomoniasis_0011.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_124_safe_aug_14_histomoniasis_0021.jpg",
+        "train_image": "safe_aug_94_safe_aug_14_histomoniasis_0021.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_122_safe_aug_14_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_68_safe_aug_15_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_106_safe_aug_14_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_127_safe_aug_14_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_130_safe_aug_10_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_141_safe_aug_10_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_65_safe_aug_14_histomoniasis_0013.jpg",
+        "train_image": "safe_aug_14_histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_93_safe_aug_0_histomoniasis_0015.jpg",
+        "train_image": "safe_aug_1_histomoniasis_0015.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_37_safe_aug_0_histomoniasis_0015.jpg",
+        "train_image": "safe_aug_21_safe_aug_0_histomoniasis_0015.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_115_safe_aug_11_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_44_safe_aug_11_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_62_safe_aug_10_histomoniasis_0013.jpg",
+        "train_image": "safe_aug_40_safe_aug_10_histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "histomoniasis_0003.jpg",
+        "train_image": "safe_aug_117_histomoniasis_0003.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_126_histomoniasis_0011.jpg",
+        "train_image": "histomoniasis_0011.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_55_safe_aug_15_histomoniasis_0021.jpg",
+        "train_image": "safe_aug_0_histomoniasis_0021.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_38_safe_aug_0_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_68_safe_aug_15_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_57_safe_aug_15_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_19_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_histomoniasis_0011.jpg",
+        "train_image": "safe_aug_116_safe_aug_17_histomoniasis_0011.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_16_histomoniasis_0003.jpg",
+        "train_image": "safe_aug_15_safe_aug_14_histomoniasis_0003.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_25_safe_aug_15_histomoniasis_0013.jpg",
+        "train_image": "safe_aug_3_safe_aug_14_histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_151_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_79_safe_aug_0_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_2_safe_aug_10_histomoniasis_0013.jpg",
+        "train_image": "safe_aug_50_safe_aug_10_histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_9_safe_aug_15_histomoniasis_0013.jpg",
+        "train_image": "safe_aug_3_safe_aug_14_histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_105_safe_aug_17_histomoniasis_0003.jpg",
+        "train_image": "safe_aug_104_safe_aug_17_histomoniasis_0003.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_90_histomoniasis_0001.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_histomoniasis_0001.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_143_safe_aug_15_histomoniasis_0021.jpg",
+        "train_image": "safe_aug_15_histomoniasis_0021.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_histomoniasis_0021.jpg",
+        "train_image": "safe_aug_45_safe_aug_17_histomoniasis_0021.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_82_histomoniasis_0013.jpg",
+        "train_image": "histomoniasis_0013.jpg",
+        "class": "Histomoniasis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_histomoniasis_0009.jpg",
+        "train_image": "safe_aug_35_safe_aug_17_histomoniasis_0009.jpg",
+        "class": "Histomoniasis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_42_infectious_bronchitis_0004.jpg",
+        "train_image": "infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_85_infectious_bronchitis_0001.jpg",
+        "train_image": "safe_aug_22_infectious_bronchitis_0001.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_139_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_7_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_130_safe_aug_17_infectious_bronchitis_0001.jpg",
+        "train_image": "safe_aug_17_infectious_bronchitis_0001.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_18_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_0_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_97_safe_aug_14_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_4_safe_aug_0_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_125_infectious_bronchitis_0005.jpg",
+        "train_image": "safe_aug_14_infectious_bronchitis_0005.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_93_safe_aug_0_infectious_bronchitis_0002.jpg",
+        "train_image": "safe_aug_3_safe_aug_15_infectious_bronchitis_0002.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_38_infectious_bronchitis_0002.jpg",
+        "train_image": "safe_aug_14_safe_aug_0_infectious_bronchitis_0002.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_118_safe_aug_17_infectious_bronchitis_0005.jpg",
+        "train_image": "safe_aug_100_safe_aug_17_infectious_bronchitis_0005.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_63_safe_aug_15_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_82_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_8_safe_aug_10_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_10_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "infectious_bronchitis_0002.jpg",
+        "train_image": "safe_aug_14_safe_aug_0_infectious_bronchitis_0002.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_129_safe_aug_0_infectious_bronchitis_0006.jpg",
+        "train_image": "safe_aug_0_infectious_bronchitis_0006.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_56_safe_aug_14_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_82_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_39_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_140_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_58_safe_aug_0_infectious_bronchitis_0006.jpg",
+        "train_image": "safe_aug_0_infectious_bronchitis_0006.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_infectious_bronchitis_0004.jpg",
+        "train_image": "safe_aug_6_safe_aug_17_infectious_bronchitis_0004.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_16_safe_aug_0_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_114_safe_aug_0_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_155_safe_aug_10_infectious_bronchitis_0005.jpg",
+        "train_image": "safe_aug_10_infectious_bronchitis_0005.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_149_safe_aug_0_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_87_safe_aug_15_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_30_safe_aug_17_infectious_bronchitis_0006.jpg",
+        "train_image": "safe_aug_159_safe_aug_17_infectious_bronchitis_0006.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_9_safe_aug_0_infectious_bronchitis_0005.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_infectious_bronchitis_0005.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_107_safe_aug_15_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_87_safe_aug_15_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_91_safe_aug_10_infectious_bronchitis_0001.jpg",
+        "train_image": "safe_aug_104_safe_aug_10_infectious_bronchitis_0001.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_146_infectious_bronchitis_0006.jpg",
+        "train_image": "safe_aug_43_safe_aug_0_infectious_bronchitis_0006.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_safe_aug_15_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_87_safe_aug_15_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_15_infectious_bronchitis_0001.jpg",
+        "train_image": "safe_aug_138_safe_aug_0_infectious_bronchitis_0001.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_infectious_bronchitis_0003.jpg",
+        "train_image": "safe_aug_152_safe_aug_17_infectious_bronchitis_0003.jpg",
+        "class": "Infectious_Bronchitis",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_78_safe_aug_102_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_102_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_41_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_146_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_70_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_99_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_85_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_120_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_147_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_139_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_143_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_135_safe_aug_0_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_165_safe_aug_0_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_97_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_158_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_133_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_127_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_16_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_39_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_109_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_141_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_129_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_65_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_145_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_93_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_37_safe_aug_0_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_162_safe_aug_0_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_123_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_40_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_62_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_28_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_8_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_137_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_143_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_55_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_120_safe_aug_105_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_38_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_57_safe_aug_102_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_143_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_183_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_162_safe_aug_0_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_104_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_25_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_170_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_169_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_99_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_157_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_132_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_2_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_28_safe_aug_106_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_9_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_170_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_108_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_6_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_90_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_129_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_154_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_74_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_186_safe_aug_0_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_143_safe_aug_103_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_132_safe_aug_105_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_173_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_155_safe_aug_102_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_82_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "train_image": "safe_aug_145_safe_aug_103_infectious_bursal_disease_0003.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_182_safe_aug_102_infectious_bursal_disease_0006.jpg",
+        "train_image": "safe_aug_102_infectious_bursal_disease_0006.jpg",
+        "class": "Infectious_Bursal_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_0_marek's_disease_0003.jpg",
+        "train_image": "safe_aug_0_safe_aug_0_marek's_disease_0003.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_6_safe_aug_0_marek's_disease_0024.jpg",
+        "train_image": "safe_aug_0_marek's_disease_0024.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_32_safe_aug_11_marek's_disease_0015.jpg",
+        "train_image": "safe_aug_56_marek's_disease_0015.jpg",
+        "class": "Mareks_Disease",
+        "distance": 2
+      },
+      {
+        "test_image": "safe_aug_34_safe_aug_15_marek's_disease_0020.jpg",
+        "train_image": "safe_aug_15_marek's_disease_0020.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_17_marek's_disease_0012.jpg",
+        "train_image": "safe_aug_0_marek's_disease_0012.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_9_marek's_disease_0010.jpg",
+        "train_image": "marek's_disease_0010.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_0_marek's_disease_0001.jpg",
+        "train_image": "safe_aug_25_safe_aug_0_marek's_disease_0001.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_68_safe_aug_17_marek's_disease_0019.jpg",
+        "train_image": "safe_aug_17_marek's_disease_0019.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_15_marek's_disease_0022.jpg",
+        "train_image": "safe_aug_58_safe_aug_15_marek's_disease_0022.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_15_marek's_disease_0001.jpg",
+        "train_image": "safe_aug_25_safe_aug_0_marek's_disease_0001.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      },
+      {
+        "test_image": "safe_aug_5_safe_aug_17_marek's_disease_0018.jpg",
+        "train_image": "safe_aug_17_marek's_disease_0018.jpg",
+        "class": "Mareks_Disease",
+        "distance": 0
+      }
+    ]
+  }
+}

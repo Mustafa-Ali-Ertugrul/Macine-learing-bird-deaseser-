@@ -1,125 +1,105 @@
 # Python
 __pycache__/
-<<<<<<< HEAD
 *.pyc
 *.pyo
+*.py[cod]
+*$py.class
+*.so
 *.egg-info/
 dist/
 build/
+.Python
 
 # Virtual environments
 .venv/
 venv/
 env/
-
-=======
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-.venv/
 ENV/
-env/
+ml_venv/
 
-# Data (use DVC instead)
-final_dataset_10_classes/
-/data/
-!src/data/
-poultry_labeled_12k.csv
-labeling_batch.csv
-
-# Models (use Git LFS or DVC)
-models/*.pth
-models/*.pt
-*.onnx
-
-# Logs
-logs/
-*.log
-runs/
-mlruns/
-
-# Training outputs
-training_output/
-reports/
-
->>>>>>> 31a72715756cc21176fb1378d37f792ec1a11b75
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-<<<<<<< HEAD
-# Data collection output
-poultry_microscopy/
-poultry_dataset.csv
-
-# Large datasets (not tracked)
-organized_poultry_dataset/
-chicken_disease_dataset/
-public_poultry_dataset/
-public_downloads/
-dataset_downloads/
-data/
-final_poultry_dataset_10_classes/
-new_diseases_dataset/
-organized_labeled_dataset/
-poultry_dataset_512x512/
-
-# Generated dataset splits
-final_dataset_split/
-quarantine_cleaned/
-
-# Logs and temporary files
-*.log
-*_training_log.txt
-status_full.txt
-evaluation_results.txt
-
-# Temporary leakage examples
-leakage_example_*.png
-
-# Node.js
-node_modules/
-poultry-pathology-app/node_modules/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Model weights and checkpoints (large files)
-*.pth
-*.safetensors
-*.bin
-optimizer.pt
-rng_state.pth
-scheduler.pt
-**/checkpoint-*/
-*_poultry_results/final_model/
-ml_venv/
-final_dataset_clean/
-models/
-=======
 # OS
 .DS_Store
 Thumbs.db
+nul
 
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
 
+# ============================================
+# Datasets (large, not tracked in git)
+# ============================================
+final_dataset_10_classes/
+final_dataset_split/
+final_dataset_clean/
+clean_dataset_split/
+data/
+!src/data/
+organized_poultry_dataset/
+chicken_disease_dataset/
+public_poultry_dataset/
+public_downloads/
+dataset_downloads/
+final_poultry_dataset_10_classes/
+new_diseases_dataset/
+organized_labeled_dataset/
+poultry_dataset_512x512/
+quarantine_cleaned/
+
+# Dataset CSVs
+poultry_labeled_12k.csv
+labeling_batch.csv
+poultry_dataset.csv
+
+# ============================================
+# Model weights & checkpoints (large files)
+# ============================================
+*.pth
+*.safetensors
+*.bin
+*.onnx
+optimizer.pt
+rng_state.pth
+scheduler.pt
+**/checkpoint-*/
+*_poultry_results/final_model/
+models/*.pth
+models/*.pt
+
+# ============================================
+# Training outputs & logs
+# ============================================
+*.log
+*_training_log.txt
+training_output/
+reports/
+logs/
+runs/
+mlruns/
+output/
+
 # Temporary
 *.tmp
 *.temp
+status_full.txt
+evaluation_results.txt
+leakage_example_*.png
+
+# Node.js
+node_modules/
+
+# Old / unrelated project folders
+poultry_microscopy/
+Macine-learing-bird-deaseser-/
+C++/
 
 # DVC
 .dvc/config.local
 .dvc/tmp
 .dvc/cache
-
-# Old project folders
-poultry_microscopy/
-Macine-learing-bird-deaseser-/
->>>>>>> 31a72715756cc21176fb1378d37f792ec1a11b75
