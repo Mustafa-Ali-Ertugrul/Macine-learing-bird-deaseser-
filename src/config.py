@@ -38,6 +38,26 @@ DISEASE_CLASSES = [
 
 NUM_CLASSES = len(DISEASE_CLASSES)
 
+CATTLE_DISEASE_CLASSES = [
+    "Healthy",
+    "Foot_and_Mouth_Disease",
+    "Lumpy_Skin_Disease",
+    "Mastitis",
+    "Bovine_Tuberculosis",
+    "Dermatophilosis",
+    "Ringworm",
+    "Pediculosis",
+    "Digital_Dermatitis",
+    "Hoof_Overgrowth",
+]
+
+SPECIES_DISEASE_CLASSES = {
+    "chicken": DISEASE_CLASSES,
+    "goose": DISEASE_CLASSES,
+    "duck": DISEASE_CLASSES,
+    "cattle": CATTLE_DISEASE_CLASSES,
+}
+
 # ─────────────────────────────────────────────
 # Tür bazlı konfigürasyon
 # ─────────────────────────────────────────────
@@ -69,6 +89,15 @@ SPECIES_CONFIG = {
         "model_dir": os.path.join(BASE_DIR, "models", "duck"),
         "results_dir": os.path.join(BASE_DIR, "results", "duck"),
     },
+    "cattle": {
+        "display_name": "Cattle",
+        "raw_data_dir": os.path.join(BASE_DIR, "cattle_dataset"),
+        "split_data_dir": os.path.join(BASE_DIR, "cattle_split_dataset"),
+        "data_dir": os.path.join(BASE_DIR, "cattle_dataset"),
+        "output_prefix": "cattle",
+        "model_dir": os.path.join(BASE_DIR, "models", "cattle"),
+        "results_dir": os.path.join(BASE_DIR, "results", "cattle"),
+    },
 }
 
 SUPPORTED_SPECIES = list(SPECIES_CONFIG.keys())
@@ -77,8 +106,6 @@ SUPPORTED_SPECIES = list(SPECIES_CONFIG.keys())
 # Ortak konfigürasyon (tüm türler için)
 # ─────────────────────────────────────────────
 COMMON_CONFIG = {
-    "num_classes": NUM_CLASSES,
-    "class_names": DISEASE_CLASSES,
     "image_size": 224,
     "batch_size": 32,
     "epochs": 50,
@@ -170,11 +197,19 @@ def validate_species(species: str) -> str:
     return species
 
 
+def get_disease_classes(species: str = "chicken") -> list[str]:
+    """Return disease classes for a species."""
+    species = validate_species(species)
+    return list(SPECIES_DISEASE_CLASSES[species])
+
+
 def get_species_config(species: str = "chicken") -> dict:
     """Belirli bir tür için konfigürasyonu döndür."""
     species = validate_species(species)
     config = deepcopy(COMMON_CONFIG)
     config.update(deepcopy(SPECIES_CONFIG[species]))
+    config["class_names"] = get_disease_classes(species)
+    config["num_classes"] = len(config["class_names"])
     config["species"] = species
     return config
 
@@ -204,6 +239,9 @@ def get_config(model_name: str = "vit_b16", species: str = "chicken") -> dict:
     # Tür config
     config.update(deepcopy(SPECIES_CONFIG[species]))
 
+    config["class_names"] = get_disease_classes(species)
+    config["num_classes"] = len(config["class_names"])
+
     # Model config (varsa)
     if model_name in MODEL_CONFIGS:
         model_conf = deepcopy(MODEL_CONFIGS[model_name])
@@ -213,27 +251,56 @@ def get_config(model_name: str = "vit_b16", species: str = "chicken") -> dict:
 
     config["species"] = species
 
-    # Model save path - gerçek konumlara göre
-    model_paths = {
-        "vit_b16": os.path.join(BASE_DIR, "vit_poultry_results", "final_model"),
-        "resnext50": os.path.join(BASE_DIR, "resnext_poultry_results", "best_resnext.pth"),
-        "resnest50d": os.path.join(BASE_DIR, "resnest_poultry_results", "best_resnest.pth"),
-        "convnext_tiny": os.path.join(BASE_DIR, "convnext_poultry_results", "final_model"),
-        "cvt_13": os.path.join(BASE_DIR, "cvt_poultry_results", "final_model"),
-        "resnet50": os.path.join(BASE_DIR, "models", "chicken", "resnet50_best.pth"),
-        "efficientnet_b0": os.path.join(BASE_DIR, "models", "chicken", "efficientnet_b0_best.pth"),
-        "mobilenet_v2": os.path.join(BASE_DIR, "models", "chicken", "mobilenet_v2_best.pth"),
-    }
-    
     config["experiment_name"] = f"{species}_{model_name}"
     config["output_dir"] = os.path.join(
-        BASE_DIR, f"{model_name}_poultry_results"
+        BASE_DIR, f"{species}_{model_name}_results"
     )
-    config["model_save_path"] = model_paths.get(model_name, os.path.join(
+    config["model_save_path"] = os.path.join(
         config["model_dir"], f"{model_name}_best.pth"
-    ))
+    )
+    config["model_load_paths"] = get_model_path_candidates(model_name, species)
 
     return config
+
+
+def get_model_path_candidates(model_name: str, species: str = "chicken") -> list[str]:
+    """Return preferred and legacy model paths for inference/evaluation."""
+    species = validate_species(species)
+    sp_config = SPECIES_CONFIG[species]
+
+    candidates = [
+        os.path.join(sp_config["model_dir"], f"{model_name}_best.pth"),
+    ]
+
+    legacy_paths = {
+        "vit_b16": [
+            os.path.join(BASE_DIR, "vit_poultry_results", "final_model"),
+            os.path.join(BASE_DIR, "poultry_disease_vit.pth"),
+        ],
+        "resnext50": [
+            os.path.join(BASE_DIR, "resnext_poultry_results", "best_resnext.pth"),
+        ],
+        "resnest50d": [
+            os.path.join(BASE_DIR, "resnest_poultry_results", "best_resnest.pth"),
+        ],
+        "convnext_tiny": [
+            os.path.join(BASE_DIR, "convnext_poultry_results", "final_model"),
+        ],
+        "cvt_13": [
+            os.path.join(BASE_DIR, "cvt_poultry_results", "final_model"),
+        ],
+    }
+
+    candidates.extend(legacy_paths.get(model_name, []))
+    return list(dict.fromkeys(candidates))
+
+
+def get_existing_model_path(model_name: str, species: str = "chicken") -> str | None:
+    """Return the first existing model path, checking current and legacy paths."""
+    for path in get_model_path_candidates(model_name, species):
+        if os.path.exists(path):
+            return path
+    return None
 
 
 def get_model_path(model_name: str, species: str = "chicken") -> str:
@@ -257,7 +324,7 @@ def check_dataset_exists(species: str) -> dict:
     }
 
     if report["exists"]:
-        for cls in DISEASE_CLASSES:
+        for cls in get_disease_classes(species):
             cls_path = os.path.join(sp_config["raw_data_dir"], cls)
             if os.path.exists(cls_path):
                 images = [

@@ -39,6 +39,10 @@ Desktop.ini
 *.ipynb
 .tpap/
 
+# Test coverage
+.coverage
+htmlcov/
+
 # ============================================
 # Datasets (large, not tracked in git)
 # ============================================
@@ -49,6 +53,12 @@ clean_dataset_split/
 data/
 duck_dataset_10_classes/
 goose_dataset_10_classes/
+cattle_dataset/
+cattle_dataset_web_candidates/
+cattle_kaggle_downloads/
+cattle_kaggle_file_cache/
+cattle_roboflow_downloads/
+cattle_web_downloads/
 organized_poultry_dataset/
 chicken_disease_dataset/
 public_poultry_dataset/
@@ -61,6 +71,7 @@ poultry_dataset_512x512/
 quarantine_cleaned/
 duck_split_dataset/
 goose_split_dataset/
+cattle_split_dataset/
 dataset/
 downloaded_disease_images/
 outputs/

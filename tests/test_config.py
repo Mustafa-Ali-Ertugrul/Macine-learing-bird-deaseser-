@@ -2,6 +2,7 @@
 import pytest
 from pathlib import Path
 from src.utils.config_loader import ConfigLoader
+from src.config import get_config, get_disease_classes, SUPPORTED_SPECIES
 
 
 class TestConfigLoader:
@@ -38,3 +39,21 @@ class TestConfigLoader:
         # Check data config
         assert 'dataset_dir' in config['data']
         assert 'num_classes' in config['data']
+
+    def test_cattle_species_config(self):
+        """Test cattle species has independent classes and paths."""
+        assert 'cattle' in SUPPORTED_SPECIES
+
+        classes = get_disease_classes('cattle')
+        config = get_config('vit_b16', 'cattle')
+
+        assert 'Foot_and_Mouth_Disease' in classes
+        assert 'Lumpy_Skin_Disease' in classes
+        assert 'Mastitis' in classes
+        assert 'Bovine_Tuberculosis' in classes
+        assert 'Ringworm' in classes
+        assert 'Digital_Dermatitis' in classes
+        assert 'Bovine_Respiratory_Disease' not in classes
+        assert config['class_names'] == classes
+        assert config['num_classes'] == len(classes)
+        assert 'models\\cattle' in config['model_save_path']
