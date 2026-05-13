@@ -1,6 +1,6 @@
 """
 Model olusturma ve yonetimi.
-EfficientNet-B0, ResNet50, MobileNet V3, ResNet18 destegi.
+EfficientNet-B0, ResNet50, MobileNet V2/V3, ResNet18 ve ViT-B/16 destegi.
 """
 
 import logging
@@ -57,6 +57,15 @@ def create_model(cfg):
             nn.Linear(in_features, num_classes),
         )
 
+    elif model_name == "mobilenet_v2":
+        model = models.mobilenet_v2(weights=weights)
+        if freeze_backbone:
+            for name, param in model.named_parameters():
+                if "classifier" not in name:
+                    param.requires_grad = False
+        in_features = model.classifier[1].in_features
+        model.classifier[1] = nn.Linear(in_features, num_classes)
+
     elif model_name == "mobilenet_v3":
         model = models.mobilenet_v3_small(weights=weights)
         if freeze_backbone:
@@ -65,6 +74,15 @@ def create_model(cfg):
                     param.requires_grad = False
         in_features = model.classifier[3].in_features
         model.classifier[3] = nn.Linear(in_features, num_classes)
+
+    elif model_name in ("vit_b16", "vit_b_16"):
+        model = models.vit_b_16(weights=weights)
+        if freeze_backbone:
+            for name, param in model.named_parameters():
+                if "heads" not in name:
+                    param.requires_grad = False
+        in_features = model.heads.head.in_features
+        model.heads.head = nn.Linear(in_features, num_classes)
 
     else:
         raise ValueError(f"Desteklenmeyen model: {model_name}")
@@ -86,12 +104,19 @@ def create_model(cfg):
                     param.requires_grad = True
             logger.info(f"ResNet: son {unfreeze_n}/4 layer acildi")
 
-        elif model_name == "mobilenet_v3":
+        elif model_name in ("mobilenet_v2", "mobilenet_v3"):
             blocks = list(model.features.children())
             for block in blocks[-unfreeze_n:]:
                 for param in block.parameters():
                     param.requires_grad = True
             logger.info(f"MobileNet: son {unfreeze_n}/{len(blocks)} blok acildi")
+
+        elif model_name in ("vit_b16", "vit_b_16"):
+            blocks = list(model.encoder.layers.children())
+            for block in blocks[-unfreeze_n:]:
+                for param in block.parameters():
+                    param.requires_grad = True
+            logger.info(f"ViT: son {unfreeze_n}/{len(blocks)} encoder blogu acildi")
 
     # Egitilecek parametre sayisi
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
