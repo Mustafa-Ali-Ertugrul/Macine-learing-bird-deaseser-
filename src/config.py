@@ -39,22 +39,48 @@ DISEASE_CLASSES = [
 NUM_CLASSES = len(DISEASE_CLASSES)
 
 CATTLE_DISEASE_CLASSES = [
-    "Healthy",
-    "Foot_and_Mouth_Disease",
-    "Lumpy_Skin_Disease",
-    "Mastitis",
     "Bovine_Tuberculosis",
     "Dermatophilosis",
-    "Ringworm",
-    "Pediculosis",
     "Digital_Dermatitis",
+    "Foot_and_Mouth_Disease",
+    "Healthy",
     "Hoof_Overgrowth",
+    "Lumpy_Skin_Disease",
+    "Mastitis",
+    "Pediculosis",
+    "Ringworm",
+]
+
+DUCK_DISEASE_CLASSES = [
+    "Avian_Influenza",
+    "Bumblefoot",
+    "Coccidiosis",
+    "Duck_Plague",
+    "Fowl_Pox",
+    "Healthy",
+    "Histomoniasis",
+    "Infectious_Bronchitis",
+    "Newcastle_Disease",
+    "Salmonella",
+]
+
+GOOSE_DISEASE_CLASSES = [
+    "Avian_Influenza",
+    "Coccidiosis",
+    "Fowl_Pox",
+    "Goose_Parvovirus",
+    "Healthy",
+    "Histomoniasis",
+    "Infectious_Bronchitis",
+    "Infectious_Bursal_Disease",
+    "Mareks_Disease",
+    "Newcastle_Disease",
 ]
 
 SPECIES_DISEASE_CLASSES = {
     "chicken": DISEASE_CLASSES,
-    "goose": DISEASE_CLASSES,
-    "duck": DISEASE_CLASSES,
+    "goose": GOOSE_DISEASE_CLASSES,
+    "duck": DUCK_DISEASE_CLASSES,
     "cattle": CATTLE_DISEASE_CLASSES,
 }
 
