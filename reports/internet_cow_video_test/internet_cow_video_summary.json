@@ -1,0 +1,242 @@
+{
+  "video_source": "https://www.pexels.com/video/herd-of-cows-during-daylight-855974/",
+  "video_file": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\pexels_herd_of_cows_855974.mp4",
+  "model_file": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cattle_strict_efficientnet_kasa\\best_model.pth",
+  "model": "efficientnet_b0",
+  "frames_tested": 12,
+  "top_prediction_counts": {
+    "Healthy": 12
+  },
+  "average_top_confidence": 0.9968,
+  "predictions": [
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_01_0.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9982,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9982
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0006
+        },
+        {
+          "class": "Lumpy_Skin_Disease",
+          "confidence": 0.0005
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_02_21.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9978,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9978
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0007
+        },
+        {
+          "class": "Lumpy_Skin_Disease",
+          "confidence": 0.0004
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_03_43.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.998,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.998
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0007
+        },
+        {
+          "class": "Foot_and_Mouth_Disease",
+          "confidence": 0.0004
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_04_64.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.998,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.998
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0006
+        },
+        {
+          "class": "Foot_and_Mouth_Disease",
+          "confidence": 0.0004
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_05_85.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.998,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.998
+        },
+        {
+          "class": "Foot_and_Mouth_Disease",
+          "confidence": 0.0004
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0004
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_06_106.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9981,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9981
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0006
+        },
+        {
+          "class": "Foot_and_Mouth_Disease",
+          "confidence": 0.0003
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_07_128.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9945,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9945
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0024
+        },
+        {
+          "class": "Ringworm",
+          "confidence": 0.0007
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_08_149.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9959,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9959
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0018
+        },
+        {
+          "class": "Bovine_Tuberculosis",
+          "confidence": 0.0005
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_09_170.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9943,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9943
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0023
+        },
+        {
+          "class": "Bovine_Tuberculosis",
+          "confidence": 0.001
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_10_191.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9979,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9979
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0007
+        },
+        {
+          "class": "Lumpy_Skin_Disease",
+          "confidence": 0.0004
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_11_213.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.9974,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.9974
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0009
+        },
+        {
+          "class": "Bovine_Tuberculosis",
+          "confidence": 0.0007
+        }
+      ]
+    },
+    {
+      "frame": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\sampled_frames\\frame_12_234.jpg",
+      "top_prediction": "Healthy",
+      "confidence": 0.993,
+      "top3": [
+        {
+          "class": "Healthy",
+          "confidence": 0.993
+        },
+        {
+          "class": "Mastitis",
+          "confidence": 0.0032
+        },
+        {
+          "class": "Lumpy_Skin_Disease",
+          "confidence": 0.0009
+        }
+      ]
+    }
+  ],
+  "csv_path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\reports\\internet_cow_video_test\\internet_cow_video_predictions.csv"
+}
