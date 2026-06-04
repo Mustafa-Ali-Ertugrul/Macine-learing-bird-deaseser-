@@ -23,6 +23,7 @@ ml_venv/
 # IDE
 .vscode/
 .idea/
+.qoder/
 *.swp
 *.swo
 *.swn
@@ -82,6 +83,9 @@ poultry_labeled_12k.csv
 labeling_batch.csv
 poultry_dataset.csv
 poultry_labeling_tool.html
+*_dataset.zip
+*_dataset_colab_clean.zip
+*_split_dataset.zip
 
 # ============================================
 # Model weights & checkpoints
@@ -98,6 +102,7 @@ poultry_disease_vit.pth
 **/checkpoint-*/
 *_poultry_results/final_model/
 models/
+cattle_strict_efficientnet_kasa/
 
 # ============================================
 # Training outputs & logs
@@ -116,9 +121,17 @@ logs/
 runs/
 mlruns/
 output/
+review/
+tmp_model_tests/
 temp_*.jpg
 temp_*.png
 temp_predict_*
+*_results/
+*_poultry_results/
+*_cattle_results/
+cattle_*_results/
+duck_*_results/
+goose_*_results/
 
 # Analysis outputs
 data_leakage_details.html
@@ -142,9 +155,20 @@ model_performance_comparison.png
 *.tmp
 *.temp
 status_full.txt
+status.txt
+status_utf8.txt
 leakage_example_*.png
 *.tmp.jpg
 *.tmp.png
+cmake_path.txt
+check_placeholders.py
+cover_page.py
+document_layout.py
+dump_docx_full.py
+inspect_docx.py
+inspect_tables.py
+search_tablo.py
+table_context.py
 
 # Node.js
 node_modules/
@@ -156,6 +180,10 @@ C++/
 
 # Vercel
 .vercel/
+
+# Local indexes and generated tool state
+.gitnexus/
+local_artifacts/
 
 # Archive (optional - for deprecated files)
 # archive/
