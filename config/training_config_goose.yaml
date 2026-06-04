@@ -12,13 +12,13 @@ class_names:
   - Avian_Influenza
   - Coccidiosis
   - Fowl_Pox
+  - Goose_Parvovirus
   - Healthy
   - Histomoniasis
   - Infectious_Bronchitis
   - Infectious_Bursal_Disease
   - Mareks_Disease
   - Newcastle_Disease
-  - Salmonella
 
 # Model
 model_architecture: vit_b16

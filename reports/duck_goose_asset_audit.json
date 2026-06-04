@@ -1,0 +1,557 @@
+{
+  "datasets": {
+    "dataset/duck": {
+      "Bumblefoot": 58,
+      "Duck_Plague": 41,
+      "Fowl_Pox": 58
+    },
+    "dataset/goose": {
+      "Fowl_Pox": 46,
+      "Goose_Parvovirus": 31
+    },
+    "cleaned_dataset/duck": {
+      "Bumblefoot": 58,
+      "Duck_Plague": 39,
+      "Fowl_Pox": 58,
+      "removed": 1
+    },
+    "cleaned_dataset/goose": {
+      "Fowl_Pox": 46,
+      "Goose_Parvovirus": 29
+    },
+    "duck_dataset_10_classes": {
+      "Bumblefoot": 34,
+      "Duck_Plague": 40,
+      "Fowl_Pox": 58
+    },
+    "goose_dataset_10_classes": {
+      "Fowl_Pox": 46,
+      "Goose_Parvovirus": 28
+    },
+    "duck_split_dataset": {},
+    "goose_split_dataset": {},
+    "prepared_duck_3class": {
+      "Bumblefoot": 58,
+      "Duck_Plague": 40,
+      "Fowl_Pox": 58
+    },
+    "prepared_duck_3class_cleaned": {
+      "Bumblefoot": 58,
+      "Duck_Plague": 39,
+      "Fowl_Pox": 58
+    },
+    "prepared_goose_2class": {
+      "Fowl_Pox": 46,
+      "Goose_Parvovirus": 31
+    },
+    "prepared_goose_2class_cleaned": {
+      "Fowl_Pox": 46,
+      "Goose_Parvovirus": 29
+    },
+    "downloaded_disease_images": {
+      "backyardchickens_com": 24,
+      "cwhl_vet_cornell_edu": 60,
+      "thepoultrysite_com": 20
+    },
+    "review": {
+      "goose_errors": 7,
+      "goose_parvovirus_suspect": 28,
+      "goose_suspect": 26,
+      "review": 3
+    }
+  },
+  "checkpoints": [
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\poultry_disease_vit.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\best_poultry_disease_model.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\final_poultry_disease_model.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\resnest_poultry_results\\best_resnest.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\resnext_poultry_results\\best_resnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2500\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2500\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2500\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2700\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2700\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2700\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2800\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2800\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\vit_poultry_results\\checkpoint-2800\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\tmp_model_tests\\tum_sigir_modelleri\\models\\cattle\\efficientnet_b0_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Avian_Influenza",
+        "Coccidiosis",
+        "Fowl_Pox",
+        "Healthy",
+        "Histomoniasis",
+        "Infectious_Bronchitis",
+        "Infectious_Bursal_Disease",
+        "Mareks_Disease",
+        "Newcastle_Disease",
+        "Salmonella"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Healthy",
+        "Foot_and_Mouth_Disease",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Ringworm",
+        "Pediculosis",
+        "Digital_Dermatitis",
+        "Hoof_Overgrowth"
+      ],
+      "config_model_name": "efficientnet_b0",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_efficientnet_b0_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\tmp_model_tests\\tum_sigir_modelleri\\models\\cattle\\mobilenet_v2_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Avian_Influenza",
+        "Coccidiosis",
+        "Fowl_Pox",
+        "Healthy",
+        "Histomoniasis",
+        "Infectious_Bronchitis",
+        "Infectious_Bursal_Disease",
+        "Mareks_Disease",
+        "Newcastle_Disease",
+        "Salmonella"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Healthy",
+        "Foot_and_Mouth_Disease",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Ringworm",
+        "Pediculosis",
+        "Digital_Dermatitis",
+        "Hoof_Overgrowth"
+      ],
+      "config_model_name": "mobilenet_v2",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_mobilenet_v2_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\tmp_model_tests\\tum_sigir_modelleri\\models\\cattle\\resnet50_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Avian_Influenza",
+        "Coccidiosis",
+        "Fowl_Pox",
+        "Healthy",
+        "Histomoniasis",
+        "Infectious_Bronchitis",
+        "Infectious_Bursal_Disease",
+        "Mareks_Disease",
+        "Newcastle_Disease",
+        "Salmonella"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Healthy",
+        "Foot_and_Mouth_Disease",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Ringworm",
+        "Pediculosis",
+        "Digital_Dermatitis",
+        "Hoof_Overgrowth"
+      ],
+      "config_model_name": "resnet50",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_resnet50_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_convnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_cvt.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_model.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_resnet.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_resnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\best_poultry_disease_simple.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_convnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_cvt.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_model.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_resnet.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_resnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\final_poultry_disease_simple.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\scripts\\training\\poultry_disease_vit.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\resnest_poultry_results\\best_resnest.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\resnext_poultry_results\\best_resnext.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-100\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-100\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-100\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-200\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-200\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-200\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-300\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-300\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\vit_poultry_results\\checkpoint-300\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1000\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1000\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1000\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1300\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1300\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\cvt_poultry_results\\checkpoint-1300\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-1100\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-1100\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-1100\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-800\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-800\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\results\\convnext_poultry_results\\checkpoint-800\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\efficientnet_b0_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "efficientnet_b0",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_efficientnet_b0_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\efficientnet_b0_best_colab_baseline.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "efficientnet_b0",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_efficientnet_b0_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\mobilenet_v2_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "mobilenet_v2",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_mobilenet_v2_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\resnet50_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "resnet50",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_resnet50_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\resnext50_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "resnext50",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_resnext50_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\models\\cattle\\vit_b16_best.pth",
+      "class_count": 10,
+      "class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_class_count": 10,
+      "config_class_names": [
+        "Bovine_Tuberculosis",
+        "Dermatophilosis",
+        "Digital_Dermatitis",
+        "Foot_and_Mouth_Disease",
+        "Healthy",
+        "Hoof_Overgrowth",
+        "Lumpy_Skin_Disease",
+        "Mastitis",
+        "Pediculosis",
+        "Ringworm"
+      ],
+      "config_model_name": "vit_b16",
+      "config_species": "cattle",
+      "config_data_dir": "/content/Macine-learing-bird-deaseser-/cattle_dataset",
+      "config_output_dir": "/content/Macine-learing-bird-deaseser-/cattle_vit_b16_results",
+      "has_model_state_dict": true
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1300\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1300\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1300\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1600\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1600\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\cvt_poultry_results\\checkpoint-1600\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-600\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-600\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-600\\scheduler.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-900\\optimizer.pt"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-900\\rng_state.pth"
+    },
+    {
+      "path": "C:\\Users\\Ali\\OneDrive\\Belgeler\\pyton\\Macine learing (bird deaseser)\\convnext_poultry_results\\checkpoint-900\\scheduler.pt"
+    }
+  ]
+}

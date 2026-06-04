@@ -15,7 +15,7 @@ def get_default_config():
         "num_classes": 0,        # Otomatik tespit edilir
 
         # Model
-        "model_name": "efficientnet_b0",  # efficientnet_b0, resnet50, mobilenet_v3
+        "model_name": "efficientnet_b0",
         "pretrained": True,
         "freeze_backbone": False,
 
@@ -56,7 +56,15 @@ def parse_args():
     parser.add_argument("--output-dir", type=str, default=None,
                         help="Cikti klasoru (varsayilan: outputs/<dataset_adi>)")
     parser.add_argument("--model", type=str, default="efficientnet_b0",
-                        choices=["efficientnet_b0", "resnet50", "mobilenet_v3", "resnet18"],
+                        choices=[
+                            "efficientnet_b0",
+                            "resnet50",
+                            "mobilenet_v2",
+                            "mobilenet_v3",
+                            "resnet18",
+                            "vit_b16",
+                            "vit_b_16",
+                        ],
                         help="Model mimarisi")
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=16)
@@ -82,7 +90,7 @@ def parse_args():
 
     cfg = get_default_config()
     cfg["data_dir"] = args.data_dir
-    cfg["model_name"] = args.model
+    cfg["model_name"] = "vit_b16" if args.model == "vit_b_16" else args.model
     cfg["epochs"] = args.epochs
     cfg["batch_size"] = args.batch_size
     cfg["learning_rate"] = args.lr

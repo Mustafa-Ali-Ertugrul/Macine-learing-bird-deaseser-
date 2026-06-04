@@ -1,0 +1,13 @@
+frame,top_prediction,confidence,second_prediction,second_confidence,third_prediction,third_confidence
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_01_0.jpg,Healthy,0.9982,Mastitis,0.0006,Lumpy_Skin_Disease,0.0005
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_02_21.jpg,Healthy,0.9978,Mastitis,0.0007,Lumpy_Skin_Disease,0.0004
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_03_43.jpg,Healthy,0.998,Mastitis,0.0007,Foot_and_Mouth_Disease,0.0004
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_04_64.jpg,Healthy,0.998,Mastitis,0.0006,Foot_and_Mouth_Disease,0.0004
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_05_85.jpg,Healthy,0.998,Foot_and_Mouth_Disease,0.0004,Mastitis,0.0004
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_06_106.jpg,Healthy,0.9981,Mastitis,0.0006,Foot_and_Mouth_Disease,0.0003
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_07_128.jpg,Healthy,0.9945,Mastitis,0.0024,Ringworm,0.0007
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_08_149.jpg,Healthy,0.9959,Mastitis,0.0018,Bovine_Tuberculosis,0.0005
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_09_170.jpg,Healthy,0.9943,Mastitis,0.0023,Bovine_Tuberculosis,0.001
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_10_191.jpg,Healthy,0.9979,Mastitis,0.0007,Lumpy_Skin_Disease,0.0004
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_11_213.jpg,Healthy,0.9974,Mastitis,0.0009,Bovine_Tuberculosis,0.0007
+C:\Users\Ali\OneDrive\Belgeler\pyton\Macine learing (bird deaseser)\reports\internet_cow_video_test\sampled_frames\frame_12_234.jpg,Healthy,0.993,Mastitis,0.0032,Lumpy_Skin_Disease,0.0009

@@ -10,13 +10,13 @@ split_dataset_dir: duck_split_dataset
 num_classes: 10
 class_names:
   - Avian_Influenza
+  - Bumblefoot
   - Coccidiosis
+  - Duck_Plague
   - Fowl_Pox
   - Healthy
   - Histomoniasis
   - Infectious_Bronchitis
-  - Infectious_Bursal_Disease
-  - Mareks_Disease
   - Newcastle_Disease
   - Salmonella
 
